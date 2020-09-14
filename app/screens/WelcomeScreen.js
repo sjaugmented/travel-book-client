@@ -1,24 +1,29 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
-
 import AppButton from "../components/AppButton";
-
 import colors from "../config/colors";
 
 function WelcomeScreen(props) {
   return (
     <ImageBackground
-      blurRadius={10}
+      blurRadius={0}
       style={styles.background}
-      source={require("../assets/welcome_bg.jpg")}
+      source={require("../assets/welcome.jpg")}
+      resizeMode="cover"
     >
-      <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/tb_logo.png")} />
-        <Text style={styles.tagline}>Sell What You Don't Need</Text>
+      <View style={styles.loginButton}>
+        <AppButton
+          title="Login"
+          color={colors.primary}
+          onPress={() => console.log("login!")}
+        />
       </View>
-      <View style={styles.buttonsContainer}>
-        <Button title="Login" />
-        <Button title="Register" color="secondary" />
+      <View style={styles.registerButton}>
+        <AppButton
+          title="Register"
+          color={colors.secondary}
+          onPress={() => console.log("register!")}
+        />
       </View>
     </ImageBackground>
   );
@@ -47,6 +52,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "600",
     paddingVertical: 20,
+  },
+  loginButton: {
+    width: "90%",
+    position: "absolute",
+    bottom: 100,
+  },
+  registerButton: {
+    width: "90%",
+    position: "absolute",
+    bottom: 30,
   },
 });
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, SafeAreaView } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import AppTextInput from "../components/AppTextInput";
+import Screen from "../components/Screen";
 
 function MapScreen(props) {
   const [location, setLocation] = useState();
@@ -36,9 +37,7 @@ function MapScreen(props) {
             longitudeDelta: 0.0421,
           }}
           showsUserLocation={true}
-        >
-          <AppTextInput />
-        </MapView>
+        ></MapView>
       )}
     </>
   );
@@ -47,8 +46,11 @@ function MapScreen(props) {
 const styles = StyleSheet.create({
   mapStyle: {
     flex: 1,
-    // width: Dimensions.get("window").width,
-    // height: Dimensions.get("window").height,
+    // justifyContent: "flex-end",
+  },
+  text: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });
 

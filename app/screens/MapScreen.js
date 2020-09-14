@@ -4,6 +4,7 @@ import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import AppTextInput from "../components/AppTextInput";
 import Screen from "../components/Screen";
+import colors from "../config/colors";
 
 function MapScreen(props) {
   const [location, setLocation] = useState();
@@ -37,7 +38,9 @@ function MapScreen(props) {
             longitudeDelta: 0.0421,
           }}
           showsUserLocation={true}
-        ></MapView>
+        >
+          <View style={styles.text}></View>
+        </MapView>
       )}
     </>
   );
@@ -49,8 +52,13 @@ const styles = StyleSheet.create({
     // justifyContent: "flex-end",
   },
   text: {
-    flex: 1,
-    justifyContent: "flex-end",
+    height: 50,
+    width: "90%",
+    backgroundColor: colors.secondary,
+    alignSelf: "center",
+    borderRadius: 20,
+    position: "absolute",
+    bottom: 100,
   },
 });
 

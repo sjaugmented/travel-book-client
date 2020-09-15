@@ -6,6 +6,8 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./app/navigation/AppNavigator";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -31,7 +33,7 @@ const StackNavigator = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <AppNavigator />
     </NavigationContainer>
   );
 }

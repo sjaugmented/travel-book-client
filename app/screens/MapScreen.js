@@ -47,12 +47,15 @@ function MapScreen(props) {
           }}
           showsUserLocation={true}
         >
-          <TouchableOpacity
+          <ButtonIcon
             style={styles.buttonIcon}
-            onPress={() => console.log("add memory")}
-          >
-            <ButtonIcon />
-          </TouchableOpacity>
+            name="plus-circle"
+            size={100}
+            backgroundColor={colors.light}
+            iconColor={colors.confirm}
+            onPress={() => console.log(location)}
+            activeOpacity={0.7}
+          />
         </MapView>
       )}
     </>

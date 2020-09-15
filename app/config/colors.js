@@ -1,6 +1,7 @@
 export default {
   primary: "rgb(130, 25, 0)",
   secondary: "rgb(150, 130, 100)",
+  confirm: "rgb(100, 255, 100)",
   black: "#000",
   white: "#fff",
   medium: "#6e6969",

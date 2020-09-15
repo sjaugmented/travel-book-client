@@ -60,8 +60,8 @@ function MapScreen(props) {
             style={styles.menu}
             name={"xbox-controller-menu"}
             size={50}
-            backgroundColor={colors.light}
-            iconColor={colors.primary}
+            backgroundColor={colors.medium}
+            iconColor={colors.light}
             onPress={() => console.log("menu")}
           />
         </MapView>

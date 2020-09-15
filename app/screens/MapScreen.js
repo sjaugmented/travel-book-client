@@ -124,12 +124,12 @@ function MapScreen(props) {
           <AppText>Whatcha doin?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="food" />
-            <ButtonIcon style={styles.icon} name="local-bar" />
+            <ButtonIcon style={styles.icon} name="beer" />
             <ButtonIcon style={styles.icon} name="camera" />
             <ButtonIcon style={styles.icon} name="bed-empty" size={50} />
           </View>
         </View> */}
-        {/* <View style={styles.memoryView}>
+        <View style={styles.memoryView}>
           <AppText>How'd you get here?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="airplane" />
@@ -139,8 +139,8 @@ function MapScreen(props) {
             <ButtonIcon style={styles.icon} name="bed-empty" />
             <ButtonIcon style={styles.icon} name="walk" />
           </View>
-        </View> */}
-        <View style={styles.memoryView}>
+        </View>
+        {/* <View style={styles.memoryView}>
           <AppText>Let's see some pictures!</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="camera" size={60} />
@@ -152,7 +152,10 @@ function MapScreen(props) {
             <ButtonIcon style={styles.icon} name="human" />
             <ButtonIcon style={styles.icon} name="human" />
           </View>
-        </View>
+        </View> */}
+        {/* <View style={styles.memoryView}>
+          <AppText style={styles.confirmation}>Memory Saved!</AppText>
+        </View> */}
       </Modal>
     </>
   )
@@ -162,6 +165,10 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     bottom: 150,
+  },
+  confirmation: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
   icon: {
     margin: 10,
@@ -189,6 +196,7 @@ const styles = StyleSheet.create({
       height: 2,
     },
     alignItems: 'center',
+    justifyContent: 'center',
     shadowOpacity: 0.55,
     shadowRadius: 10,
     elevation: 5,

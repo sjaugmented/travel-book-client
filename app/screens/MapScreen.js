@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Dimensions, SafeAreaView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import AppTextInput from "../components/AppTextInput";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import Icon from "../components/Icon";
+import ButtonIcon from "../components/ButtonIcon";
 
 function MapScreen(props) {
   const [location, setLocation] = useState();
@@ -39,7 +47,12 @@ function MapScreen(props) {
           }}
           showsUserLocation={true}
         >
-          <AppTextInput style={styles.textInput} icon="map-search-outline" />
+          <TouchableOpacity
+            style={styles.buttonIcon}
+            onPress={() => console.log("add memory")}
+          >
+            <ButtonIcon />
+          </TouchableOpacity>
         </MapView>
       )}
     </>
@@ -51,14 +64,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  textInput: {
-    height: 50,
-    width: "90%",
-    // backgroundColor: colors.danger,
-    alignSelf: "center",
-    borderRadius: 20,
+  buttonIcon: {
     position: "absolute",
-    bottom: 100,
+    bottom: 200,
   },
 });
 

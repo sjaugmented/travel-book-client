@@ -5,6 +5,8 @@ import {
   Dimensions,
   SafeAreaView,
   TouchableOpacity,
+  Modal,
+  Button,
 } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
@@ -13,9 +15,11 @@ import Screen from "../components/Screen";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ButtonIcon from "../components/ButtonIcon";
+import AppMenu from "../components/AppMenu";
 
 function MapScreen(props) {
   const [location, setLocation] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync();
@@ -48,7 +52,7 @@ function MapScreen(props) {
           showsUserLocation={true}
         >
           <ButtonIcon
-            style={styles.buttonIcon}
+            style={styles.addButton}
             name="plus-circle"
             size={100}
             backgroundColor={colors.light}
@@ -57,15 +61,26 @@ function MapScreen(props) {
             activeOpacity={0.7}
           />
           <ButtonIcon
-            style={styles.menu}
+            style={styles.menuButton}
             name={"xbox-controller-menu"}
             size={50}
             backgroundColor={colors.medium}
             iconColor={colors.light}
-            onPress={() => console.log("menu")}
+            onPress={() => setModalVisible(true)}
           />
         </MapView>
       )}
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        presentationStyle="formSheet"
+        style={styles.modalContent}
+      >
+        <Screen>
+          <Button title="Close" onPress={() => setModalVisible(false)} />
+          <AppMenu />
+        </Screen>
+      </Modal>
     </>
   );
 }
@@ -75,14 +90,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  buttonIcon: {
+  addButton: {
     position: "absolute",
     bottom: 150,
   },
-  menu: {
+  menuButton: {
     position: "absolute",
     bottom: 70,
     right: 50,
+  },
+  modalContent: {
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 0,
   },
 });
 

@@ -8,9 +8,22 @@ function AppMenu(props) {
   return (
     <View style={styles.container}>
       <View style={styles.navBar}>
-        <ButtonIcon name="account-outline" />
-        <ButtonIcon name="account-multiple-outline" />
-        <ButtonIcon name="trophy-award" />
+        <ButtonIcon
+          name="account"
+          backgroundColor={colors.background}
+          iconColor={colors.primary}
+        />
+        <ButtonIcon
+          name="account-multiple"
+          backgroundColor={colors.background}
+          iconColor={colors.primary}
+        />
+        <ButtonIcon
+          name="trophy-award"
+          backgroundColor={colors.background}
+          backgroundColor={colors.background}
+          iconColor={colors.primary}
+        />
       </View>
     </View>
   );
@@ -19,7 +32,6 @@ function AppMenu(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
   },
   navbar: {},
 });

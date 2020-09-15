@@ -73,10 +73,11 @@ function MapScreen(props) {
       <Modal
         visible={modalVisible}
         animationType="slide"
-        presentationStyle="formSheet"
-        style={styles.modalContent}
+        // presentationStyle="formSheet"
+        transparent={true}
+        // style={styles.modalContainer}
       >
-        <Screen>
+        <Screen style={styles.modalView}>
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <AppMenu />
         </Screen>
@@ -99,10 +100,24 @@ const styles = StyleSheet.create({
     bottom: 70,
     right: 50,
   },
-  modalContent: {
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 0,
+  modalContainer: {
+    // marginTop: 100,
+    backgroundColor: colors.white,
+  },
+  modalView: {
+    marginTop: 100,
+    backgroundColor: colors.background,
+    borderRadius: 20,
+    padding: 35,
+    // alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 

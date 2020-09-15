@@ -6,7 +6,7 @@ export default {
   white: "#fff",
   medium: "#6e6969",
   light: "#f8f4f4",
-  dark: "#0c0c0c",
+  dark: "#403f3f",
   danger: "rgb(225, 0, 0)",
-  background: "rgb(243, 212, 183)",
+  background: "rgb(255, 255, 230)",
 };

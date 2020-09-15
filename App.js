@@ -5,7 +5,7 @@ import MapScreen from "./app/screens/MapScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  return <MapScreen />;
+  return <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({

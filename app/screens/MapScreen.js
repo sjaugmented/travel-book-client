@@ -39,7 +39,7 @@ function MapScreen(props) {
           }}
           showsUserLocation={true}
         >
-          <View style={styles.text}></View>
+          <AppTextInput style={styles.textInput} icon="map-search-outline" />
         </MapView>
       )}
     </>
@@ -49,12 +49,12 @@ function MapScreen(props) {
 const styles = StyleSheet.create({
   mapStyle: {
     flex: 1,
-    // justifyContent: "flex-end",
+    alignItems: "center",
   },
-  text: {
+  textInput: {
     height: 50,
     width: "90%",
-    backgroundColor: colors.secondary,
+    // backgroundColor: colors.danger,
     alignSelf: "center",
     borderRadius: 20,
     position: "absolute",

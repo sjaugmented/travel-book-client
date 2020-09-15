@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Icon({
@@ -27,7 +27,11 @@ export default function Icon({
       onPress={onPress}
       activeOpacity={activeOpacity}
     >
-      <MaterialCommunityIcons name={name} color={iconColor} size={size} />
+      <MaterialCommunityIcons
+        name={name}
+        color={iconColor}
+        size={size - size * 0.1}
+      />
     </TouchableOpacity>
   );
 }

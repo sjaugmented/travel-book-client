@@ -57,10 +57,10 @@ function MapScreen(props) {
           // props
           style={styles.mapStyle}
           region={{
-            latitude: location.latitude,
+            latitude: location.latitude - 0.0055,
             longitude: location.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: 0.0222,
+            longitudeDelta: 0.0121,
           }}
           showsUserLocation={true}
         >
@@ -113,7 +113,7 @@ function MapScreen(props) {
       </Modal>
       <Modal
         visible={memoryVisible}
-        animationType="fade"
+        animationType="slide"
         transparent={true}
         onBackdropPress={() => setMemoryVisible(false)}
         backdropColor="clear"

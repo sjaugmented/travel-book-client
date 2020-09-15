@@ -135,12 +135,12 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: "absolute",
-    bottom: 150,
+    bottom: 200,
   },
   menuButton: {
     position: "absolute",
-    bottom: 70,
-    right: 50,
+    bottom: 75,
+    // right: 50,
   },
   menuView: {
     flex: 1,

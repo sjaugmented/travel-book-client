@@ -73,7 +73,7 @@ function MapScreen({ navigation }) {
               style={styles.addButton}
               name="airplane"
               size={100}
-              backgroundColor={colors.confirm}
+              backgroundColor={colors.primary}
               iconColor={colors.light}
               onPress={() => beginTrip()}
               activeOpacity={0.7}
@@ -94,7 +94,7 @@ function MapScreen({ navigation }) {
             name={"xbox-controller-menu"}
             size={65}
             backgroundColor={colors.light}
-            iconColor={colors.primary}
+            iconColor={colors.secondary}
             onPress={() => setMenuVisible(true)}
           />
         </MapView>

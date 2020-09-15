@@ -73,11 +73,13 @@ function MapScreen(props) {
       <Modal
         visible={modalVisible}
         animationType="slide"
-        // presentationStyle="formSheet"
         transparent={true}
         onBackdropPress={() => setModalVisible(false)}
         onSwipeComplete={() => setModalVisible(false)}
         swipeDirection="down"
+        backdropColor="clear"
+        backdropOpacity={0}
+        onModalHide={() => getLocation()}
       >
         <View style={styles.modalView}>
           <Button title="Close" onPress={() => setModalVisible(false)} />
@@ -103,9 +105,10 @@ const styles = StyleSheet.create({
     right: 50,
   },
   modalView: {
+    flex: 1,
     marginTop: 200,
-    // marginLeft: 10,
-    // marginRight: 10,
+    margin: -20,
+
     backgroundColor: colors.background,
     borderRadius: 20,
     padding: 35,

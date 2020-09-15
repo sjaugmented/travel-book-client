@@ -15,7 +15,7 @@ import Screen from "../components/Screen";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ButtonIcon from "../components/ButtonIcon";
-import AppMenu from "../components/AppMenu";
+import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
 
 function MapScreen(props) {

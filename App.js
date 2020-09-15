@@ -1,32 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import Screen from "./app/components/Screen";
+import { StyleSheet } from "react-native";
 import MapScreen from "./app/screens/MapScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-
-// const Tweets = ({ navigation }) => {
-//   return (
-//     <Screen>
-//       <Text>Tweets</Text>
-//       <Button
-//         title="View Tweet"
-//         onPress={() => navigation.navigate("TweetDetails")}
-//       />
-//     </Screen>
-//   );
-// };
-
-// const TweetDetails = () => {
-//   return (
-//     <Screen>
-//       <Text>Tweet Details</Text>
-//     </Screen>
-//   );
-// };
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -57,11 +36,11 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });

@@ -3,7 +3,7 @@ import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       blurRadius={0}
@@ -11,18 +11,25 @@ function WelcomeScreen(props) {
       source={require("../assets/welcome.jpg")}
       resizeMode="cover"
     >
+      <View style={styles.mapButton}>
+        <AppButton
+          title="Map"
+          color={colors.confirm}
+          onPress={() => navigation.navigate("Map")}
+        />
+      </View>
       <View style={styles.loginButton}>
         <AppButton
           title="Login"
           color={colors.primary}
-          onPress={() => console.log("login!")}
+          onPress={() => navigation.navigate("Login")}
         />
       </View>
       <View style={styles.registerButton}>
         <AppButton
           title="Register"
           color={colors.secondary}
-          onPress={() => console.log("register!")}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
     </ImageBackground>
@@ -34,6 +41,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+  },
+  mapButton: {
+    width: "90%",
+    position: "absolute",
+    bottom: 170,
   },
   loginButton: {
     width: "90%",

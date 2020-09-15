@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -6,49 +6,49 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Button,
-} from 'react-native'
-import Modal from 'react-native-modal'
-import MapView from 'react-native-maps'
-import * as Location from 'expo-location'
-import AppTextInput from '../components/AppTextInput'
-import Screen from '../components/Screen'
-import colors from '../config/colors'
-import Icon from '../components/Icon'
-import ButtonIcon from '../components/ButtonIcon'
-import AppMenu from '../components/AppMenu'
-import AppText from '../components/AppText'
+} from "react-native";
+import Modal from "react-native-modal";
+import MapView from "react-native-maps";
+import * as Location from "expo-location";
+import AppTextInput from "../components/AppTextInput";
+import Screen from "../components/Screen";
+import colors from "../config/colors";
+import Icon from "../components/Icon";
+import ButtonIcon from "../components/ButtonIcon";
+import AppMenu from "../components/menu/AppMenu";
+import AppText from "../components/AppText";
 
 function MapScreen(props) {
-  const [location, setLocation] = useState()
-  const [menuVisible, setMenuVisible] = useState(false)
-  const [memoryVisible, setMemoryVisible] = useState(false)
-  const [tripActive, setTripActive] = useState(false)
+  const [location, setLocation] = useState();
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [memoryVisible, setMemoryVisible] = useState(false);
+  const [tripActive, setTripActive] = useState(false);
 
   const getLocation = async () => {
-    const { granted } = await Location.requestPermissionsAsync()
+    const { granted } = await Location.requestPermissionsAsync();
     if (!granted) {
       // error - we need your location dummy
     } else {
       const {
         coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync()
-      setLocation({ latitude, longitude })
+      } = await Location.getCurrentPositionAsync();
+      setLocation({ latitude, longitude });
     }
-  }
+  };
 
   useEffect(() => {
-    getLocation()
-  }, [])
+    getLocation();
+  }, []);
 
   const beginTrip = () => {
-    console.log('beginning trip from', location) // remove
-    setTripActive(true)
-  }
+    console.log("beginning trip from", location); // remove
+    setTripActive(true);
+  };
 
   const addMemory = () => {
-    console.log('memory began at', location)
-    setMemoryVisible(true)
-  }
+    console.log("memory began at", location);
+    setMemoryVisible(true);
+  };
 
   return (
     <>
@@ -57,10 +57,10 @@ function MapScreen(props) {
           // props
           style={styles.mapStyle}
           region={{
-            latitude: location.latitude,
+            latitude: location.latitude - 0.0055,
             longitude: location.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: 0.0222,
+            longitudeDelta: 0.0121,
           }}
           showsUserLocation={true}
         >
@@ -87,10 +87,10 @@ function MapScreen(props) {
           )}
           <ButtonIcon
             style={styles.menuButton}
-            name={'xbox-controller-menu'}
-            size={50}
-            backgroundColor={colors.medium}
-            iconColor={colors.light}
+            name={"xbox-controller-menu"}
+            size={65}
+            backgroundColor={colors.light}
+            iconColor={colors.primary}
             onPress={() => setMenuVisible(true)}
           />
         </MapView>
@@ -113,7 +113,7 @@ function MapScreen(props) {
       </Modal>
       <Modal
         visible={memoryVisible}
-        animationType="fade"
+        animationType="slide"
         transparent={true}
         onBackdropPress={() => setMemoryVisible(false)}
         backdropColor="clear"
@@ -158,30 +158,37 @@ function MapScreen(props) {
         </View> */}
       </Modal>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   addButton: {
-    position: 'absolute',
+    position: "absolute",
+    bottom: 200,
+  },
+  menuButton: {
+    position: "absolute",
+    bottom: 75,
+    // right: 50,
+    position: "absolute",
     bottom: 150,
   },
   confirmation: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   icon: {
     margin: 10,
   },
   iconContainer: {
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: "row",
     marginTop: 20,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   mapStyle: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   memoryView: {
     flex: 1,
@@ -190,22 +197,21 @@ const styles = StyleSheet.create({
     // margin: -20,
     backgroundColor: colors.background,
     padding: 35,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     shadowOpacity: 0.55,
     shadowRadius: 10,
     elevation: 5,
     borderRadius: 10,
   },
   menuButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 70,
-    right: 50,
   },
   menuView: {
     flex: 1,
@@ -214,8 +220,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderRadius: 20,
     padding: 35,
-    height: '80%',
-    shadowColor: '#000',
+    height: "80%",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -224,6 +230,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
-})
+});
 
-export default MapScreen
+export default MapScreen;

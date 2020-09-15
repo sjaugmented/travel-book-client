@@ -56,6 +56,14 @@ function MapScreen(props) {
             onPress={() => console.log(location)}
             activeOpacity={0.7}
           />
+          <ButtonIcon
+            style={styles.menu}
+            name={"xbox-controller-menu"}
+            size={50}
+            backgroundColor={colors.light}
+            iconColor={colors.primary}
+            onPress={() => console.log("menu")}
+          />
         </MapView>
       )}
     </>
@@ -69,7 +77,12 @@ const styles = StyleSheet.create({
   },
   buttonIcon: {
     position: "absolute",
-    bottom: 200,
+    bottom: 150,
+  },
+  menu: {
+    position: "absolute",
+    bottom: 70,
+    right: 50,
   },
 });
 

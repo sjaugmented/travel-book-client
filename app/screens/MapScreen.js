@@ -50,6 +50,10 @@ function MapScreen({ navigation }) {
     setMemoryVisible(true);
   };
 
+  const handlePress = (name) => {
+    console.log(name);
+  };
+
   return (
     <>
       {location && (
@@ -127,38 +131,106 @@ function MapScreen({ navigation }) {
         {/* <View style={styles.memoryView}>
           <AppText>Whatcha doin?</AppText>
           <View style={styles.iconContainer}>
-            <ButtonIcon style={styles.icon} name="food" />
-            <ButtonIcon style={styles.icon} name="beer" />
-            <ButtonIcon style={styles.icon} name="camera" />
-            <ButtonIcon style={styles.icon} name="bed-empty" size={50} />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('food')}
+              name="food"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('nightlife')}
+              name="beer"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('site-seeing')}
+              name="camera"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('lodging')}
+              name="bed-empty"
+              size={50}
+            />
           </View>
         </View> */}
         {/* <View style={styles.memoryView}>
           <AppText>How'd you get here?</AppText>
           <View style={styles.iconContainer}>
-            <ButtonIcon style={styles.icon} name="airplane" />
-            <ButtonIcon style={styles.icon} name="bus" />
-            <ButtonIcon style={styles.icon} name="train" />
-            <ButtonIcon style={styles.icon} name="car" />
-            <ButtonIcon style={styles.icon} name="bed-empty" />
-            <ButtonIcon style={styles.icon} name="walk" />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('airplane')}
+              name="plane"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('airplane')}
+              name="bus"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('train')}
+              name="train"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('car')}
+              name="car"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('boat')}
+              name=""
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('foot')}
+              name="walk"
+            />
           </View>
         </View> */}
         {/* <View style={styles.memoryView}>
           <AppText>Let's see some pictures!</AppText>
           <View style={styles.iconContainer}>
-            <ButtonIcon style={styles.icon} name="camera" size={60} />
-            <ButtonIcon style={styles.icon} name="image-album" size={60} />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('Take a pic')}
+              name="camera"
+              size={60}
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('Browse photos')}
+              name="image-album"
+              size={60}
+            />
           </View>
           <AppText>And tell us who you're with!</AppText>
           <View style={styles.iconContainer}>
-            <ButtonIcon style={styles.icon} name="human" />
-            <ButtonIcon style={styles.icon} name="human" />
-            <ButtonIcon style={styles.icon} name="human" />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('tag a friend')}
+              name="human"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('tag a friend')}
+              name="human"
+            />
+            <ButtonIcon
+              style={styles.icon}
+              onPress={() => handlePress('tag a friend')}
+              name="human"
+            />
           </View>
         </View> */}
         <View style={styles.memoryView}>
           <AppText style={styles.confirmation}>Memory Saved!</AppText>
+          <ButtonIcon
+            name="close"
+            size={30}
+            onPress={() => setMemoryVisible(false)}
+          />
         </View>
       </Modal>
     </>
@@ -180,6 +252,7 @@ const styles = StyleSheet.create({
   confirmation: {
     fontSize: 30,
     fontWeight: "bold",
+    marginBottom: 20,
   },
   icon: {
     margin: 10,

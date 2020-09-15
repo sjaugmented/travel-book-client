@@ -20,6 +20,7 @@ import AppMenu from "../components/AppMenu";
 function MapScreen(props) {
   const [location, setLocation] = useState();
   const [modalVisible, setModalVisible] = useState(false);
+  const [tripActive, setTripActive] = useState(false);
 
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync();
@@ -37,6 +38,15 @@ function MapScreen(props) {
     getLocation();
   }, []);
 
+  const beginTrip = () => {
+    console.log("beginning trip from", location); // remove
+    setTripActive(true);
+  };
+
+  const addMemory = () => {
+    console.log("memory began at", location);
+  };
+
   return (
     <>
       {location && (
@@ -51,15 +61,27 @@ function MapScreen(props) {
           }}
           showsUserLocation={true}
         >
-          <ButtonIcon
-            style={styles.addButton}
-            name="plus-circle"
-            size={100}
-            backgroundColor={colors.light}
-            iconColor={colors.confirm}
-            onPress={() => console.log(location)}
-            activeOpacity={0.7}
-          />
+          {!tripActive ? (
+            <ButtonIcon
+              style={styles.addButton}
+              name="airplane"
+              size={100}
+              backgroundColor={colors.confirm}
+              iconColor={colors.light}
+              onPress={() => beginTrip()}
+              activeOpacity={0.7}
+            />
+          ) : (
+            <ButtonIcon
+              style={styles.addButton}
+              name="plus-circle"
+              size={100}
+              backgroundColor={colors.light}
+              iconColor={colors.confirm}
+              onPress={() => addMemory()}
+              activeOpacity={0.7}
+            />
+          )}
           <ButtonIcon
             style={styles.menuButton}
             name={"xbox-controller-menu"}
@@ -83,7 +105,7 @@ function MapScreen(props) {
       >
         <View style={styles.modalView}>
           <Button title="Close" onPress={() => setModalVisible(false)} />
-          <AppMenu />
+          <AppMenu tripActive={tripActive} setTripActive={setTripActive} />
         </View>
       </Modal>
     </>

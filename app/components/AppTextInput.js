@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
 export default function AppTextInput({ icon, ...otherProps }) {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
+    width: "90%",
     padding: 15,
     marginVertical: 10,
   },

@@ -99,6 +99,7 @@ function MapScreen({ navigation }) {
           />
         </MapView>
       )}
+      {/* MENU MODAL */}
       <Modal
         visible={menuVisible}
         animationType="slide"
@@ -119,6 +120,7 @@ function MapScreen({ navigation }) {
           <AppMenu tripActive={tripActive} setTripActive={setTripActive} />
         </View>
       </Modal>
+      {/* MEMORY MODAL */}
       <Modal
         visible={memoryVisible}
         animationType="slide"
@@ -128,32 +130,32 @@ function MapScreen({ navigation }) {
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
-        {/* <View style={styles.memoryView}>
+        <View style={styles.memoryView}>
           <AppText>Whatcha doin?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon
               style={styles.icon}
-              onPress={() => handlePress('food')}
+              onPress={() => handlePress("food")}
               name="food"
             />
             <ButtonIcon
               style={styles.icon}
-              onPress={() => handlePress('nightlife')}
+              onPress={() => handlePress("nightlife")}
               name="beer"
             />
             <ButtonIcon
               style={styles.icon}
-              onPress={() => handlePress('site-seeing')}
+              onPress={() => handlePress("site-seeing")}
               name="camera"
             />
             <ButtonIcon
               style={styles.icon}
-              onPress={() => handlePress('lodging')}
+              onPress={() => handlePress("lodging")}
               name="bed-empty"
               size={50}
             />
           </View>
-        </View> */}
+        </View>
         {/* <View style={styles.memoryView}>
           <AppText>How'd you get here?</AppText>
           <View style={styles.iconContainer}>
@@ -224,14 +226,14 @@ function MapScreen({ navigation }) {
             />
           </View>
         </View> */}
-        <View style={styles.memoryView}>
+        {/* <View style={styles.memoryView}>
           <AppText style={styles.confirmation}>Memory Saved!</AppText>
           <ButtonIcon
             name="close"
             size={30}
             onPress={() => setMemoryVisible(false)}
-          />
-        </View>
+          /> */}
+        {/* </View> */}
       </Modal>
     </>
   );

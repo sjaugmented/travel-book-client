@@ -18,7 +18,7 @@ import ButtonIcon from "../components/ButtonIcon";
 import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
 
-function MapScreen(props) {
+function MapScreen({ navigation }) {
   const [location, setLocation] = useState();
   const [menuVisible, setMenuVisible] = useState(false);
   const [memoryVisible, setMemoryVisible] = useState(false);
@@ -108,6 +108,10 @@ function MapScreen(props) {
       >
         <View style={styles.menuView}>
           <Button title="Close" onPress={() => setMenuVisible(false)} />
+          <Button
+            title="Welcome Screen"
+            onPress={() => navigation.navigate("Welcome")}
+          />
           <AppMenu tripActive={tripActive} setTripActive={setTripActive} />
         </View>
       </Modal>
@@ -120,7 +124,7 @@ function MapScreen(props) {
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
-        {/* <View style={styles.memoryView}>
+        <View style={styles.memoryView}>
           <AppText>Whatcha doin?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="food" />
@@ -128,8 +132,8 @@ function MapScreen(props) {
             <ButtonIcon style={styles.icon} name="camera" />
             <ButtonIcon style={styles.icon} name="bed-empty" size={50} />
           </View>
-        </View> */}
-        <View style={styles.memoryView}>
+        </View>
+        {/* <View style={styles.memoryView}>
           <AppText>How'd you get here?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="airplane" />
@@ -139,7 +143,7 @@ function MapScreen(props) {
             <ButtonIcon style={styles.icon} name="bed-empty" />
             <ButtonIcon style={styles.icon} name="walk" />
           </View>
-        </View>
+        </View> */}
         {/* <View style={styles.memoryView}>
           <AppText>Let's see some pictures!</AppText>
           <View style={styles.iconContainer}>

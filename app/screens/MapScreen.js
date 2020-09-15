@@ -88,7 +88,7 @@ function MapScreen(props) {
           <ButtonIcon
             style={styles.menuButton}
             name={"xbox-controller-menu"}
-            size={50}
+            size={65}
             backgroundColor={colors.light}
             iconColor={colors.primary}
             onPress={() => setMenuVisible(true)}

@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Icon({
   name = "email",
-  size = 40,
+  size = 50,
   backgroundColor = "#000",
   iconColor = "#fff",
   style,

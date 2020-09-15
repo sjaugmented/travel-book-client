@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../config/colors";
-import Screen from "./Screen";
 import ButtonIcon from "./ButtonIcon";
+import AppText from "./AppText";
 
-function AppMenu(props) {
+function AppMenu({ tripActive, setTripActive }) {
   return (
     <View>
       <View style={styles.navbar}>
@@ -25,7 +25,24 @@ function AppMenu(props) {
           backgroundColor={colors.background}
           backgroundColor={colors.background}
           iconColor={colors.primary}
+          style={{ marginBottom: 40 }}
         />
+        {tripActive && (
+          <ButtonIcon
+            name="minus-circle"
+            size={75}
+            backgroundColor={colors.light}
+            iconColor={colors.danger}
+            onPress={() => setTripActive(false)}
+            activeOpacity={0.7}
+          />
+        )}
+      </View>
+      <View style={styles.trophies}>
+        <AppText style={styles.text}>RECENT TROPHIES</AppText>
+      </View>
+      <View style={styles.trips}>
+        <AppText style={styles.text}>MY TRIPS</AppText>
       </View>
     </View>
   );
@@ -38,7 +55,17 @@ const styles = StyleSheet.create({
   navbar: {
     position: "absolute",
     right: 20,
-    top: 250,
+    top: 225,
+    alignItems: "center",
+  },
+  text: {
+    fontWeight: "500",
+    color: colors.primary,
+  },
+  trophies: {},
+  trips: {
+    position: "absolute",
+    top: 225,
   },
 });
 

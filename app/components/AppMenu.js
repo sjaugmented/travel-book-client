@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../config/colors";
-import Screen from "./Screen";
 import ButtonIcon from "./ButtonIcon";
+import AppText from "./AppText";
 
 function AppMenu({ tripActive, setTripActive }) {
   return (
@@ -38,6 +38,12 @@ function AppMenu({ tripActive, setTripActive }) {
           />
         )}
       </View>
+      <View style={styles.trophies}>
+        <AppText style={styles.text}>RECENT TROPHIES</AppText>
+      </View>
+      <View style={styles.trips}>
+        <AppText style={styles.text}>MY TRIPS</AppText>
+      </View>
     </View>
   );
 }
@@ -51,6 +57,15 @@ const styles = StyleSheet.create({
     right: 20,
     top: 225,
     alignItems: "center",
+  },
+  text: {
+    fontWeight: "500",
+    color: colors.primary,
+  },
+  trophies: {},
+  trips: {
+    position: "absolute",
+    top: 225,
   },
 });
 

@@ -5,9 +5,9 @@ import {
   Dimensions,
   SafeAreaView,
   TouchableOpacity,
-  Modal,
   Button,
 } from "react-native";
+import Modal from "react-native-modal";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 import AppTextInput from "../components/AppTextInput";
@@ -75,7 +75,9 @@ function MapScreen(props) {
         animationType="slide"
         // presentationStyle="formSheet"
         transparent={true}
-        // style={styles.modalContainer}
+        onBackdropPress={() => setModalVisible(false)}
+        onSwipeComplete={() => setModalVisible(false)}
+        swipeDirection="down"
       >
         <View style={styles.modalView}>
           <Button title="Close" onPress={() => setModalVisible(false)} />

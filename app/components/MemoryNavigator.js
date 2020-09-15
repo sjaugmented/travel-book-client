@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-
 import { createStackNavigator } from "@react-navigation/stack";
+
 import TypeOfPlace from "./memoryCards/TypeOfPlace";
 import Transpo from "./memoryCards/Transpo";
 import PhotoSocial from "./memoryCards/PhotoSocial";
@@ -9,7 +8,7 @@ import Done from "./memoryCards/Done";
 
 const Stack = createStackNavigator();
 
-function MemoryNavigator(props) {
+function MemoryNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Type" component={TypeOfPlace} />
@@ -19,9 +18,5 @@ function MemoryNavigator(props) {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default MemoryNavigator;

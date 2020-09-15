@@ -9,8 +9,7 @@ function Done(props) {
         name="close"
         size={30}
         onPress={() => setMemoryVisible(false)}
-      />{" "}
-      */}
+      />
     </View>
   );
 }

@@ -120,19 +120,48 @@ function MapScreen(props) {
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
+        {/* <View style={styles.memoryView}>
+          <AppText>Whatcha doin?</AppText>
+          <View style={styles.iconContainer}>
+            <ButtonIcon style={styles.icon} name="food" />
+            <ButtonIcon style={styles.icon} name="beer" />
+            <ButtonIcon style={styles.icon} name="camera" />
+            <ButtonIcon style={styles.icon} name="bed-empty" size={50} />
+          </View>
+        </View> */}
         <View style={styles.memoryView}>
-          <AppText>Component goes here</AppText>
+          <AppText>How'd you get here?</AppText>
+          <View style={styles.iconContainer}>
+            <ButtonIcon style={styles.icon} name="airplane" />
+            <ButtonIcon style={styles.icon} name="bus" />
+            <ButtonIcon style={styles.icon} name="train" />
+            <ButtonIcon style={styles.icon} name="car" />
+            <ButtonIcon style={styles.icon} name="bed-empty" />
+            <ButtonIcon style={styles.icon} name="walk" />
+          </View>
         </View>
+        {/* <View style={styles.memoryView}>
+          <AppText>Let's see some pictures!</AppText>
+          <View style={styles.iconContainer}>
+            <ButtonIcon style={styles.icon} name="camera" size={60} />
+            <ButtonIcon style={styles.icon} name="image-album" size={60} />
+          </View>
+          <AppText>And tell us who you're with!</AppText>
+          <View style={styles.iconContainer}>
+            <ButtonIcon style={styles.icon} name="human" />
+            <ButtonIcon style={styles.icon} name="human" />
+            <ButtonIcon style={styles.icon} name="human" />
+          </View>
+        </View> */}
+        {/* <View style={styles.memoryView}>
+          <AppText style={styles.confirmation}>Memory Saved!</AppText>
+        </View> */}
       </Modal>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  mapStyle: {
-    flex: 1,
-    alignItems: "center",
-  },
   addButton: {
     position: "absolute",
     bottom: 200,
@@ -141,6 +170,48 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 75,
     // right: 50,
+    position: "absolute",
+    bottom: 150,
+  },
+  confirmation: {
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  icon: {
+    margin: 10,
+  },
+  iconContainer: {
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    flexWrap: "wrap",
+  },
+  mapStyle: {
+    flex: 1,
+    alignItems: "center",
+  },
+  memoryView: {
+    flex: 1,
+    marginTop: 350,
+    marginBottom: 120,
+    // margin: -20,
+    backgroundColor: colors.background,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    alignItems: "center",
+    justifyContent: "center",
+    shadowOpacity: 0.55,
+    shadowRadius: 10,
+    elevation: 5,
+    borderRadius: 10,
+  },
+  menuButton: {
+    position: "absolute",
+    bottom: 70,
   },
   menuView: {
     flex: 1,
@@ -150,22 +221,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     height: "80%",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.55,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  memoryView: {
-    flex: 1,
-    marginTop: 370,
-    marginBottom: 120,
-    margin: -20,
-    backgroundColor: colors.background,
-    padding: 35,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

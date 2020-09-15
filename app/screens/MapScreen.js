@@ -124,7 +124,7 @@ function MapScreen({ navigation }) {
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
-        <View style={styles.memoryView}>
+        {/* <View style={styles.memoryView}>
           <AppText>Whatcha doin?</AppText>
           <View style={styles.iconContainer}>
             <ButtonIcon style={styles.icon} name="food" />
@@ -132,7 +132,7 @@ function MapScreen({ navigation }) {
             <ButtonIcon style={styles.icon} name="camera" />
             <ButtonIcon style={styles.icon} name="bed-empty" size={50} />
           </View>
-        </View>
+        </View> */}
         {/* <View style={styles.memoryView}>
           <AppText>How'd you get here?</AppText>
           <View style={styles.iconContainer}>
@@ -157,9 +157,9 @@ function MapScreen({ navigation }) {
             <ButtonIcon style={styles.icon} name="human" />
           </View>
         </View> */}
-        {/* <View style={styles.memoryView}>
+        <View style={styles.memoryView}>
           <AppText style={styles.confirmation}>Memory Saved!</AppText>
-        </View> */}
+        </View>
       </Modal>
     </>
   );

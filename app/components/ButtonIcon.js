@@ -1,12 +1,12 @@
-import React from "react";
-import { TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from 'react'
+import { TouchableOpacity } from 'react-native'
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 export default function Icon({
-  name = "email",
+  name = 'email',
   size = 50,
-  backgroundColor = "#000",
-  iconColor = "#fff",
+  backgroundColor = '#000',
+  iconColor = '#fff',
   style,
   onPress,
   activeOpacity,
@@ -19,8 +19,8 @@ export default function Icon({
           height: size,
           borderRadius: size / 2,
           backgroundColor,
-          justifyContent: "center",
-          alignItems: "center",
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         style,
       ]}
@@ -32,6 +32,7 @@ export default function Icon({
         color={iconColor}
         size={size - size * 0.1}
       />
+      {/* <MaterialIcons name={name} color={iconColor} size={size - size * 0.1} /> */}
     </TouchableOpacity>
-  );
+  )
 }

@@ -1,10 +1,24 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import ButtonIcon from "../ButtonIcon";
-import AppText from "../AppText";
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, FlatList, Text } from 'react-native'
+import colors from '../../config/colors'
+import ButtonIcon from '../ButtonIcon'
+import AppText from '../AppText'
+import TripModel from '../../api/trips'
+import ListItem from '../ListItem'
 
 function AppMenu({ tripActive, setTripActive }) {
+  const [trips, setTrips] = useState([])
+
+  useEffect(() => {
+    loadTrips()
+  }, [])
+
+  const loadTrips = async () => {
+    const response = await TripModel.all()
+    setTrips(response.trips)
+    // console.log(response.trips)
+  }
+
   return (
     <View>
       <View style={styles.navbar}>
@@ -43,9 +57,21 @@ function AppMenu({ tripActive, setTripActive }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
+
+        <FlatList
+          data={trips}
+          keyExtractor={(trip) => trip._id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              name={item.name}
+              year={item.year}
+              onPress={() => console.log('trip selected', item)}
+            />
+          )}
+        />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -53,20 +79,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navbar: {
-    position: "absolute",
+    position: 'absolute',
     right: 20,
     top: 225,
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
-    fontWeight: "500",
-    color: colors.secondary,
+    fontWeight: '500',
+    color: colors.primary,
   },
   trophies: {},
   trips: {
-    position: "absolute",
+    position: 'absolute',
     top: 225,
+    width: 200,
   },
-});
+})
 
-export default AppMenu;
+export default AppMenu

@@ -5,6 +5,7 @@ import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
 
 function TypeOfPlace({ navigation }) {
+  const tripInfo = useContext(tripContext);
   const handlePress = (string) => {
     console.log(string);
     navigation.navigate("Transpo");

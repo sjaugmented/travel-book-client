@@ -7,6 +7,7 @@ import ButtonIcon from "../ButtonIcon";
 
 function Done({ navigation }) {
   const setModalVisible = useContext(ModalContext);
+
   const handlePress = (string) => {
     console.log(string);
     setModalVisible(false);

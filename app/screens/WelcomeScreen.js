@@ -8,13 +8,13 @@ function WelcomeScreen({ navigation }) {
     <ImageBackground
       blurRadius={0}
       style={styles.background}
-      source={require("../assets/welcome.jpg")}
+      source={require("../assets/milan-chalk.jpg")}
       resizeMode="cover"
     >
       <View style={styles.mapButton}>
         <AppButton
           title="Map"
-          color={colors.confirm}
+          color={colors.dark}
           onPress={() => navigation.navigate("Map")}
         />
       </View>

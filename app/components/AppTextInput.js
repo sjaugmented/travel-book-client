@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from "react-native";
 import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
-export default function AppTextInput({ icon, ...otherProps }) {
+export default function AppTextInput({ icon, width = "100%", ...otherProps }) {
   return (
     <View style={styles.container}>
       {icon && (

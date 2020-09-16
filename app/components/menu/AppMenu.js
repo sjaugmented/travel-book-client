@@ -11,20 +11,20 @@ function AppMenu({ tripActive, setTripActive }) {
         <ButtonIcon
           name="account"
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="account-multiple"
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="trophy-award"
           backgroundColor={colors.background}
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 40 }}
         />
         {tripActive && (

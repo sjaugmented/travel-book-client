@@ -78,7 +78,7 @@ function MapScreen({ navigation }) {
               size={100}
               backgroundColor={colors.primary}
               iconColor={colors.light}
-              onPress={() => setModalVisible(true);}
+              onPress={() => setModalVisible(true)}
               activeOpacity={0.7}
             />
           ) : (
@@ -88,7 +88,7 @@ function MapScreen({ navigation }) {
               size={100}
               backgroundColor={colors.confirm}
               iconColor={colors.light}
-              onPress={() => setModalVisible(true);}
+              onPress={() => setModalVisible(true)}
               activeOpacity={0.7}
             />
           )}

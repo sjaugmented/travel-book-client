@@ -21,7 +21,7 @@ function MemoryNavigator({ setMemoryVisible }) {
       {!tripActive ? (
         <Stack.Screen name="NewTrip" component={NewTrip} />
       ) : (
-        <Stack.Screen name="Type" component={TypeOfPlace} />
+        <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       )}
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />

@@ -8,16 +8,16 @@ function WelcomeScreen({ navigation }) {
     <ImageBackground
       blurRadius={0}
       style={styles.background}
-      source={require("../assets/welcome_palms_2px.jpg")}
+      source={require("../assets/milan-chalk.jpg")}
       resizeMode="cover"
     >
-      {/* <View style={styles.mapButton}>
+      <View style={styles.mapButton}>
         <AppButton
           title="Map"
-          color={colors.confirm}
+          color={colors.dark}
           onPress={() => navigation.navigate("Map")}
         />
-      </View> */}
+      </View>
       <View style={styles.loginButton}>
         <AppButton
           title="Login"

@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, FlatList, Text } from 'react-native'
 import colors from '../../config/colors'
 import ButtonIcon from '../ButtonIcon'
 import AppText from '../AppText'
+import TripModel from '../../api/trips'
 
 function AppMenu({ tripActive, setTripActive }) {
+  const [trips, setTrips] = useState([])
+
+  useEffect(() => {
+    loadTrips()
+  }, [])
+
+  const loadTrips = async () => {
+    const response = await TripModel.all()
+    setTrips(response.trips)
+  }
+
   return (
     <View>
       <View style={styles.navbar}>

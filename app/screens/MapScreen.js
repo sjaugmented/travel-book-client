@@ -18,6 +18,7 @@ import ButtonIcon from "../components/ButtonIcon";
 import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
 import MemoryNavigator from "../components/MemoryNavigator";
+import MemoryContext from "../context/memoryContext";
 
 function MapScreen({ navigation }) {
   const [location, setLocation] = useState();
@@ -132,7 +133,9 @@ function MapScreen({ navigation }) {
         onModalHide={() => getLocation()}
       >
         <View style={styles.memoryView}>
-          <MemoryNavigator setMemoryVisible={setMemoryVisible} />
+          <MemoryContext.Provider value={setMemoryVisible}>
+            <MemoryNavigator setMemoryVisible={setMemoryVisible} />
+          </MemoryContext.Provider>
         </View>
       </Modal>
     </>

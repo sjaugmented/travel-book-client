@@ -8,7 +8,7 @@ function WelcomeScreen({ navigation }) {
     <ImageBackground
       blurRadius={0}
       style={styles.background}
-      source={require("../assets/welcome_palms_2px.jpg")}
+      source={require("../assets/welcome_palms_greenfill.jpg")}
       resizeMode="cover"
     >
       <View style={styles.mapButton}>

@@ -4,6 +4,7 @@ import colors from '../../config/colors'
 import ButtonIcon from '../ButtonIcon'
 import AppText from '../AppText'
 import TripModel from '../../api/trips'
+import ListItem from '../ListItem'
 
 function AppMenu({ tripActive, setTripActive }) {
   const [trips, setTrips] = useState([])
@@ -15,6 +16,7 @@ function AppMenu({ tripActive, setTripActive }) {
   const loadTrips = async () => {
     const response = await TripModel.all()
     setTrips(response.trips)
+    // console.log(response.trips)
   }
 
   return (
@@ -55,12 +57,18 @@ function AppMenu({ tripActive, setTripActive }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-        <Text>Bali</Text>
-        <Text>New York</Text>
-        <Text>Paris</Text>
-        <Text>Afganistan</Text>
-        <Text>Nicaragua</Text>
-        {/* <FlatList /> */}
+
+        <FlatList
+          data={trips}
+          keyExtractor={(trip) => trip._id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              name={item.name}
+              year={item.year}
+              onPress={() => console.log('trip selected', item)}
+            />
+          )}
+        />
       </View>
     </View>
   )
@@ -84,6 +92,7 @@ const styles = StyleSheet.create({
   trips: {
     position: 'absolute',
     top: 225,
+    width: 200,
   },
 })
 

@@ -134,11 +134,13 @@ function MapScreen({ navigation }) {
         onModalHide={() => getLocation()}
       >
         <View style={styles.memoryView}>
-          <ActiveTripContext value={tripActive}>
+          <ActiveTripContext.Provider
+            value={{ tripActive: tripActive, setTripActive: setTripActive }}
+          >
             <ModalContext.Provider value={setModalVisible}>
               <MemoryNavigator setMemoryVisible={setModalVisible} />
             </ModalContext.Provider>
-          </ActiveTripContext>
+          </ActiveTripContext.Provider>
         </View>
       </Modal>
     </>

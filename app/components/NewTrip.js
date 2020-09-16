@@ -9,20 +9,23 @@ import ModalContext from "../context/modalContext";
 import ActiveTripContext from "../context/activeTripContext";
 
 function NewTrip({ navigation }) {
-  const [tripActive, setActiveTrip] = useContext(ActiveTripContext);
-  const [modalVisible, setModalVisible] = useContext(ModalContext);
+  const { tripActive, setTripActive } = useContext(ActiveTripContext);
+  console.log("tripActive:", tripActive);
+  console.log("setTripActive:", setTripActive);
+  const setModalVisible = useContext(ModalContext);
   const [tripName, setTripName] = useState("");
 
   const handleChange = (e) => {
     // update state
-    setTripName(e.target.value);
+    setTripName({ tripName: e.target.value });
   };
 
   const handleSubmit = async () => {
     // lock it in
     //const newTrip = await TripModel.create(tripName);
     console.log("tripName:", tripName);
-    setActiveTrip(true);
+    setTripActive(true);
+    console.log("tripActive:", tripActive);
     //setModalVisible(false);
     navigation.navigate("TypeOfPlace");
   };
@@ -31,7 +34,7 @@ function NewTrip({ navigation }) {
     <Screen style={styles.container}>
       <AppText>Where ya going?</AppText>
       <AppTextInput icon="airplane" placeholder="Name your trip!" />
-      <ButtonIcon name="forward" size={30} onPress={() => handleSubmit} />
+      <ButtonIcon name="forward" size={30} onPress={() => handleSubmit()} />
     </Screen>
   );
 }

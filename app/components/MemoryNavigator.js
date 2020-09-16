@@ -10,19 +10,17 @@ import ActiveTripContext from "../context/activeTripContext";
 
 const Stack = createStackNavigator();
 
-function MemoryNavigator({ setMemoryVisible }) {
-  const [tripActive, setTripActive] = useContext(ActiveTripContext);
+function MemoryNavigator() {
+  const { tripActive } = useContext(ActiveTripContext);
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      {!tripActive ? (
-        <Stack.Screen name="NewTrip" component={NewTrip} />
-      ) : (
-        <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
-      )}
+      {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
+      <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
       <Stack.Screen name="Done" component={Done} />

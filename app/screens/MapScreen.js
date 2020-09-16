@@ -17,6 +17,7 @@ import Icon from "../components/Icon";
 import ButtonIcon from "../components/ButtonIcon";
 import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
+import MemoryNavigator from "../components/MemoryNavigator";
 
 function MapScreen({ navigation }) {
   const [location, setLocation] = useState();
@@ -131,109 +132,8 @@ function MapScreen({ navigation }) {
         onModalHide={() => getLocation()}
       >
         <View style={styles.memoryView}>
-          <AppText>Whatcha doin?</AppText>
-          <View style={styles.iconContainer}>
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress("food")}
-              name="food"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress("nightlife")}
-              name="beer"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress("site-seeing")}
-              name="camera"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress("lodging")}
-              name="bed-empty"
-              size={50}
-            />
-          </View>
+          <MemoryNavigator setMemoryVisible={setMemoryVisible} />
         </View>
-        {/* <View style={styles.memoryView}>
-          <AppText>How'd you get here?</AppText>
-          <View style={styles.iconContainer}>
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('airplane')}
-              name="plane"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('airplane')}
-              name="bus"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('train')}
-              name="train"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('car')}
-              name="car"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('boat')}
-              name=""
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('foot')}
-              name="walk"
-            />
-          </View>
-        </View> */}
-        {/* <View style={styles.memoryView}>
-          <AppText>Let's see some pictures!</AppText>
-          <View style={styles.iconContainer}>
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('Take a pic')}
-              name="camera"
-              size={60}
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('Browse photos')}
-              name="image-album"
-              size={60}
-            />
-          </View>
-          <AppText>And tell us who you're with!</AppText>
-          <View style={styles.iconContainer}>
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('tag a friend')}
-              name="human"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('tag a friend')}
-              name="human"
-            />
-            <ButtonIcon
-              style={styles.icon}
-              onPress={() => handlePress('tag a friend')}
-              name="human"
-            />
-          </View>
-        </View> */}
-        {/* <View style={styles.memoryView}>
-          <AppText style={styles.confirmation}>Memory Saved!</AppText>
-          <ButtonIcon
-            name="close"
-            size={30}
-            onPress={() => setMemoryVisible(false)}
-          /> */}
-        {/* </View> */}
       </Modal>
     </>
   );
@@ -256,15 +156,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
-  icon: {
-    margin: 10,
-  },
-  iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
-    marginTop: 20,
-    flexWrap: "wrap",
-  },
+
   mapStyle: {
     flex: 1,
     alignItems: "center",
@@ -281,8 +173,6 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    alignItems: "center",
-    justifyContent: "center",
     shadowOpacity: 0.55,
     shadowRadius: 10,
     elevation: 5,

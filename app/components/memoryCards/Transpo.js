@@ -1,39 +1,48 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import colors from "../../config/colors";
 
-function Transpo(props) {
+import AppText from "../AppText";
+import ButtonIcon from "../ButtonIcon";
+
+function Transpo({ navigation }) {
+  const handlePress = (string) => {
+    console.log(string);
+    navigation.navigate("PhotoSocial");
+  };
+
   return (
     <View style={styles.memoryView}>
       <AppText>How'd you get here?</AppText>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.loghandlePress("airplane")}
+          onPress={() => handlePress("airplane")}
           name="plane"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.log("airplane")}
+          onPress={() => handlePress("airplane")}
           name="bus"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.log("train")}
+          onPress={() => handlePress("train")}
           name="train"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.log("car")}
+          onPress={() => handlePress("car")}
           name="car"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.log("boat")}
-          name=""
+          onPress={() => handlePress("boat")}
+          name="sailing"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => console.log("foot")}
+          onPress={() => handlePress("foot")}
           name="walk"
         />
       </View>
@@ -42,7 +51,21 @@ function Transpo(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  memoryView: {
+    flex: 1,
+    backgroundColor: colors.background,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconContainer: {
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    flexWrap: "wrap",
+  },
+  icon: {
+    margin: 10,
+  },
 });
 
 export default Transpo;

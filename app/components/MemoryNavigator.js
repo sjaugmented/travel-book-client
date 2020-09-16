@@ -8,9 +8,13 @@ import Done from "./memoryCards/Done";
 
 const Stack = createStackNavigator();
 
-function MemoryNavigator() {
+function MemoryNavigator({ setMemoryVisible }) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Type" component={TypeOfPlace} />
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />

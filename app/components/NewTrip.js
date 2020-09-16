@@ -7,6 +7,7 @@ import Screen from "./Screen";
 
 import ModalContext from "../context/modalContext";
 import ActiveTripContext from "../context/activeTripContext";
+import colors from "../config/colors";
 
 function NewTrip({ navigation }) {
   const { tripActive, setTripActive } = useContext(ActiveTripContext);
@@ -40,7 +41,10 @@ function NewTrip({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
 });
 
 export default NewTrip;

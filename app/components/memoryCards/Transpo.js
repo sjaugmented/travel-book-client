@@ -18,7 +18,7 @@ function Transpo({ navigation }) {
         <ButtonIcon
           style={styles.icon}
           onPress={() => handlePress("airplane")}
-          name="plane"
+          name="airplane-takeoff"
         />
         <ButtonIcon
           style={styles.icon}

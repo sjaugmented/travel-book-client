@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { AuthSession } from "expo";
+import AppButton from "../components/AppButton";
+import colors from "../config/colors";
 
 const auth0Domain = "dev-r94p-cf7.us.auth0.com";
 const auth0ClientId = "y7CBRXvOHQoNJqPQqcXcZ9znVN3hBYiz";
 
-export default class authSession extends Component {
-  _loginWithAuth0 = async () => {
-    const redirectUrl = AuthSession.getRedirectUrl();
+export default class Auth0Login extends Component {
+  loginWithAuth0 = async () => {
+    console.log("beginning auth");
+    const redirectUrl = await AuthSession.getRedirectUrl();
     let authUrl =
       `${auth0Domain}/authorize` +
       toQueryString({
@@ -24,6 +27,7 @@ export default class authSession extends Component {
     if (result.type === "success") {
       console.log(result);
       let token = result.params.access_token;
+      console.log(token);
       this.props.setToken(token);
       this.props.navigation.navigate("Next Screen");
     }
@@ -31,9 +35,14 @@ export default class authSession extends Component {
 
   render() {
     return (
-      <Login
-        navigation={this.props.navigation}
-        onLogin={() => this._loginWithAuth0()}
+      // <Login
+      //   navigation={this.props.navigation}
+      //   onLogin={() => this.loginWithAuth0()}
+      // />
+      <AppButton
+        title="Login"
+        color={colors.primary}
+        onPress={() => this.loginWithAuth0()}
       />
     );
   }

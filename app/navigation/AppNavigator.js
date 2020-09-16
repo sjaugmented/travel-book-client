@@ -9,6 +9,7 @@ import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
 import Transpo from "../components/memoryCards/Transpo";
 import PhotoSocial from "../components/memoryCards/PhotoSocial";
 import Done from "../components/memoryCards/Done";
+import Auth0Login from "../auth/Auth0Login";
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ function AppNavigator() {
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={Auth0Login} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen
         name="Map"

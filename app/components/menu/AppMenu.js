@@ -11,20 +11,20 @@ function AppMenu({ tripActive, setTripActive }) {
         <ButtonIcon
           name="account"
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="account-multiple"
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="trophy-award"
           backgroundColor={colors.background}
           backgroundColor={colors.background}
-          iconColor={colors.primary}
+          iconColor={colors.secondary}
           style={{ marginBottom: 40 }}
         />
         {tripActive && (
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "500",
-    color: colors.primary,
+    color: colors.secondary,
   },
   trophies: {},
   trips: {

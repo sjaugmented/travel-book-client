@@ -1,8 +1,8 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import ButtonIcon from "../ButtonIcon";
-import AppText from "../AppText";
+import React from 'react'
+import { View, StyleSheet, FlatList, Text } from 'react-native'
+import colors from '../../config/colors'
+import ButtonIcon from '../ButtonIcon'
+import AppText from '../AppText'
 
 function AppMenu({ tripActive, setTripActive }) {
   return (
@@ -43,9 +43,15 @@ function AppMenu({ tripActive, setTripActive }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
+        <Text>Bali</Text>
+        <Text>New York</Text>
+        <Text>Paris</Text>
+        <Text>Afganistan</Text>
+        <Text>Nicaragua</Text>
+        {/* <FlatList /> */}
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -53,20 +59,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navbar: {
-    position: "absolute",
+    position: 'absolute',
     right: 20,
     top: 225,
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
-    fontWeight: "500",
+    fontWeight: '500',
     color: colors.primary,
   },
   trophies: {},
   trips: {
-    position: "absolute",
+    position: 'absolute',
     top: 225,
   },
-});
+})
 
-export default AppMenu;
+export default AppMenu

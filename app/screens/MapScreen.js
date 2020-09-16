@@ -238,13 +238,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 200,
   },
-  menuButton: {
-    position: 'absolute',
-    bottom: 75,
-    // right: 50,
-    position: 'absolute',
-    bottom: 150,
-  },
+
   confirmation: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -284,8 +278,15 @@ const styles = StyleSheet.create({
   },
   menuButton: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 75,
+    // right: 50,
+    position: 'absolute',
+    bottom: 150,
   },
+  // menuButton: {
+  //   position: 'absolute',
+  //   bottom: 70,
+  // },
   menuView: {
     flex: 1,
     marginTop: 200,

@@ -8,11 +8,11 @@ const auth0ClientId = "y7CBRXvOHQoNJqPQqcXcZ9znVN3hBYiz";
 
 export default class Auth0Login extends Component {
   loginWithAuth0 = async () => {
-    console.log("beginning auth");
+    console.log(Object.toQueryString());
     const redirectUrl = await AuthSession.getRedirectUrl();
     let authUrl =
       `${auth0Domain}/authorize` +
-      toQueryString({
+      Object.toQueryString({
         client_id: auth0ClientId,
         response_type: "token",
         scope: "openid profile email",

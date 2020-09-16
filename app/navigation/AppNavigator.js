@@ -30,10 +30,6 @@ function AppNavigator() {
           animationEnabled: false,
         }}
       />
-      {/* <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
-      <Stack.Screen name="Transpo" component={Transpo} />
-      <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
-      <Stack.Screen name="Done" component={Done} /> */}
     </Stack.Navigator>
   );
 }

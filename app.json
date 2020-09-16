@@ -4,7 +4,7 @@
     "slug": "travel-book-client",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/tb_logo.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/milan-chalk.jpg",
       "resizeMode": "contain",
@@ -21,6 +21,6 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "",
-    "scheme": "exp://localhost:19000"
+    "scheme": "travelbook"
   }
 }

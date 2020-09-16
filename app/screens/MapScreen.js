@@ -18,12 +18,13 @@ import ButtonIcon from "../components/ButtonIcon";
 import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
 import MemoryNavigator from "../components/MemoryNavigator";
-import MemoryContext from "../context/memoryContext";
+import ModalContext from "../context/modalContext";
+import ActiveTripContext from "../context/ActiveTripContext";
 
 function MapScreen({ navigation }) {
   const [location, setLocation] = useState();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [memoryVisible, setMemoryVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [tripActive, setTripActive] = useState(false);
 
   const getLocation = async () => {
@@ -49,7 +50,7 @@ function MapScreen({ navigation }) {
 
   const addMemory = () => {
     console.log("memory began at", location);
-    setMemoryVisible(true);
+    setModalVisible(true);
   };
 
   const handlePress = (name) => {
@@ -77,7 +78,7 @@ function MapScreen({ navigation }) {
               size={100}
               backgroundColor={colors.primary}
               iconColor={colors.light}
-              onPress={() => beginTrip()}
+              onPress={() => setModalVisible(true);}
               activeOpacity={0.7}
             />
           ) : (
@@ -87,7 +88,7 @@ function MapScreen({ navigation }) {
               size={100}
               backgroundColor={colors.confirm}
               iconColor={colors.light}
-              onPress={() => addMemory()}
+              onPress={() => setModalVisible(true);}
               activeOpacity={0.7}
             />
           )}
@@ -107,7 +108,7 @@ function MapScreen({ navigation }) {
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setMenuVisible(false)}
-        onSwipeComplete={() => setMenuVisible(false)}
+        // onSwipeComplete={() => setMenuVisible(false)}
         swipeDirection="down"
         backdropColor="clear"
         backdropOpacity={0}
@@ -124,18 +125,20 @@ function MapScreen({ navigation }) {
       </Modal>
       {/* MEMORY MODAL */}
       <Modal
-        visible={memoryVisible}
+        visible={modalVisible}
         animationType="slide"
         transparent={true}
-        onBackdropPress={() => setMemoryVisible(false)}
+        onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
         <View style={styles.memoryView}>
-          <MemoryContext.Provider value={setMemoryVisible}>
-            <MemoryNavigator setMemoryVisible={setMemoryVisible} />
-          </MemoryContext.Provider>
+          <ActiveTripContext value={tripActive}>
+            <ModalContext.Provider value={setModalVisible}>
+              <MemoryNavigator setMemoryVisible={setModalVisible} />
+            </ModalContext.Provider>
+          </ActiveTripContext>
         </View>
       </Modal>
     </>

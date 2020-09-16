@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
-import MemoryContext from "../../context/memoryContext";
+import ModalContext from "../../context/modalContext";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
 
 function Done({ navigation }) {
-  const setMemoryVisible = useContext(MemoryContext);
+  const setModalVisible = useContext(ModalContext);
   const handlePress = (string) => {
     console.log(string);
-    setMemoryVisible(false);
+    setModalVisible(false);
   };
 
   return (

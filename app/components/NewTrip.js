@@ -6,7 +6,7 @@ import ButtonIcon from "./ButtonIcon";
 import Screen from "./Screen";
 
 import ModalContext from "../context/modalContext";
-import ActiveTripContext from "../context/ActiveTripContext";
+import ActiveTripContext from "../context/activeTripContext";
 
 function NewTrip({ navigation }) {
   const [tripActive, setActiveTrip] = useContext(ActiveTripContext);

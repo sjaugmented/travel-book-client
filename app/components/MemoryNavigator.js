@@ -6,7 +6,7 @@ import Transpo from "./memoryCards/Transpo";
 import PhotoSocial from "./memoryCards/PhotoSocial";
 import Done from "./memoryCards/Done";
 import NewTrip from "./NewTrip";
-import ActiveTripContext from "../context/ActiveTripContext";
+import ActiveTripContext from "../context/activeTripContext";
 
 const Stack = createStackNavigator();
 

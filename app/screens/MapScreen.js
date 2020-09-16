@@ -19,7 +19,7 @@ import AppMenu from "../components/menu/AppMenu";
 import AppText from "../components/AppText";
 import MemoryNavigator from "../components/MemoryNavigator";
 import ModalContext from "../context/modalContext";
-import ActiveTripContext from "../context/ActiveTripContext";
+import ActiveTripContext from "../context/activeTripContext";
 
 function MapScreen({ navigation }) {
   const [location, setLocation] = useState();

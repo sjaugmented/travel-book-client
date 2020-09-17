@@ -6,7 +6,10 @@ import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
 function PhotoSocial({ navigation }) {
+  //Set memoryContext objext
   const memoryContext = useContext(MemoryContext)
+
+  //Set photo/social check-in and go to final modal
   const handlePress = (string) => {
     memoryContext.setCheckInPhoto(string)
     navigation.navigate('SubmitMemory')

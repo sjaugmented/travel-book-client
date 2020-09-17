@@ -52,16 +52,9 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.loginButton}></View>
       <View style={styles.loginButton}>
         <AppButton
-          title="Login"
+          title="Login With Google"
           color={colors.primary}
           onPress={() => signInWithGoogleAsync()}
-        />
-      </View>
-      <View style={styles.registerButton}>
-        <AppButton
-          title="Register"
-          color={colors.secondary}
-          onPress={() => navigation.navigate("Register")}
         />
       </View>
     </ImageBackground>

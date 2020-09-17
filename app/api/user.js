@@ -6,7 +6,6 @@ export default class UserModel {
     try {
       console.log("all()");
       const allUsers = await axios.get(`${local}/users`);
-      console.log("MODEL - allUsers:", allUsers);
       return allUsers;
     } catch (error) {
       console.log(error);

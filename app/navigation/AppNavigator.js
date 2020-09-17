@@ -8,8 +8,7 @@ import MapScreen from "../screens/MapScreen";
 import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
 import Transpo from "../components/memoryCards/Transpo";
 import PhotoSocial from "../components/memoryCards/PhotoSocial";
-import Done from "../components/memoryCards/Done";
-import Auth0Login from "../auth/Auth0Login";
+import SubmitMemory from "../components/memoryCards/SubmitMemory";
 
 const Stack = createStackNavigator();
 

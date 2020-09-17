@@ -8,7 +8,7 @@ import * as Google from "expo-google-app-auth";
 import UserModel from "../api/user";
 
 function WelcomeScreen({ navigation }) {
-  async function signInWithGoogleAsync() {
+  const signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId:
@@ -29,7 +29,7 @@ function WelcomeScreen({ navigation }) {
     } catch (e) {
       return { error: true };
     }
-  }
+  };
 
   const handleLogin = () => {
     Linking.openURL("http://localhost:4000/api/v1/auth/login");

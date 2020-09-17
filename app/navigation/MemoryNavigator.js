@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
-import Transpo from "../components/memoryCards/Transpo";
-import PhotoSocial from "../components/memoryCards/PhotoSocial";
-import Done from "../components/memoryCards/Done";
-import NewTrip from "../components/NewTrip";
+import TypeOfPlace from "./memoryCards/TypeOfPlace";
+import Transpo from "./memoryCards/Transpo";
+import PhotoSocial from "./memoryCards/PhotoSocial";
+import NameOfPlace from "./memoryCards/NameOfPlace";
+import SubmitMemory from "./memoryCards/SubmitMemory";
+import NewTrip from "./NewTrip";
 import ActiveTripContext from "../context/activeTripContext";
 
 const Stack = createStackNavigator();
 
-function MemoryNavigator() {
+function MemoryNavigator(props) {
   const { tripActive } = useContext(ActiveTripContext);
-
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,10 +20,11 @@ function MemoryNavigator() {
       }}
     >
       {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
+      <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
       <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
-      <Stack.Screen name="Done" component={Done} />
+      <Stack.Screen name="SubmitMemory" component={SubmitMemory} />
     </Stack.Navigator>
   );
 }

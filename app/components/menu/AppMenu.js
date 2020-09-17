@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, FlatList, Text, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import colors from "../../config/colors";
 import ButtonIcon from "../ButtonIcon";
 import AppText from "../AppText";
@@ -8,6 +14,8 @@ import ListItem from "../ListItem";
 
 import TripContext from "../../context/TripContext";
 import ActiveTripContext from "../../context/activeTripContext";
+import { ScrollView } from "react-native-gesture-handler";
+import TripList from "./TripList";
 
 function AppMenu({ navigation }) {
   const tripActive = useContext(ActiveTripContext);
@@ -65,19 +73,10 @@ function AppMenu({ navigation }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-
-        <FlatList
+        <TripList
+          style={styles.trips}
           data={trips}
           keyExtractor={(trip) => trip._id.toString()}
-          renderItem={({ item }) => (
-            <ScrollView style={styles.scrollView} scrollEnabled={scrollEnabled}>
-              <ListItem
-                title={item.name}
-                subTitle={item.year}
-                onPress={() => handlePress(item.name)}
-              />
-            </ScrollView>
-          )}
         />
       </View>
     </View>
@@ -88,12 +87,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
-    padding: 20,
+    padding: 30,
     borderRadius: 20,
   },
   navbar: {
     position: "absolute",
-    right: 20,
+    right: 30,
     top: 225,
     alignItems: "center",
     // backgroundColor: colors.background,
@@ -109,9 +108,12 @@ const styles = StyleSheet.create({
   trips: {
     position: "absolute",
     top: 225,
-    left: 20,
+    left: 30,
     width: 200,
     // backgroundColor: colors.background,
+  },
+  scrollView: {
+    //
   },
 });
 

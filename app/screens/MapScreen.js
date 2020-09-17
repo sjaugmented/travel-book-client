@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   menuView: {
     flex: 1,
     marginTop: 200,
-    // margin: -50,
+    margin: -22,
     backgroundColor: colors.light,
     borderRadius: 20,
     // padding: 35,

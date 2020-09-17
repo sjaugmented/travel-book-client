@@ -165,12 +165,7 @@ function MapScreen({ navigation }) {
                 setCheckInPhoto: setCheckInPhoto,
               }}
             >
-              <MemoryNavigator
-                modalVisible={modalVisible}
-                memory={memory}
-                location={location}
-                // setModalVisible={setModalVisible}
-              />
+              <MemoryNavigator />
             </MemoryContext.Provider>
           </ActiveTripContext.Provider>
         </View>

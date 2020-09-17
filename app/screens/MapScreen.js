@@ -9,13 +9,8 @@ import colors from '../config/colors'
 import ButtonIcon from '../components/ButtonIcon'
 
 //Navigators
-<<<<<<< HEAD
-import MenuNavigator from '../components/MenuNavigator'
+import MenuNavigator from '../navigation/MenuNavigator'
 import MemoryNavigator from '../navigation/MemoryNavigator'
-=======
-import MenuNavigator from "../navigation/MenuNavigator";
-import MemoryNavigator from "../navigation/MemoryNavigator";
->>>>>>> submaster
 
 //useContexts
 import MemoryContext from '../context/memoryContext'
@@ -23,12 +18,8 @@ import TripContext from '../context/TripContext'
 import ActiveTripContext from '../context/activeTripContext'
 
 //API
-<<<<<<< HEAD
 import MemoryModal from '../api/memories'
-=======
-import MemoryModal from "../api/memories";
-import ModalContext from "../context/modalContext";
->>>>>>> submaster
+import ModalContext from '../context/modalContext'
 
 function MapScreen({ navigation }) {
   //Hide and show

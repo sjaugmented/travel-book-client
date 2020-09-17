@@ -7,15 +7,15 @@ import TripModel from '../../api/trips'
 
 function Trip({ navigation }) {
   const tripContext = useContext(TripContext)
-  console.log(tripContext.pickedTrip)
 
   useEffect(() => {
     loadTrip()
+    tripContext.setPickedTrip('')
   }, [])
 
   const loadTrip = async () => {
     const response = await TripModel.show(tripContext.pickedTrip)
-    console.log('data', response)
+    console.log('data', response.trip)
   }
 
   return <View style={styles.container}></View>

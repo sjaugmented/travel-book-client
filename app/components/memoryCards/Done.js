@@ -1,41 +1,43 @@
-import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import ModalContext from "../../context/modalContext";
-import AppText from "../AppText";
-import ButtonIcon from "../ButtonIcon";
+import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
+import colors from '../../config/colors'
+import ModalContext from '../../context/modalContext'
+import AppText from '../AppText'
+import ButtonIcon from '../ButtonIcon'
 
-function Done({ navigation }) {
-  const setModalVisible = useContext(ModalContext);
+function Done({ navigation, memory }) {
+  const setModalVisible = useContext(ModalContext)
+  const setMemory = useContext(ModalContext)
   const handlePress = (string) => {
-    console.log(string);
-    setModalVisible(false);
-  };
+    setMemory((prevArray) => [...prevArray])
+    console.log(memory)
+    // setModalVisible(false)
+  }
 
   return (
     <View style={styles.memoryView}>
       <AppText style={styles.confirmation}>Memory Saved!</AppText>
-      <ButtonIcon name="close" size={30} onPress={() => handlePress("Done")} />
+      <ButtonIcon name="close" size={30} onPress={() => handlePress('Done')} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     backgroundColor: colors.background,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
     marginTop: 20,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   icon: {
     margin: 10,
   },
-});
+})
 
-export default Done;
+export default Done

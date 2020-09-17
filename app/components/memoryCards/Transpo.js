@@ -1,15 +1,17 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
+import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
+import colors from '../../config/colors'
+import ModalContext from '../../context/modalContext'
+import AppText from '../AppText'
+import ButtonIcon from '../ButtonIcon'
 
-import AppText from "../AppText";
-import ButtonIcon from "../ButtonIcon";
-
-function Transpo({ navigation }) {
+function Transpo({ navigation, memory }) {
+  const setMemory = useContext(ModalContext)
   const handlePress = (string) => {
-    console.log(string);
-    navigation.navigate("PhotoSocial");
-  };
+    setMemory((prevArray) => [...prevArray, string])
+    console.log(memory)
+    navigation.navigate('PhotoSocial')
+  }
 
   return (
     <View style={styles.memoryView}>
@@ -17,55 +19,55 @@ function Transpo({ navigation }) {
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("airplane")}
+          onPress={() => handlePress('airplane')}
           name="airplane-takeoff"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("airplane")}
+          onPress={() => handlePress('airplane')}
           name="bus"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("train")}
+          onPress={() => handlePress('train')}
           name="train"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("car")}
+          onPress={() => handlePress('car')}
           name="car"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("boat")}
+          onPress={() => handlePress('boat')}
           name="sailing"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("foot")}
+          onPress={() => handlePress('foot')}
           name="walk"
         />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     backgroundColor: colors.background,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
     marginTop: 20,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   icon: {
     margin: 10,
   },
-});
+})
 
-export default Transpo;
+export default Transpo

@@ -26,6 +26,7 @@ function MapScreen({ navigation }) {
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [tripActive, setTripActive] = useState(false)
+  const [memory, setMemory] = useState([])
 
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync()
@@ -137,8 +138,11 @@ function MapScreen({ navigation }) {
           <ActiveTripContext.Provider
             value={{ tripActive: tripActive, setTripActive: setTripActive }}
           >
-            <ModalContext.Provider value={setModalVisible}>
-              <MemoryNavigator setMemoryVisible={setModalVisible} />
+            <ModalContext.Provider value={(setModalVisible, setMemory)}>
+              <MemoryNavigator
+                memory={memory}
+                setMemoryVisible={setModalVisible}
+              />
             </ModalContext.Provider>
           </ActiveTripContext.Provider>
         </View>

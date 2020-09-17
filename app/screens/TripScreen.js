@@ -40,9 +40,12 @@ function TripScreen({ navigation }) {
         style={styles.tripPic}
         resizeMode="center"
       />
-      <AppHeader style={styles.header}>
-        {displayTrip ? displayTrip.name : "Loading..."}
-      </AppHeader>
+      <View style={styles.trip}>
+        <AppHeader style={styles.header}>
+          {displayTrip ? displayTrip.name : "Loading..."}
+        </AppHeader>
+        <AppText>{displayTrip.year}</AppText>
+      </View>
     </View>
   );
 }
@@ -51,10 +54,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
+  tripPic: { width: "100%", height: 200 },
+  trip: {
     flex: 1,
+    padding: 10,
   },
-  tripPic: { width: "100%", height: 100 },
 });
 
 export default TripScreen;

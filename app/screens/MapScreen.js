@@ -208,16 +208,12 @@ const styles = StyleSheet.create({
   menuButton: {
     position: "absolute",
     bottom: 75,
-    // right: 50,
-    position: "absolute",
-    bottom: 150,
   },
   confirmation: {
     fontSize: 30,
     fontWeight: "bold",
     marginBottom: 20,
   },
-
   mapStyle: {
     flex: 1,
     alignItems: "center",
@@ -239,21 +235,13 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
   },
-  menuButton: {
-    position: "absolute",
-    bottom: 70,
-  },
-  // menuButton: {
-  //   position: 'absolute',
-  //   bottom: 70,
-  // },
   menuView: {
     flex: 1,
     marginTop: 200,
-    margin: -20,
-    backgroundColor: colors.background,
+    // margin: -50,
+    backgroundColor: colors.light,
     borderRadius: 20,
-    padding: 35,
+    // padding: 35,
     height: "80%",
     shadowColor: "#000",
     shadowOffset: {

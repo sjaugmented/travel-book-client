@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, ScrollView } from "react-native";
 import colors from "../../config/colors";
 import ButtonIcon from "../ButtonIcon";
 import AppText from "../AppText";
@@ -29,24 +29,23 @@ function AppMenu({ navigation }) {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.navbar}>
         <ButtonIcon
           name="account"
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="account-multiple"
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="trophy-award"
-          backgroundColor={colors.background}
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 40 }}
         />
@@ -71,11 +70,13 @@ function AppMenu({ navigation }) {
           data={trips}
           keyExtractor={(trip) => trip._id.toString()}
           renderItem={({ item }) => (
-            <ListItem
-              title={item.name}
-              subTitle={item.year}
-              onPress={() => handlePress(item.name)}
-            />
+            <ScrollView style={styles.scrollView} scrollEnabled={scrollEnabled}>
+              <ListItem
+                title={item.name}
+                subTitle={item.year}
+                onPress={() => handlePress(item.name)}
+              />
+            </ScrollView>
           )}
         />
       </View>
@@ -86,25 +87,31 @@ function AppMenu({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
+    padding: 20,
+    borderRadius: 20,
   },
   navbar: {
     position: "absolute",
     right: 20,
     top: 225,
     alignItems: "center",
-    backgroundColor: colors.background,
+    // backgroundColor: colors.background,
   },
   text: {
     fontWeight: "500",
     color: colors.primary,
+    // backgroundColor: colors.background,
   },
-  trophies: { backgroundColor: colors.background },
+  trophies: {
+    // backgroundColor: colors.background
+  },
   trips: {
     position: "absolute",
     top: 225,
+    left: 20,
     width: 200,
-    backgroundColor: colors.background,
+    // backgroundColor: colors.background,
   },
 });
 

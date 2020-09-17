@@ -67,7 +67,7 @@ function AppMenu({ navigation }) {
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
 
-        {/* <FlatList
+        <FlatList
           data={trips}
           keyExtractor={(trip) => trip._id.toString()}
           renderItem={({ item }) => (
@@ -77,7 +77,7 @@ function AppMenu({ navigation }) {
               onPress={() => handlePress(item.name)}
             />
           )}
-        /> */}
+        />
       </View>
     </View>
   );

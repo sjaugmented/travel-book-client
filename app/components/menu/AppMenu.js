@@ -18,6 +18,7 @@ function AppMenu({ tripActive, setTripActive, navigation }) {
 
   const loadTrips = async () => {
     const response = await TripModel.all()
+    // console.log(response)
     setTrips(response.trips)
   }
 

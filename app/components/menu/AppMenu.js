@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, StyleSheet, FlatList, Text } from 'react-native'
 import colors from '../../config/colors'
 import ButtonIcon from '../ButtonIcon'
@@ -6,7 +6,10 @@ import AppText from '../AppText'
 import TripModel from '../../api/trips'
 import ListItem from '../ListItem'
 
-function AppMenu({ tripActive, setTripActive }) {
+import TripContext from '../../context/TripContext'
+
+function AppMenu({ tripActive, setTripActive, navigation }) {
+  const tripContext = useContext(TripContext)
   const [trips, setTrips] = useState([])
 
   useEffect(() => {
@@ -16,7 +19,11 @@ function AppMenu({ tripActive, setTripActive }) {
   const loadTrips = async () => {
     const response = await TripModel.all()
     setTrips(response.trips)
-    // console.log(response.trips)
+  }
+
+  const handlePress = (trip) => {
+    tripContext.setPickedTrip(trip)
+    navigation.navigate('Trip')
   }
 
   return (
@@ -63,9 +70,9 @@ function AppMenu({ tripActive, setTripActive }) {
           keyExtractor={(trip) => trip._id.toString()}
           renderItem={({ item }) => (
             <ListItem
-              name={item.name}
-              year={item.year}
-              onPress={() => console.log('trip selected', item)}
+              title={item.name}
+              subTitle={item.year}
+              onPress={() => handlePress(item.name)}
             />
           )}
         />

@@ -1,32 +1,69 @@
 import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  SafeAreaView,
-  TouchableOpacity,
-  Button,
-} from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import Modal from 'react-native-modal'
 import MapView from 'react-native-maps'
 import * as Location from 'expo-location'
-import AppTextInput from '../components/AppTextInput'
-import Screen from '../components/Screen'
+
+//Styles
 import colors from '../config/colors'
-import Icon from '../components/Icon'
 import ButtonIcon from '../components/ButtonIcon'
-import AppMenu from '../components/menu/AppMenu'
-import AppText from '../components/AppText'
+
+//Navigators
+import MenuNavigator from '../components/MenuNavigator'
 import MemoryNavigator from '../components/MemoryNavigator'
-import ModalContext from '../context/modalContext'
+
+//useContexts
+import MemoryContext from '../context/memoryContext'
+import TripContext from '../context/TripContext'
 import ActiveTripContext from '../context/activeTripContext'
 
+//API
+import MemoryModal from '../api/memories'
+
 function MapScreen({ navigation }) {
-  const [location, setLocation] = useState()
+  //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
+
   const [tripActive, setTripActive] = useState(false)
 
+  //Memory and Trip Hooks
+  const [memory, setMemory] = useState(null)
+  const [tripName, setTripName] = useState('')
+  const [location, setLocation] = useState()
+  const [checkInPlace, setCheckInPlace] = useState('')
+  const [checkInType, setCheckInType] = useState('')
+  const [checkInTranspo, setCheckInTranspo] = useState('')
+  const [checkInPhoto, setCheckInPhoto] = useState('')
+
+  //Hook for show trip window
+  const [pickedTrip, setPickedTrip] = useState('')
+
+  //setMemory with this data and call saveMemory function to add to db
+  const addMemory = () => {
+    let memoryData = {
+      location: location,
+      locationName: checkInPlace,
+      type: checkInType,
+      transpo: checkInTranspo,
+      photo: checkInPhoto,
+    }
+    setMemory(memoryData)
+    saveMemory(memoryData)
+    setModalVisible(false)
+  }
+
+  //Adding memory to db
+  const saveMemory = async (memory) => {
+    const data = {
+      memory,
+      tripName,
+    }
+    const result = await MemoryModal.create(data)
+    setMemory(null)
+  }
+
+  //Setting latitude and longitude for current location
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync()
     if (!granted) {
@@ -46,11 +83,6 @@ function MapScreen({ navigation }) {
   const beginTrip = () => {
     console.log('beginning trip from', location) // remove
     setTripActive(true)
-  }
-
-  const addMemory = () => {
-    console.log('memory began at', location)
-    setModalVisible(true)
   }
 
   const handlePress = (name) => {
@@ -120,7 +152,14 @@ function MapScreen({ navigation }) {
             title="Welcome Screen"
             onPress={() => navigation.navigate('Welcome')}
           />
-          <AppMenu tripActive={tripActive} setTripActive={setTripActive} />
+          <TripContext.Provider
+            value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
+          >
+            <MenuNavigator
+              tripActive={tripActive}
+              setTripActive={setTripActive}
+            />
+          </TripContext.Provider>
         </View>
       </Modal>
       {/* MEMORY MODAL */}
@@ -137,9 +176,19 @@ function MapScreen({ navigation }) {
           <ActiveTripContext.Provider
             value={{ tripActive: tripActive, setTripActive: setTripActive }}
           >
-            <ModalContext.Provider value={setModalVisible}>
-              <MemoryNavigator setMemoryVisible={setModalVisible} />
-            </ModalContext.Provider>
+            <MemoryContext.Provider
+              value={{
+                onPress: addMemory,
+                setCheckInPlace: setCheckInPlace,
+                setCheckInType: setCheckInType,
+                setCheckInTranspo: setCheckInTranspo,
+                setCheckInPhoto: setCheckInPhoto,
+                setTripName: setTripName,
+                tripName: tripName,
+              }}
+            >
+              <MemoryNavigator />
+            </MemoryContext.Provider>
           </ActiveTripContext.Provider>
         </View>
       </Modal>

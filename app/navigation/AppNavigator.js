@@ -20,8 +20,6 @@ function AppNavigator() {
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={Auth0Login} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen
         name="Map"
         component={MapScreen}

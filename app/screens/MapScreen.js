@@ -10,7 +10,7 @@ import ButtonIcon from "../components/ButtonIcon";
 
 //Navigators
 import MenuNavigator from "../components/MenuNavigator";
-import MemoryNavigator from "../components/MemoryNavigator";
+import MemoryNavigator from "../navigation/MemoryNavigator";
 
 //useContexts
 import MemoryContext from "../context/memoryContext";

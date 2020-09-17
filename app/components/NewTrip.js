@@ -8,6 +8,7 @@ import TripModel from "../api/trips";
 
 import MemoryContext from "../context/memoryContext";
 import ActiveTripContext from "../context/activeTripContext";
+import colors from "../config/colors";
 
 function NewTrip({ navigation }) {
   const { tripActive, setTripActive } = useContext(ActiveTripContext);

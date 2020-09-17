@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Button } from 'react-native'
-import Modal from 'react-native-modal'
-import MapView from 'react-native-maps'
-import * as Location from 'expo-location'
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Button, Modal } from "react-native";
+import NativeModal from "react-native-modal";
+import MapView from "react-native-maps";
+import * as Location from "expo-location";
 
 //Styles
-import colors from '../config/colors'
-import ButtonIcon from '../components/ButtonIcon'
+import colors from "../config/colors";
+import ButtonIcon from "../components/ButtonIcon";
 
 //Navigators
-import MenuNavigator from '../components/MenuNavigator'
-import MemoryNavigator from '../navigation/MemoryNavigator'
+import MenuNavigator from "../components/MenuNavigator";
+import MemoryNavigator from "../navigation/MemoryNavigator";
 
 //useContexts
-import MemoryContext from '../context/memoryContext'
-import TripContext from '../context/TripContext'
-import ActiveTripContext from '../context/activeTripContext'
+import MemoryContext from "../context/memoryContext";
+import TripContext from "../context/TripContext";
+import ActiveTripContext from "../context/activeTripContext";
 
 //API
-import MemoryModal from '../api/memories'
+import MemoryModal from "../api/memories";
 
 function MapScreen({ navigation }) {
   //Hide and show
-  const [menuVisible, setMenuVisible] = useState(false)
-  const [modalVisible, setModalVisible] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const [tripActive, setTripActive] = useState(false)
+  const [tripActive, setTripActive] = useState(false);
 
   //Memory and Trip Hooks
-  const [memory, setMemory] = useState(null)
-  const [tripName, setTripName] = useState('')
-  const [location, setLocation] = useState()
-  const [checkInPlace, setCheckInPlace] = useState('')
-  const [checkInType, setCheckInType] = useState('')
-  const [checkInTranspo, setCheckInTranspo] = useState('')
-  const [checkInPhoto, setCheckInPhoto] = useState('')
+  const [memory, setMemory] = useState(null);
+  const [tripName, setTripName] = useState("");
+  const [location, setLocation] = useState();
+  const [checkInPlace, setCheckInPlace] = useState("");
+  const [checkInType, setCheckInType] = useState("");
+  const [checkInTranspo, setCheckInTranspo] = useState("");
+  const [checkInPhoto, setCheckInPhoto] = useState("");
 
   //Hook for show trip window
-  const [pickedTrip, setPickedTrip] = useState('')
+  const [pickedTrip, setPickedTrip] = useState("");
 
   //setMemory with this data and call saveMemory function to add to db
   const addMemory = () => {
@@ -47,38 +47,38 @@ function MapScreen({ navigation }) {
       type: checkInType,
       transpo: checkInTranspo,
       photo: checkInPhoto,
-    }
-    setMemory(memoryData)
-    saveMemory(memoryData)
-    setModalVisible(false)
-  }
+    };
+    setMemory(memoryData);
+    saveMemory(memoryData);
+    setModalVisible(false);
+  };
 
   //Adding memory to db
   const saveMemory = async (memory) => {
     const data = {
       memory,
       tripName,
-    }
-    const result = await MemoryModal.create(data)
-    setMemory(null)
-  }
+    };
+    const result = await MemoryModal.create(data);
+    setMemory(null);
+  };
 
   //Setting latitude and longitude for current location
   const getLocation = async () => {
-    const { granted } = await Location.requestPermissionsAsync()
+    const { granted } = await Location.requestPermissionsAsync();
     if (!granted) {
       // error - we need your location dummy
     } else {
       const {
         coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync()
-      setLocation({ latitude, longitude })
+      } = await Location.getCurrentPositionAsync();
+      setLocation({ latitude, longitude });
     }
-  }
+  };
 
   useEffect(() => {
-    getLocation()
-  }, [])
+    getLocation();
+  }, []);
 
   return (
     <>
@@ -117,7 +117,7 @@ function MapScreen({ navigation }) {
           )}
           <ButtonIcon
             style={styles.menuButton}
-            name={'xbox-controller-menu'}
+            name={"xbox-controller-menu"}
             size={65}
             backgroundColor={colors.light}
             iconColor={colors.secondary}
@@ -126,40 +126,44 @@ function MapScreen({ navigation }) {
         </MapView>
       )}
       {/* MENU MODAL */}
-      <Modal
+      <NativeModal
         visible={menuVisible}
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setMenuVisible(false)}
         // onSwipeComplete={() => setMenuVisible(false)}
-        swipeDirection="down"
-        backdropColor="clear"
-        backdropOpacity={0}
+        // swipeDirection="down"
+        // backdropColor="clear"
+        // backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
         <View style={styles.menuView}>
           <Button title="Close" onPress={() => setMenuVisible(false)} />
           <Button
             title="Welcome Screen"
-            onPress={() => navigation.navigate('Welcome')}
+            onPress={() => navigation.navigate("Welcome")}
           />
           <TripContext.Provider
             value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
           >
-            <MenuNavigator
-              tripActive={tripActive}
-              setTripActive={setTripActive}
-            />
+            <ActiveTripContext.Provider
+              value={{ tripActive: tripActive, setTripActive: setTripActive }}
+            >
+              <MenuNavigator
+                tripActive={tripActive}
+                setTripActive={setTripActive}
+              />
+            </ActiveTripContext.Provider>
           </TripContext.Provider>
         </View>
-      </Modal>
+      </NativeModal>
       {/* MEMORY MODAL */}
-      <Modal
+      <NativeModal
         visible={modalVisible}
         animationType="slide"
-        transparent={true}
+        // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
-        backdropColor="clear"
+        // backdropColor="clear"
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
@@ -182,41 +186,37 @@ function MapScreen({ navigation }) {
             </MemoryContext.Provider>
           </ActiveTripContext.Provider>
         </View>
-      </Modal>
+      </NativeModal>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   addButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 200,
   },
   menuButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 75,
-    // right: 50,
-    position: 'absolute',
-    bottom: 150,
   },
   confirmation: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
-
   mapStyle: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   memoryView: {
     flex: 1,
     marginTop: 350,
     marginBottom: 120,
     // margin: -20,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
     padding: 35,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -226,23 +226,15 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
   },
-  menuButton: {
-    position: 'absolute',
-    bottom: 70,
-  },
-  // menuButton: {
-  //   position: 'absolute',
-  //   bottom: 70,
-  // },
   menuView: {
     flex: 1,
     marginTop: 200,
-    margin: -20,
-    backgroundColor: colors.background,
+    margin: -21,
+    backgroundColor: colors.light,
     borderRadius: 20,
-    padding: 35,
-    height: '80%',
-    shadowColor: '#000',
+    // padding: 35,
+    height: "80%",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -251,6 +243,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
-})
+});
 
-export default MapScreen
+export default MapScreen;

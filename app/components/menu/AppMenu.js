@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, StyleSheet, FlatList, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import colors from '../../config/colors'
 import ButtonIcon from '../ButtonIcon'
 import AppText from '../AppText'
@@ -7,8 +13,12 @@ import TripModel from '../../api/trips'
 import ListItem from '../ListItem'
 
 import TripContext from '../../context/TripContext'
+import ActiveTripContext from '../../context/activeTripContext'
+import { ScrollView } from 'react-native-gesture-handler'
+import TripList from './TripList'
 
-function AppMenu({ tripActive, setTripActive, navigation }) {
+function AppMenu({ navigation }) {
+  const tripActive = useContext(ActiveTripContext)
   const tripContext = useContext(TripContext)
   const [trips, setTrips] = useState([])
 
@@ -18,7 +28,6 @@ function AppMenu({ tripActive, setTripActive, navigation }) {
 
   const loadTrips = async () => {
     const response = await TripModel.all()
-    // console.log(response)
     setTrips(response.trips)
   }
 
@@ -28,34 +37,33 @@ function AppMenu({ tripActive, setTripActive, navigation }) {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.navbar}>
         <ButtonIcon
           name="account"
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="account-multiple"
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="trophy-award"
-          backgroundColor={colors.background}
-          backgroundColor={colors.background}
+          backgroundColor={colors.light}
           iconColor={colors.secondary}
           style={{ marginBottom: 40 }}
         />
-        {tripActive && (
+        {tripActive.tripActive && (
           <ButtonIcon
             name="minus-circle"
             size={75}
             backgroundColor={colors.light}
             iconColor={colors.danger}
-            onPress={() => setTripActive(false)}
+            onPress={() => tripActive.setTripActive(false)}
             activeOpacity={0.7}
           />
         )}
@@ -65,18 +73,7 @@ function AppMenu({ tripActive, setTripActive, navigation }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-
-        <FlatList
-          data={trips}
-          keyExtractor={(trip) => trip._id.toString()}
-          renderItem={({ item }) => (
-            <ListItem
-              title={item.name}
-              subTitle={item.year}
-              onPress={() => handlePress(item.name)}
-            />
-          )}
-        />
+        <TripList style={styles.trips} data={trips} handlePress={handlePress} />
       </View>
     </View>
   )
@@ -85,22 +82,34 @@ function AppMenu({ tripActive, setTripActive, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.light,
+    padding: 30,
+    borderRadius: 20,
   },
   navbar: {
     position: 'absolute',
-    right: 20,
+    right: 30,
     top: 225,
     alignItems: 'center',
+    // backgroundColor: colors.background,
   },
   text: {
     fontWeight: '500',
     color: colors.primary,
+    // backgroundColor: colors.background,
   },
-  trophies: {},
+  trophies: {
+    // backgroundColor: colors.background
+  },
   trips: {
     position: 'absolute',
-    top: 225,
-    width: 200,
+    top: 150,
+    left: 30,
+    width: 225,
+    // backgroundColor: colors.background,
+  },
+  scrollView: {
+    //
   },
 })
 

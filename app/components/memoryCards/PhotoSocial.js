@@ -32,7 +32,7 @@ function PhotoSocial({ navigation }) {
   // const selectImage = ()
   return (
     <View style={styles.memoryView}>
-      <AppText>Let's see some pictures!</AppText>
+      <AppHeader>Let's see some pictures!</AppHeader>
       <View style={styles.iconContainer}>
         <Button title="Select Image" onPress={selectImage} />
         <ButtonIcon
@@ -48,24 +48,24 @@ function PhotoSocial({ navigation }) {
           size={60}
         />
       </View>
-      <AppText>And tell us who you're with!</AppText>
+      {/* <AppText>And tell us who you're with!</AppText>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
-      </View>
+      </View> */}
     </View>
   )
 }
@@ -73,7 +73,7 @@ function PhotoSocial({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -77,6 +77,7 @@ function AppMenu({ navigation }) {
           style={styles.trips}
           data={trips}
           keyExtractor={(trip) => trip._id.toString()}
+          handlePress={handlePress}
         />
       </View>
     </View>
@@ -107,9 +108,9 @@ const styles = StyleSheet.create({
   },
   trips: {
     position: "absolute",
-    top: 225,
+    top: 150,
     left: 30,
-    width: 200,
+    width: 225,
     // backgroundColor: colors.background,
   },
   scrollView: {

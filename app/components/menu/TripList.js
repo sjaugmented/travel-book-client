@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, ScrollView } from "react-native";
 import AppText from "../AppText";
 import ListItem from "../ListItem";
 
-function TripList({ data }) {
+function TripList({ data, handlePress }) {
   console.log("data:", data);
   return (
     <View style={styles.container}>
@@ -12,7 +12,7 @@ function TripList({ data }) {
           <ListItem
             title={item.name}
             subTitle={item.year}
-            // onPress={() => handlePress(item.name)}
+            onPress={() => handlePress(item.name)}
           />
         ))}
       </ScrollView>
@@ -21,7 +21,7 @@ function TripList({ data }) {
 }
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 15, marginTop: 10 },
+  container: { marginBottom: 15, marginTop: 10, height: 375 },
 });
 
 export default TripList;

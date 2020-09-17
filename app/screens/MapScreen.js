@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Button } from "react-native";
-import Modal from "react-native-modal";
+import { View, StyleSheet, Button, Modal } from "react-native";
+import NativeModal from "react-native-modal";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
 
@@ -135,15 +135,15 @@ function MapScreen({ navigation }) {
         </MapView>
       )}
       {/* MENU MODAL */}
-      <Modal
+      <NativeModal
         visible={menuVisible}
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setMenuVisible(false)}
         // onSwipeComplete={() => setMenuVisible(false)}
-        swipeDirection="down"
-        backdropColor="clear"
-        backdropOpacity={0}
+        // swipeDirection="down"
+        // backdropColor="clear"
+        // backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
         <View style={styles.menuView}>
@@ -165,14 +165,14 @@ function MapScreen({ navigation }) {
             </ActiveTripContext.Provider>
           </TripContext.Provider>
         </View>
-      </Modal>
+      </NativeModal>
       {/* MEMORY MODAL */}
-      <Modal
+      <NativeModal
         visible={modalVisible}
         animationType="slide"
-        transparent={true}
+        // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
-        backdropColor="clear"
+        // backdropColor="clear"
         backdropOpacity={0}
         onModalHide={() => getLocation()}
       >
@@ -195,7 +195,7 @@ function MapScreen({ navigation }) {
             </MemoryContext.Provider>
           </ActiveTripContext.Provider>
         </View>
-      </Modal>
+      </NativeModal>
     </>
   );
 }
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     marginTop: 350,
     marginBottom: 120,
     // margin: -20,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
     padding: 35,
     shadowColor: "#000",
     shadowOffset: {
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   menuView: {
     flex: 1,
     marginTop: 200,
-    margin: -22,
+    margin: -21,
     backgroundColor: colors.light,
     borderRadius: 20,
     // padding: 35,

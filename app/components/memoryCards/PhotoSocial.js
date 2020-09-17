@@ -1,72 +1,73 @@
-import React, { useContext } from 'react'
-import { View, StyleSheet } from 'react-native'
-import colors from '../../config/colors'
-import MemoryContext from '../../context/memoryContext'
-import AppText from '../AppText'
-import ButtonIcon from '../ButtonIcon'
+import React, { useContext } from "react";
+import { View, StyleSheet } from "react-native";
+import colors from "../../config/colors";
+import MemoryContext from "../../context/memoryContext";
+import AppHeader from "../AppHeader";
+import AppText from "../AppText";
+import ButtonIcon from "../ButtonIcon";
 
 function PhotoSocial({ navigation }) {
-  const memoryContext = useContext(MemoryContext)
+  const memoryContext = useContext(MemoryContext);
   const handlePress = (string) => {
-    memoryContext.setCheckInPhoto(string)
-    navigation.navigate('SubmitMemory')
-  }
+    memoryContext.setCheckInPhoto(string);
+    navigation.navigate("SubmitMemory");
+  };
 
   return (
     <View style={styles.memoryView}>
-      <AppText>Let's see some pictures!</AppText>
+      <AppHeader>Let's see some pictures!</AppHeader>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('Take a pic')}
+          onPress={() => handlePress("Take a pic")}
           name="camera"
           size={60}
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('Browse photos')}
+          onPress={() => handlePress("Browse photos")}
           name="image-album"
           size={60}
         />
       </View>
-      <AppText>And tell us who you're with!</AppText>
+      {/* <AppText>And tell us who you're with!</AppText>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('tag a friend')}
+          onPress={() => handlePress("tag a friend")}
           name="human"
         />
-      </View>
+      </View> */}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors.light,
+    alignItems: "center",
+    justifyContent: "center",
   },
   iconContainer: {
-    justifyContent: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    flexDirection: "row",
     marginTop: 20,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   icon: {
     margin: 10,
   },
-})
+});
 
-export default PhotoSocial
+export default PhotoSocial;

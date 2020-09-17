@@ -24,7 +24,7 @@ function Done({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
     alignItems: "center",
     justifyContent: "center",
   },

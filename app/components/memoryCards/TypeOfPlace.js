@@ -4,6 +4,7 @@ import colors from "../../config/colors";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
 import MemoryContext from "../../context/memoryContext";
+import AppHeader from "../AppHeader";
 
 function TypeOfPlace({ navigation }) {
   const memoryContext = useContext(MemoryContext);
@@ -15,7 +16,7 @@ function TypeOfPlace({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppText>Whatcha doin?</AppText>
+      <AppHeader>Whatcha doin?</AppHeader>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
@@ -46,7 +47,7 @@ function TypeOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.light,
     alignItems: "center",
     justifyContent: "center",
   },

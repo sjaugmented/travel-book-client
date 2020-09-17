@@ -5,6 +5,7 @@ import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 
 import * as AuthSession from "expo-auth-session";
+import * as Google from "expo-google-app-auth";
 
 const auth0Domain = "https://dev-r94p-cf7.us.auth0.com";
 const auth0ClientId = "y7CBRXvOHQoNJqPQqcXcZ9znVN3hBYiz";
@@ -45,6 +46,27 @@ function WelcomeScreen({ navigation }) {
     }
   };
 
+  async function signInWithGoogleAsync() {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId:
+          "469615040442-h1n11vjc6oh6bhoa4ss1rdntoo66mqdk.apps.googleusercontent.com",
+        iosClientId:
+          "469615040442-lcalo53k63uk825532pp92dgqbdle0g0.apps.googleusercontent.com",
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        console.log("result", result);
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  }
+
   const handleLogin = () => {
     Linking.openURL("http://localhost:4000/api/v1/auth/login");
   };
@@ -68,7 +90,7 @@ function WelcomeScreen({ navigation }) {
         <AppButton
           title="Login"
           color={colors.primary}
-          onPress={() => handleLogin()}
+          onPress={() => signInWithGoogleAsync()}
         />
       </View>
       <View style={styles.registerButton}>

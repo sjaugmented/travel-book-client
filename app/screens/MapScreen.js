@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  SafeAreaView,
-  TouchableOpacity,
-  Button,
-} from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import Modal from 'react-native-modal'
 import MapView from 'react-native-maps'
 import * as Location from 'expo-location'
-import AppTextInput from '../components/AppTextInput'
-import Screen from '../components/Screen'
+
+//Styles
 import colors from '../config/colors'
-import Icon from '../components/Icon'
 import ButtonIcon from '../components/ButtonIcon'
-import AppMenu from '../components/menu/AppMenu'
-import AppText from '../components/AppText'
+
+//Navigators
+import MenuNavigator from '../components/MenuNavigator'
 import MemoryNavigator from '../components/MemoryNavigator'
+
+//useContexts
 import MemoryContext from '../context/memoryContext'
 import TripContext from '../context/TripContext'
 import ActiveTripContext from '../context/activeTripContext'
-import MemoryModel from '../api/memories'
-import MenuNavigator from '../components/MenuNavigator'
+
+//API
+import MemoryModal from '../api/memories'
 
 function MapScreen({ navigation }) {
+  //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
+
   const [tripActive, setTripActive] = useState(false)
+
+  //Memory and Trip Hooks
   const [memory, setMemory] = useState(null)
   const [tripName, setTripName] = useState('')
   const [location, setLocation] = useState()
@@ -36,8 +36,10 @@ function MapScreen({ navigation }) {
   const [checkInTranspo, setCheckInTranspo] = useState('')
   const [checkInPhoto, setCheckInPhoto] = useState('')
 
+  //Hook for show trip window
   const [pickedTrip, setPickedTrip] = useState('')
 
+  //setMemory with this data and call saveMemory function to add to db
   const addMemory = () => {
     let memoryData = {
       location: location,
@@ -51,15 +53,17 @@ function MapScreen({ navigation }) {
     setModalVisible(false)
   }
 
+  //Adding memory to db
   const saveMemory = async (memory) => {
     const data = {
       memory,
       tripName,
     }
-    const result = await MemoryModel.create(data)
+    const result = await MemoryModal.create(data)
     setMemory(null)
   }
 
+  //Setting latitude and longitude for current location
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync()
     if (!granted) {

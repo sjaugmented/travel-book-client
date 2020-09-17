@@ -27,6 +27,7 @@ function MapScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const [tripActive, setTripActive] = useState(false)
   const [memory, setMemory] = useState(null)
+  const [tripName, setTripName] = useState('')
   const [location, setLocation] = useState()
   const [checkInType, setCheckInType] = useState('')
   const [checkInTranspo, setCheckInTranspo] = useState('')
@@ -45,10 +46,11 @@ function MapScreen({ navigation }) {
   }
 
   const saveMemory = async (memory) => {
-    console.log('saved mem', memory)
-    const result = await MemoryModel.create(memory)
-    console.log('result', result)
-
+    const data = {
+      memory,
+      tripName,
+    }
+    const result = await MemoryModel.create(data)
     setMemory(null)
   }
 
@@ -163,6 +165,8 @@ function MapScreen({ navigation }) {
                 setCheckInType: setCheckInType,
                 setCheckInTranspo: setCheckInTranspo,
                 setCheckInPhoto: setCheckInPhoto,
+                setTripName: setTripName,
+                tripName: tripName,
               }}
             >
               <MemoryNavigator />

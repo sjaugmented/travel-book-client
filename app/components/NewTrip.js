@@ -11,12 +11,11 @@ import ActiveTripContext from '../context/activeTripContext'
 
 function NewTrip({ navigation }) {
   const { tripActive, setTripActive } = useContext(ActiveTripContext)
-
-  const [tripName, setTripName] = useState('')
+  const memoryContext = useContext(MemoryContext)
 
   const handleSubmit = async () => {
     // lock it in
-    const result = await TripModel.create(tripName)
+    const result = await TripModel.create(memoryContext.tripName)
 
     setTripActive(true)
 
@@ -28,7 +27,7 @@ function NewTrip({ navigation }) {
     <Screen style={styles.container}>
       <AppText>Where ya going?</AppText>
       <AppTextInput
-        onChangeText={(text) => setTripName(text)}
+        onChangeText={(text) => memoryContext.setTripName(text)}
         icon="airplane"
         placeholder="Name your trip!"
       />

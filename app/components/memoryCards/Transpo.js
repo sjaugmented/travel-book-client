@@ -1,15 +1,14 @@
 import React, { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'
 import colors from '../../config/colors'
-import ModalContext from '../../context/modalContext'
+import MemoryContext from '../../context/memoryContext'
 import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
-function Transpo({ navigation, memory }) {
-  const setMemory = useContext(ModalContext)
+function Transpo({ navigation }) {
+  const memoryContext = useContext(MemoryContext)
   const handlePress = (string) => {
-    setMemory((prevArray) => [...prevArray, string])
-    console.log(memory)
+    memoryContext.setCheckInTranspo(string)
     navigation.navigate('PhotoSocial')
   }
 

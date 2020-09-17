@@ -1,23 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import colors from '../../config/colors'
-import ModalContext from '../../context/modalContext'
+import MemoryContext from '../../context/memoryContext'
 import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
-function Done({ navigation, memory }) {
-  const setModalVisible = useContext(ModalContext)
-  const setMemory = useContext(ModalContext)
-  const handlePress = (string) => {
-    setMemory((prevArray) => [...prevArray])
-    console.log(memory)
-    // setModalVisible(false)
-  }
-
+function SubmitMemory({ navigation }) {
+  const memoryContext = useContext(MemoryContext)
   return (
     <View style={styles.memoryView}>
       <AppText style={styles.confirmation}>Memory Saved!</AppText>
-      <ButtonIcon name="close" size={30} onPress={() => handlePress('Done')} />
+      <ButtonIcon name="close" size={30} onPress={memoryContext.onPress} />
     </View>
   )
 }
@@ -40,4 +33,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Done
+export default SubmitMemory

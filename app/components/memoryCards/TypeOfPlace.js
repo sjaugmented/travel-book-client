@@ -3,13 +3,13 @@ import { View, StyleSheet } from 'react-native'
 import colors from '../../config/colors'
 import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
-import ModalContext from '../../context/modalContext'
+import MemoryContext from '../../context/memoryContext'
 
-function TypeOfPlace({ navigation, memory }) {
-  const setMemory = useContext(ModalContext)
+function TypeOfPlace({ navigation }) {
+  const memoryContext = useContext(MemoryContext)
+
   const handlePress = (string) => {
-    setMemory((prevArray) => [...prevArray, string])
-    console.log(memory)
+    memoryContext.setCheckInType(string)
     navigation.navigate('Transpo')
   }
 

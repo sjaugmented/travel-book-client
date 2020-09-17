@@ -18,15 +18,39 @@ import ButtonIcon from '../components/ButtonIcon'
 import AppMenu from '../components/menu/AppMenu'
 import AppText from '../components/AppText'
 import MemoryNavigator from '../components/MemoryNavigator'
-import ModalContext from '../context/modalContext'
+import MemoryContext from '../context/memoryContext'
 import ActiveTripContext from '../context/activeTripContext'
+import MemoryModel from '../api/memories'
 
 function MapScreen({ navigation }) {
-  const [location, setLocation] = useState()
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [tripActive, setTripActive] = useState(false)
-  const [memory, setMemory] = useState([])
+  const [memory, setMemory] = useState(null)
+  const [location, setLocation] = useState()
+  const [checkInType, setCheckInType] = useState('')
+  const [checkInTranspo, setCheckInTranspo] = useState('')
+  const [checkInPhoto, setCheckInPhoto] = useState('')
+
+  const addMemory = () => {
+    let memoryData = {
+      location: location,
+      type: checkInType,
+      transpo: checkInTranspo,
+      photo: checkInPhoto,
+    }
+    setMemory(memoryData)
+    saveMemory(memoryData)
+    setModalVisible(false)
+  }
+
+  const saveMemory = async (memory) => {
+    console.log('saved mem', memory)
+    const result = await MemoryModel.create(memory)
+    console.log('result', result)
+
+    setMemory(null)
+  }
 
   const getLocation = async () => {
     const { granted } = await Location.requestPermissionsAsync()
@@ -47,11 +71,6 @@ function MapScreen({ navigation }) {
   const beginTrip = () => {
     console.log('beginning trip from', location) // remove
     setTripActive(true)
-  }
-
-  const addMemory = () => {
-    console.log('memory began at', location)
-    setModalVisible(true)
   }
 
   const handlePress = (name) => {
@@ -138,12 +157,21 @@ function MapScreen({ navigation }) {
           <ActiveTripContext.Provider
             value={{ tripActive: tripActive, setTripActive: setTripActive }}
           >
-            <ModalContext.Provider value={(setModalVisible, setMemory)}>
+            <MemoryContext.Provider
+              value={{
+                onPress: addMemory,
+                setCheckInType: setCheckInType,
+                setCheckInTranspo: setCheckInTranspo,
+                setCheckInPhoto: setCheckInPhoto,
+              }}
+            >
               <MemoryNavigator
+                modalVisible={modalVisible}
                 memory={memory}
-                setMemoryVisible={setModalVisible}
+                location={location}
+                // setModalVisible={setModalVisible}
               />
-            </ModalContext.Provider>
+            </MemoryContext.Provider>
           </ActiveTripContext.Provider>
         </View>
       </Modal>

@@ -6,13 +6,12 @@ import ButtonIcon from './ButtonIcon'
 import Screen from './Screen'
 import TripModel from '../api/trips'
 
-import ModalContext from '../context/modalContext'
+import MemoryContext from '../context/memoryContext'
 import ActiveTripContext from '../context/activeTripContext'
 
 function NewTrip({ navigation }) {
   const { tripActive, setTripActive } = useContext(ActiveTripContext)
 
-  const setModalVisible = useContext(ModalContext)
   const [tripName, setTripName] = useState('')
 
   const handleSubmit = async () => {

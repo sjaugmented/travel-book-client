@@ -1,16 +1,15 @@
 import React, { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'
 import colors from '../../config/colors'
-import ModalContext from '../../context/modalContext'
+import MemoryContext from '../../context/memoryContext'
 import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
-function PhotoSocial({ navigation, memory }) {
-  const setMemory = useContext(ModalContext)
+function PhotoSocial({ navigation }) {
+  const memoryContext = useContext(MemoryContext)
   const handlePress = (string) => {
-    setMemory((prevArray) => [...prevArray, string])
-    console.log('soc', memory)
-    navigation.navigate('Done')
+    memoryContext.setCheckInPhoto(string)
+    navigation.navigate('SubmitMemory')
   }
 
   return (

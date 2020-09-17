@@ -1,23 +1,22 @@
 import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
-import MemoryContext from "../../context/memoryContext";
+import ModalContext from "../../context/modalContext";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
 
-function SubmitMemory() {
-  //Set memoryContext objext
-  const memoryContext = useContext(MemoryContext);
+function Done({ navigation }) {
+  const setModalVisible = useContext(ModalContext);
+
+  const handlePress = (string) => {
+    console.log(string);
+    setModalVisible(false);
+  };
 
   return (
     <View style={styles.memoryView}>
-      <View style={styles.button}>
-        <AppButton
-          title="Store Memory"
-          color={colors.confirm}
-          onPress={memoryContext.onPress}
-        />
-      </View>
+      <AppText style={styles.confirmation}>Memory Saved!</AppText>
+      <ButtonIcon name="close" size={30} onPress={() => handlePress("Done")} />
     </View>
   );
 }
@@ -38,9 +37,6 @@ const styles = StyleSheet.create({
   icon: {
     margin: 10,
   },
-  button: {
-    width: "90%",
-  },
 });
 
-export default SubmitMemory;
+export default Done;

@@ -4,7 +4,6 @@ import AppText from "../AppText";
 import ListItem from "../ListItem";
 
 function TripList({ data, handlePress }) {
-  console.log("data:", data);
   return (
     <View style={styles.container}>
       <ScrollView>

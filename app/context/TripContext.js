@@ -1,5 +1,5 @@
-import React from 'react'
+import React from "react";
 
-const TripContext = React.createContext()
+const TripContext = React.createContext();
 
-export default TripContext
+export default TripContext;

@@ -6,16 +6,16 @@ import {
   TouchableHighlight,
   Image,
 } from "react-native";
-import AppText from "../AppText";
+import AppText from "../components/AppText";
 
-import TripContext from "../../context/TripContext";
-import TripModel from "../../api/trips";
-import AppHeader from "../AppHeader";
+import TripContext from "../context/TripContext";
+import TripModel from "../api/trips";
+import AppHeader from "../components/AppHeader";
+import TripShowContext from "../context/TripShowContext";
 
-function Trip({ navigation }) {
-  const tripContext = useContext(TripContext);
-  const [showTrip, setShowTrip] = useState("");
-
+function TripScreen({ navigation }) {
+  const showTrip = useContext(TripShowContext);
+  const [displayTrip, setDisplay] = useState("");
   console.log("showTrip:", showTrip);
 
   useEffect(() => {
@@ -25,8 +25,9 @@ function Trip({ navigation }) {
 
   const loadTrip = async () => {
     try {
-      const response = await TripModel.show(tripContext.pickedTrip);
-      setShowTrip(response.trip);
+      const response = await TripModel.show(showTrip.showTrip);
+      console.log(response.trip);
+      setDisplay(response.trip);
     } catch (error) {
       console.log(error);
     }
@@ -35,12 +36,12 @@ function Trip({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/welcome_palms.jpg")}
+        source={require("../assets/welcome_palms.jpg")}
         style={styles.tripPic}
         resizeMode="center"
       />
       <AppHeader style={styles.header}>
-        {showTrip ? showTrip.name : "Loading..."}
+        {displayTrip ? displayTrip.name : "Loading..."}
       </AppHeader>
     </View>
   );
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
   tripPic: { width: "100%", height: 100 },
 });
 
-export default Trip;
+export default TripScreen;

@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, View } from "react-native";
 
 import Menu from "../components/menu/AppMenu";
-import Trip from "../components/menu/TripScreen";
+import TripScreen from "../screens/TripScreen";
 
 const Stack = createStackNavigator();
 

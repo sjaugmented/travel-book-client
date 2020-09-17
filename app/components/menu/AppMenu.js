@@ -1,10 +1,31 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import ButtonIcon from "../ButtonIcon";
-import AppText from "../AppText";
+import React, { useState, useEffect, useContext } from 'react'
+import { View, StyleSheet, FlatList, Text } from 'react-native'
+import colors from '../../config/colors'
+import ButtonIcon from '../ButtonIcon'
+import AppText from '../AppText'
+import TripModel from '../../api/trips'
+import ListItem from '../ListItem'
 
-function AppMenu({ tripActive, setTripActive }) {
+import TripContext from '../../context/TripContext'
+
+function AppMenu({ tripActive, setTripActive, navigation }) {
+  const tripContext = useContext(TripContext)
+  const [trips, setTrips] = useState([])
+
+  useEffect(() => {
+    loadTrips()
+  }, [])
+
+  const loadTrips = async () => {
+    const response = await TripModel.all()
+    setTrips(response.trips)
+  }
+
+  const handlePress = (trip) => {
+    tripContext.setPickedTrip(trip)
+    navigation.navigate('Trip')
+  }
+
   return (
     <View>
       <View style={styles.navbar}>
@@ -43,9 +64,21 @@ function AppMenu({ tripActive, setTripActive }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
+
+        <FlatList
+          data={trips}
+          keyExtractor={(trip) => trip._id.toString()}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.name}
+              subTitle={item.year}
+              onPress={() => handlePress(item.name)}
+            />
+          )}
+        />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -53,20 +86,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   navbar: {
-    position: "absolute",
+    position: 'absolute',
     right: 20,
     top: 225,
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
-    fontWeight: "500",
-    color: colors.secondary,
+    fontWeight: '500',
+    color: colors.primary,
   },
   trophies: {},
   trips: {
-    position: "absolute",
+    position: 'absolute',
     top: 225,
+    width: 200,
   },
-});
+})
 
-export default AppMenu;
+export default AppMenu

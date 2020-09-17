@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
+import MemoryContext from "../../context/memoryContext";
 
 function TypeOfPlace({ navigation }) {
-  const tripInfo = useContext(tripContext);
+  const memoryContext = useContext(MemoryContext);
+
   const handlePress = (string) => {
-    console.log(string);
+    memoryContext.setCheckInType(string);
     navigation.navigate("Transpo");
   };
 

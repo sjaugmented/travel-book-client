@@ -1,16 +1,16 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import WelcomeScreen from '../screens/WelcomeScreen'
-import LoginScreen from '../screens/LoginScreen'
-import RegisterScreen from '../screens/RegisterScreen'
-import MapScreen from '../screens/MapScreen'
-import TypeOfPlace from '../components/memoryCards/TypeOfPlace'
-import Transpo from '../components/memoryCards/Transpo'
-import PhotoSocial from '../components/memoryCards/PhotoSocial'
-import SubmitMemory from '../components/memoryCards/SubmitMemory'
+import WelcomeScreen from "../screens/WelcomeScreen";
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import MapScreen from "../screens/MapScreen";
+import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
+import Transpo from "../components/memoryCards/Transpo";
+import PhotoSocial from "../components/memoryCards/PhotoSocial";
+import SubmitMemory from "../components/memoryCards/SubmitMemory";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 function AppNavigator() {
   return (
@@ -20,8 +20,6 @@ function AppNavigator() {
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen
         name="Map"
         component={MapScreen}
@@ -29,12 +27,8 @@ function AppNavigator() {
           animationEnabled: false,
         }}
       />
-      {/* <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
-      <Stack.Screen name="Transpo" component={Transpo} />
-      <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
-      <Stack.Screen name="Done" component={Done} /> */}
     </Stack.Navigator>
-  )
+  );
 }
 
-export default AppNavigator
+export default AppNavigator;

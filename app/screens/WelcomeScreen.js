@@ -22,6 +22,7 @@ function WelcomeScreen({ navigation }) {
         console.log("result", result);
         const allUsers = await UserModel.all();
         console.log("allUsers", allUsers);
+        navigation.navigate("Map");
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -29,10 +30,6 @@ function WelcomeScreen({ navigation }) {
     } catch (e) {
       return { error: true };
     }
-  };
-
-  const handleLogin = () => {
-    Linking.openURL("http://localhost:4000/api/v1/auth/login");
   };
 
   return (

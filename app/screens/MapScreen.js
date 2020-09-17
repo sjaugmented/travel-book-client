@@ -155,10 +155,14 @@ function MapScreen({ navigation }) {
           <TripContext.Provider
             value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
           >
-            <MenuNavigator
-              tripActive={tripActive}
-              setTripActive={setTripActive}
-            />
+            <ActiveTripContext.Provider
+              value={{ tripActive: tripActive, setTripActive: setTripActive }}
+            >
+              <MenuNavigator
+                tripActive={tripActive}
+                setTripActive={setTripActive}
+              />
+            </ActiveTripContext.Provider>
           </TripContext.Provider>
         </View>
       </Modal>

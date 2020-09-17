@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TypeOfPlace from "./memoryCards/TypeOfPlace";
-import Transpo from "./memoryCards/Transpo";
-import PhotoSocial from "./memoryCards/PhotoSocial";
-import Done from "./memoryCards/Done";
-import NewTrip from "./NewTrip";
+import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
+import Transpo from "../components/memoryCards/Transpo";
+import PhotoSocial from "../components/memoryCards/PhotoSocial";
+import Done from "../components/memoryCards/Done";
+import NewTrip from "../components/NewTrip";
 import ActiveTripContext from "../context/activeTripContext";
 
 const Stack = createStackNavigator();

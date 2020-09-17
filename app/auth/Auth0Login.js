@@ -15,7 +15,7 @@ export default class Auth0Login extends Component {
       Object.toQueryString({
         client_id: auth0ClientId,
         response_type: "token",
-        scope: "openid profile email",
+        scope: "openid, profile, email",
         redirect_uri: redirectUrl,
       });
     console.log(`Redirect URL (add this to Auth0): ${redirectUrl}`);

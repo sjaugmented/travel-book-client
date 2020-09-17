@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import * as Linking from "expo-linking";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
 
@@ -14,7 +15,7 @@ function WelcomeScreen({ navigation }) {
     const params = {
       client_id: auth0ClientId,
       response_type: "token",
-      scope: "openid profile email",
+      scope: "openid, profile, email",
       redirect_uri: redirectUrl,
     };
 
@@ -44,6 +45,10 @@ function WelcomeScreen({ navigation }) {
     }
   };
 
+  const handleLogin = () => {
+    Linking.openURL("http://localhost:4000/api/v1/auth/login");
+  };
+
   return (
     <ImageBackground
       blurRadius={0}
@@ -63,7 +68,7 @@ function WelcomeScreen({ navigation }) {
         <AppButton
           title="Login"
           color={colors.primary}
-          onPress={() => loginWithAuth0()}
+          onPress={() => handleLogin()}
         />
       </View>
       <View style={styles.registerButton}>

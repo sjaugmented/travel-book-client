@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
 
 function TypeOfPlace({ navigation }) {
-  const tripInfo = useContext(tripContext);
+  // const tripInfo = useContext(tripContext);
   const handlePress = (string) => {
     console.log(string);
     navigation.navigate("Transpo");

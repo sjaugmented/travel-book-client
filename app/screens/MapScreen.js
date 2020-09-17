@@ -9,7 +9,7 @@ import colors from "../config/colors";
 import ButtonIcon from "../components/ButtonIcon";
 
 //Navigators
-import MenuNavigator from "../components/MenuNavigator";
+import MenuNavigator from "../navigation/MenuNavigator";
 import MemoryNavigator from "../navigation/MemoryNavigator";
 
 //useContexts
@@ -19,6 +19,7 @@ import ActiveTripContext from "../context/activeTripContext";
 
 //API
 import MemoryModal from "../api/memories";
+import ModalContext from "../context/modalContext";
 
 function MapScreen({ navigation }) {
   //Hide and show
@@ -149,10 +150,12 @@ function MapScreen({ navigation }) {
             <ActiveTripContext.Provider
               value={{ tripActive: tripActive, setTripActive: setTripActive }}
             >
-              <MenuNavigator
-                tripActive={tripActive}
-                setTripActive={setTripActive}
-              />
+              <ModalContext.Provider value={setMenuVisible}>
+                <MenuNavigator
+                  tripActive={tripActive}
+                  setTripActive={setTripActive}
+                />
+              </ModalContext.Provider>
             </ActiveTripContext.Provider>
           </TripContext.Provider>
         </View>

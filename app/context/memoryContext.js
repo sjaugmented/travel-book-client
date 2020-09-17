@@ -1,5 +1,5 @@
-import React from 'react'
+import React from "react";
 
-const MemoryContext = React.createContext()
+const MemoryContext = React.createContext();
 
-export default MemoryContext
+export default MemoryContext;

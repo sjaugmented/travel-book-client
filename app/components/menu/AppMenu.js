@@ -16,11 +16,17 @@ import TripContext from "../../context/TripContext";
 import ActiveTripContext from "../../context/activeTripContext";
 import { ScrollView } from "react-native-gesture-handler";
 import TripList from "./TripList";
+import ModalContext from "../../context/modalContext";
+import TripShowContext from "../../context/TripShowContext";
 
 function AppMenu({ navigation }) {
   const tripActive = useContext(ActiveTripContext);
   const tripContext = useContext(TripContext);
+  const setMenuVisible = useContext(ModalContext);
   const [trips, setTrips] = useState([]);
+  const showTrip = useContext(TripShowContext);
+
+  console.log("showTripCon:", showTrip);
 
   useEffect(() => {
     loadTrips();
@@ -32,7 +38,8 @@ function AppMenu({ navigation }) {
   };
 
   const handlePress = (trip) => {
-    tripContext.setPickedTrip(trip);
+    showTrip.setShowTrip(trip);
+    setMenuVisible(false);
     navigation.navigate("Trip");
   };
 

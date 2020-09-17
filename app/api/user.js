@@ -4,7 +4,6 @@ const axios = require("axios");
 export default class UserModel {
   static all = async () => {
     try {
-      console.log("all()");
       const allUsers = await axios.get(`${local}/users`);
       return allUsers;
     } catch (error) {
@@ -12,7 +11,6 @@ export default class UserModel {
     }
   };
   static create = async (userData) => {
-    // console.log('userData', userData)
     const id = userData.user.id;
     console.log("id:", id);
     try {

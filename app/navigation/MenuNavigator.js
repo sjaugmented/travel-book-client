@@ -2,8 +2,8 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, View } from "react-native";
 
-import Menu from "./menu/AppMenu";
-import Trip from "./menu/Trip";
+import Menu from "../components/menu/AppMenu";
+import Trip from "../components/menu/Trip";
 
 const Stack = createStackNavigator();
 

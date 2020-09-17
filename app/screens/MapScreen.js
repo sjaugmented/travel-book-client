@@ -9,7 +9,7 @@ import colors from "../config/colors";
 import ButtonIcon from "../components/ButtonIcon";
 
 //Navigators
-import MenuNavigator from "../components/MenuNavigator";
+import MenuNavigator from "../navigation/MenuNavigator";
 import MemoryNavigator from "../navigation/MemoryNavigator";
 
 //useContexts

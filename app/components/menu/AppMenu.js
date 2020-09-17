@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, StyleSheet, FlatList, Text } from 'react-native'
 import colors from '../../config/colors'
 import ButtonIcon from '../ButtonIcon'
 import AppText from '../AppText'
 import TripModel from '../../api/trips'
 import ListItem from '../ListItem'
-import { useNavigation } from '@react-navigation/native'
-function AppMenu({ tripActive, setTripActive }) {
+
+import TripContext from '../../context/TripContext'
+
+function AppMenu({ tripActive, setTripActive, navigation }) {
+  const tripContext = useContext(TripContext)
   const [trips, setTrips] = useState([])
-  const navigation = useNavigation()
 
   useEffect(() => {
     loadTrips()
@@ -20,6 +22,7 @@ function AppMenu({ tripActive, setTripActive }) {
   }
 
   const handlePress = (trip) => {
+    tripContext.setPickedTrip(trip)
     navigation.navigate('Trip')
   }
 

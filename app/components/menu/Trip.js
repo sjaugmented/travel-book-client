@@ -1,14 +1,32 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useContext, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import AppText from '../AppText'
+
+import TripContext from '../../context/TripContext'
+import TripModel from '../../api/trips'
 
 function Trip({ navigation }) {
-  return (
-    <View>
-      <Text>hi</Text>
-    </View>
-  )
+  const tripContext = useContext(TripContext)
+  console.log(tripContext.pickedTrip)
+
+  useEffect(() => {
+    loadTrip()
+  }, [])
+
+  const loadTrip = async () => {
+    const response = await TripModel.show(tripContext.pickedTrip)
+    console.log('data', response)
+  }
+
+  return <View style={styles.container}></View>
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+})
 
 export default Trip

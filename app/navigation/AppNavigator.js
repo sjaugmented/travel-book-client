@@ -9,6 +9,7 @@ import TypeOfPlace from "../components/memoryCards/TypeOfPlace";
 import Transpo from "../components/memoryCards/Transpo";
 import PhotoSocial from "../components/memoryCards/PhotoSocial";
 import SubmitMemory from "../components/memoryCards/SubmitMemory";
+import TripScreen from "../screens/TripScreen";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ function AppNavigator() {
           animationEnabled: false,
         }}
       />
+      <Stack.Screen name="Trip" component={TripScreen} />
     </Stack.Navigator>
   );
 }

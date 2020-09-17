@@ -19,11 +19,18 @@ function WelcomeScreen({ navigation }) {
         scopes: ['profile', 'email'],
       })
 
+<<<<<<< HEAD
       if (result.type === 'success') {
         const user = await UserModel.create(result)
 
         navigation.navigate('Map')
         return result.accessToken
+=======
+      if (result.type === "success") {
+        const user = await UserModel.create(result);
+        navigation.navigate("Map");
+        return result.accessToken;
+>>>>>>> submaster
       } else {
         return { cancelled: true }
       }

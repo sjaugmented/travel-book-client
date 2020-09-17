@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import TypeOfPlace from './memoryCards/TypeOfPlace'
 import Transpo from './memoryCards/Transpo'
 import PhotoSocial from './memoryCards/PhotoSocial'
+import NameOfPlace from './memoryCards/NameOfPlace'
 import SubmitMemory from './memoryCards/SubmitMemory'
 import NewTrip from './NewTrip'
 import ActiveTripContext from '../context/activeTripContext'
@@ -19,6 +20,7 @@ function MemoryNavigator(props) {
       }}
     >
       {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
+      <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
       <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />

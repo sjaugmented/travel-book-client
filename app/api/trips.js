@@ -25,4 +25,12 @@ export default class TripModel {
       console.log(error)
     }
   }
+
+  static show = async (id) => {
+    try {
+      const trip = await fetch(`${local}/trips/${id}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

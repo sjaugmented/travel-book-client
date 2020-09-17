@@ -20,7 +20,7 @@ function NewTrip({ navigation }) {
     setTripActive(true)
 
     //setModalVisible(false);
-    navigation.navigate('TypeOfPlace')
+    navigation.navigate('NameOfPlace')
   }
 
   return (

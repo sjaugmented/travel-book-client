@@ -21,6 +21,7 @@ import MemoryNavigator from '../components/MemoryNavigator'
 import MemoryContext from '../context/memoryContext'
 import ActiveTripContext from '../context/activeTripContext'
 import MemoryModel from '../api/memories'
+import MenuNavigator from '../components/MenuNavigator'
 
 function MapScreen({ navigation }) {
   const [menuVisible, setMenuVisible] = useState(false)
@@ -29,6 +30,7 @@ function MapScreen({ navigation }) {
   const [memory, setMemory] = useState(null)
   const [tripName, setTripName] = useState('')
   const [location, setLocation] = useState()
+  const [checkInPlace, setCheckInPlace] = useState('')
   const [checkInType, setCheckInType] = useState('')
   const [checkInTranspo, setCheckInTranspo] = useState('')
   const [checkInPhoto, setCheckInPhoto] = useState('')
@@ -36,6 +38,7 @@ function MapScreen({ navigation }) {
   const addMemory = () => {
     let memoryData = {
       location: location,
+      locationName: checkInPlace,
       type: checkInType,
       transpo: checkInTranspo,
       photo: checkInPhoto,
@@ -142,7 +145,10 @@ function MapScreen({ navigation }) {
             title="Welcome Screen"
             onPress={() => navigation.navigate('Welcome')}
           />
-          <AppMenu tripActive={tripActive} setTripActive={setTripActive} />
+          <MenuNavigator
+            tripActive={tripActive}
+            setTripActive={setTripActive}
+          />
         </View>
       </Modal>
       {/* MEMORY MODAL */}
@@ -162,6 +168,7 @@ function MapScreen({ navigation }) {
             <MemoryContext.Provider
               value={{
                 onPress: addMemory,
+                setCheckInPlace: setCheckInPlace,
                 setCheckInType: setCheckInType,
                 setCheckInTranspo: setCheckInTranspo,
                 setCheckInPhoto: setCheckInPhoto,

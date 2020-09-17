@@ -5,9 +5,10 @@ import ButtonIcon from '../ButtonIcon'
 import AppText from '../AppText'
 import TripModel from '../../api/trips'
 import ListItem from '../ListItem'
-
+import { useNavigation } from '@react-navigation/native'
 function AppMenu({ tripActive, setTripActive }) {
   const [trips, setTrips] = useState([])
+  const navigation = useNavigation()
 
   useEffect(() => {
     loadTrips()
@@ -16,7 +17,10 @@ function AppMenu({ tripActive, setTripActive }) {
   const loadTrips = async () => {
     const response = await TripModel.all()
     setTrips(response.trips)
-    // console.log(response.trips)
+  }
+
+  const handlePress = (trip) => {
+    navigation.navigate('Trip')
   }
 
   return (
@@ -63,9 +67,9 @@ function AppMenu({ tripActive, setTripActive }) {
           keyExtractor={(trip) => trip._id.toString()}
           renderItem={({ item }) => (
             <ListItem
-              name={item.name}
-              year={item.year}
-              onPress={() => console.log('trip selected', item)}
+              title={item.name}
+              subTitle={item.year}
+              onPress={() => handlePress(item.name)}
             />
           )}
         />

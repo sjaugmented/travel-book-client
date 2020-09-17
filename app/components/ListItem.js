@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import AppText from './AppText'
 
-function ListItem({ name, onPress, year }) {
+function ListItem({ title, id, onPress, subTitle, navigation, handlePress }) {
   return (
     <TouchableHighlight underlayColor="blue" onPress={onPress}>
       <View style={styles.container}>
-        <AppText>{name}</AppText>
-        <AppText>{year}</AppText>
+        <AppText>{title}</AppText>
+        <AppText>{subTitle}</AppText>
       </View>
     </TouchableHighlight>
   )

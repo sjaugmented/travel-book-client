@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet, View, Image, Text } from 'react-native'
 import * as Linking from 'expo-linking'
 import AppButton from '../components/AppButton'
 import colors from '../config/colors'
+import MapScreen from './MapScreen'
 
 import * as Google from 'expo-google-app-auth'
 import UserModel from '../api/user'
@@ -22,7 +23,7 @@ function WelcomeScreen({ navigation }) {
         // console.log('result', result)
 
         const user = await UserModel.create(result)
-
+        navigation.navigate('Map')
         return result.accessToken
       } else {
         return { cancelled: true }
@@ -30,10 +31,6 @@ function WelcomeScreen({ navigation }) {
     } catch (e) {
       return { error: true }
     }
-  }
-
-  const handleLogin = () => {
-    Linking.openURL('http://localhost:4000/api/v1/auth/login')
   }
 
   return (

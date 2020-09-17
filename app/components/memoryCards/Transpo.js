@@ -6,7 +6,10 @@ import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
 function Transpo({ navigation }) {
+  //Set memoryContext objext
   const memoryContext = useContext(MemoryContext)
+
+  //Set way of transportation check-in and go to next modal
   const handlePress = (string) => {
     memoryContext.setCheckInTranspo(string)
     navigation.navigate('PhotoSocial')

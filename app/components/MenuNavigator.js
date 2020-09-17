@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import Menu from './menu/AppMenu'
 import Trip from './menu/Trip'
-import ListItem from './ListItem'
 
 const Stack = createStackNavigator()
 

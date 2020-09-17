@@ -6,8 +6,10 @@ import ButtonIcon from '../ButtonIcon'
 import MemoryContext from '../../context/memoryContext'
 
 function TypeOfPlace({ navigation }) {
+  //set memoryContext object
   const memoryContext = useContext(MemoryContext)
 
+  //Set typeofplace check-in and go to next modal
   const handlePress = (string) => {
     memoryContext.setCheckInType(string)
     navigation.navigate('Transpo')

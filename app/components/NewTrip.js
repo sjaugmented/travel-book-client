@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useContext } from 'react'
+import { StyleSheet } from 'react-native'
 import AppText from './AppText'
 import AppTextInput from './AppTextInput'
 import ButtonIcon from './ButtonIcon'

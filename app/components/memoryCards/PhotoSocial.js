@@ -1,49 +1,75 @@
-import React, { useContext, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { View, StyleSheet, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
 
 import colors from '../../config/colors'
 import MemoryContext from '../../context/memoryContext'
-import AppText from '../AppText'
+import AppHeader from '../AppHeader'
 import ButtonIcon from '../ButtonIcon'
+import AppButton from '../AppButton'
 
 function PhotoSocial({ navigation }) {
+  //state hook for images
+  const [imageUri, setImageUri] = useState('')
   //Set memoryContext objext
   const memoryContext = useContext(MemoryContext)
 
   //Set photo/social check-in and go to final modal
-  const handlePress = (string) => {
-    memoryContext.setCheckInPhoto(string)
+  const handlePress = () => {
     navigation.navigate('SubmitMemory')
   }
 
   // async function to get permission to get photos
   const requestPermission = async () => {
-    // const result = await ermissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA)
-    // result.granted
-    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync()
-    if (!granted) alert('You need to enable permission to access the library')
+    const result = await Permissions.askAsync(
+      Permissions.CAMERA_ROLL,
+      Permissions.CAMERA,
+    )
+    result.granted
+    // const { granted } = await ImagePicker.requestCameraRollPermissionsAsync()
+    // if (!granted) alert('You need to enable permission to access the library')
   }
 
   useEffect(() => {
     requestPermission()
   }, [])
-  // const selectImage = ()
+
+  const selectImage = async (string) => {
+    try {
+      let result
+      if (string === 'camera') {
+        result = await ImagePicker.launchCameraAsync()
+      } else {
+        result = await ImagePicker.launchImageLibraryAsync()
+      }
+
+      if (!result.cancelled) {
+        memoryContext.setCheckInPhoto(result.uri)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <View style={styles.memoryView}>
       <AppHeader>Let's see some pictures!</AppHeader>
       <View style={styles.iconContainer}>
-        <Button title="Select Image" onPress={selectImage} />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('Take a pic')}
           name="camera"
           size={60}
+          onPress={() => selectImage('camera')}
+        />
+        <AppButton onPress={handlePress} title="Submit" />
+        <Image
+          source={{ uri: memoryContext.checkInPhoto }}
+          style={{ width: 100, height: 100 }}
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress('Browse photos')}
+          onPress={() => selectImage('library')}
           name="image-album"
           size={60}
         />

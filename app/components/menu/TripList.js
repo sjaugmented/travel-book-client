@@ -1,10 +1,9 @@
-import React from "react";
-import { View, StyleSheet, FlatList, ScrollView } from "react-native";
-import AppText from "../AppText";
-import ListItem from "../ListItem";
+import React from 'react'
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
+import AppText from '../AppText'
+import ListItem from '../ListItem'
 
 function TripList({ data, handlePress }) {
-  console.log("data:", data);
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -18,11 +17,11 @@ function TripList({ data, handlePress }) {
         ))}
       </ScrollView>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: { marginBottom: 15, marginTop: 10, height: 375 },
-});
+})
 
-export default TripList;
+export default TripList

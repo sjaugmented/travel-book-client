@@ -15,7 +15,6 @@ function Trip({ navigation }) {
 
   const loadTrip = async () => {
     const response = await TripModel.show(tripContext.pickedTrip)
-    console.log('data', response.trip)
   }
 
   return <View style={styles.container}></View>

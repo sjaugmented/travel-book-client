@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function Icon({
-  name = "email",
+  name = 'email',
   size = 40,
-  backgroundColor = "#000",
-  iconColor = "#fff",
+  backgroundColor = '#000',
+  iconColor = '#fff',
 }) {
   return (
     <View
@@ -15,13 +15,13 @@ export default function Icon({
         height: size,
         borderRadius: size / 2,
         backgroundColor,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <MaterialCommunityIcons name={name} color={iconColor} size={size * 0.5} />
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})

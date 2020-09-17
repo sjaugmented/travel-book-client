@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 import * as Linking from "expo-linking";
 import AppButton from "../components/AppButton";
 import colors from "../config/colors";
+import MapScreen from "./MapScreen";
 
 import * as Google from "expo-google-app-auth";
 import UserModel from "../api/user";
@@ -19,9 +20,9 @@ function WelcomeScreen({ navigation }) {
       });
 
       if (result.type === "success") {
-        console.log("result", result);
-        const allUsers = await UserModel.all();
-        console.log("allUsers", allUsers);
+        // console.log('result', result)
+
+        const user = await UserModel.create(result);
         navigation.navigate("Map");
         return result.accessToken;
       } else {

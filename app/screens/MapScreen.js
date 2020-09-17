@@ -80,15 +80,6 @@ function MapScreen({ navigation }) {
     getLocation();
   }, []);
 
-  const beginTrip = () => {
-    console.log("beginning trip from", location); // remove
-    setTripActive(true);
-  };
-
-  const handlePress = (name) => {
-    console.log(name);
-  };
-
   return (
     <>
       {location && (

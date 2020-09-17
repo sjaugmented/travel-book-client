@@ -20,9 +20,9 @@ function WelcomeScreen({ navigation }) {
       });
 
       if (result.type === "success") {
-        // console.log('result', result)
-
-        const user = await UserModel.create(result);
+        console.log("result", result);
+        const allUsers = await UserModel.all();
+        console.log("allUsers", allUsers);
         navigation.navigate("Map");
         return result.accessToken;
       } else {

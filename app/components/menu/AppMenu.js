@@ -73,12 +73,7 @@ function AppMenu({ navigation }) {
       </View>
       <View style={styles.trips}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-        <TripList
-          style={styles.trips}
-          data={trips}
-          keyExtractor={(trip) => trip._id.toString()}
-          handlePress={handlePress}
-        />
+        <TripList style={styles.trips} data={trips} handlePress={handlePress} />
       </View>
     </View>
   );

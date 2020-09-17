@@ -12,6 +12,7 @@ function TripList({ data, handlePress }) {
           <ListItem
             title={item.name}
             subTitle={item.year}
+            key={index}
             onPress={() => handlePress(item.name)}
           />
         ))}

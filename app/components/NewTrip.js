@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { StyleSheet } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import AppText from './AppText'
 import AppTextInput from './AppTextInput'
 import ButtonIcon from './ButtonIcon'
@@ -8,6 +8,7 @@ import TripModel from '../api/trips'
 
 import MemoryContext from '../context/memoryContext'
 import ActiveTripContext from '../context/activeTripContext'
+import colors from '../config/colors'
 
 function NewTrip({ navigation }) {
   const { tripActive, setTripActive } = useContext(ActiveTripContext)
@@ -37,7 +38,10 @@ function NewTrip({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
 })
 
 export default NewTrip

@@ -12,14 +12,14 @@ import colors from "../config/colors";
 import AppHeader from "./AppHeader";
 
 function NewTrip({ navigation }) {
-  const { tripActive, setTripActive } = useContext(ActiveTripContext);
+  const { tripActive, storeTripActive } = useContext(ActiveTripContext);
   const memoryContext = useContext(MemoryContext);
 
   const handleSubmit = async () => {
     // lock it in
     const result = await TripModel.create(memoryContext.tripName);
 
-    setTripActive(true);
+    storeTripActive(true);
 
     //setModalVisible(false);
     navigation.navigate("NameOfPlace");

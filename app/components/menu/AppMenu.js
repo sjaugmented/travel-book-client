@@ -68,7 +68,7 @@ function AppMenu({ navigation }) {
             size={75}
             backgroundColor={colors.light}
             iconColor={colors.danger}
-            onPress={() => tripActive.setTripActive(false)}
+            onPress={() => tripActive.storeTripActive(false)}
             activeOpacity={0.7}
           />
         )}

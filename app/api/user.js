@@ -29,4 +29,8 @@ export default class UserModel {
       console.log(error);
     }
   };
+  static show = async (googleId) => {
+    const result = await axios.get(`${local}/users/${googleId}`);
+    return result.data.user;
+  };
 }

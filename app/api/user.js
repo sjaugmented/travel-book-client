@@ -13,7 +13,6 @@ export default class UserModel {
     }
   };
   static create = async (userData) => {
-    // console.log('userData', userData)
     const id = userData.user.id;
 
     try {

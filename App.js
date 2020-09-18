@@ -32,8 +32,6 @@ export default function App() {
     await AsyncStorage.setItem("tripActive", "false");
   };
 
-  console.log("App.js:", user);
-
   return (
     <>
       <NavigationContainer>

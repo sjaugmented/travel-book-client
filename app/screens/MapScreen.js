@@ -46,7 +46,6 @@ function MapScreen({ navigation }) {
   const getTripActive = async () => {
     try {
       const tripState = await AsyncStorage.getItem("tripActive");
-      console.log("MapScreenTripState:", tripState);
       if (tripState === "true") setTripActive(true);
       else setTripActive(false);
     } catch (error) {
@@ -57,7 +56,6 @@ function MapScreen({ navigation }) {
   const storeTripActive = async (bool) => {
     try {
       const str = bool.toString();
-      console.log("str:", str);
       setTripActive(bool);
       await AsyncStorage.setItem("tripActive", str);
     } catch (error) {

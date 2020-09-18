@@ -30,7 +30,6 @@ const { width, height } = Dimensions.get("window");
 function TripScreen({ navigation }) {
   const showTrip = useContext(TripShowContext);
   const [displayTrip, setDisplay] = useState("");
-  console.log("showTrip:", showTrip);
 
   useEffect(() => {
     loadTrip();
@@ -40,7 +39,6 @@ function TripScreen({ navigation }) {
   const loadTrip = async () => {
     try {
       const response = await TripModel.show(showTrip.showTrip);
-      console.log(response.trip);
       setDisplay(response.trip);
     } catch (error) {
       console.log(error);

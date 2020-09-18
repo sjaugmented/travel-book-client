@@ -44,9 +44,6 @@ function WelcomeScreen({ navigation }) {
           setUser(user.name);
         }
         const localId = await AsyncStorage.getItem("username");
-        console.log("localStorage:", localId);
-        console.log("Welcome Screen user:", user);
-        navigation.navigate("Map");
       } else {
         return { cancelled: true };
       }
@@ -62,14 +59,6 @@ function WelcomeScreen({ navigation }) {
       source={require("../assets/milan-chalk.jpg")}
       resizeMode="cover"
     >
-      {/* <View style={styles.mapButton}>
-        <AppButton
-          title="Map"
-          color={colors.dark}
-          onPress={() => navigation.navigate("Map")}
-        />
-      </View> */}
-      <View style={styles.loginButton}></View>
       <View style={styles.loginButton}>
         <AppButton
           title="Login With Google"

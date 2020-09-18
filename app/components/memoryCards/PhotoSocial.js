@@ -33,7 +33,7 @@ function PhotoSocial({ navigation }) {
 
   useEffect(() => {
     requestPermission()
-    memoryContext.setCheckInPhoto('')
+    // memoryContext.setCheckInPhoto(' ')
   }, [])
 
   const selectImage = async (string) => {
@@ -58,12 +58,11 @@ function PhotoSocial({ navigation }) {
       <AppHeader style={styles.header}>Let's see some pictures!</AppHeader>
 
       <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.photo}
-            source={{ uri: memoryContext.checkInPhoto }}
-          />
-        </View>
+        <Image
+          style={styles.photo}
+          source={{ uri: memoryContext.checkInPhoto }}
+        />
+
         <View style={styles.sideButtons}>
           <AppButton onPress={handlePress} title="Submit" />
           <ButtonIcon
@@ -105,29 +104,34 @@ function PhotoSocial({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: 'white',
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,
-    width: '100%',
-    height: '100%',
+    // width: 400,
+    // height: 500,
   },
   header: {
-    marginTop: 10,
+    marginTop: 100,
   },
   container: {
     justifyContent: 'center',
-    flexDirection: 'column',
-    marginTop: 20,
-    flexWrap: 'wrap',
-    position: 'relative',
+    // flexDirection: 'column',
+    marginTop: -200,
+    // flexWrap: 'wrap',
+    // position: 'relative',
   },
   photo: {
     width: 200,
     height: 200,
     borderRadius: 20,
+    alignSelf: 'center',
     // position: 'absolute',
-    // right: 15,
+    // right: 10,
+    left: 10,
+    flexDirection: 'column',
   },
   sideButtons: {},
   icon: {

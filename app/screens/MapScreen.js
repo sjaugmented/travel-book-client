@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Button, Modal } from 'react-native'
 import NativeModal from 'react-native-modal'
+import MapInput from '../components/MapInput'
 import MapView from 'react-native-maps'
 import * as Location from 'expo-location'
 
@@ -21,7 +22,7 @@ import ActiveTripContext from '../context/activeTripContext'
 import MemoryModal from '../api/memories'
 import ModalContext from '../context/modalContext'
 
-function MapScreen({ navigation }) {
+function MapScreen({ navigation, props }) {
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
@@ -83,6 +84,9 @@ function MapScreen({ navigation }) {
 
   return (
     <>
+      <View style={{ paddingTop: 50, flex: 0.4 }}>
+        <MapInput />
+      </View>
       {location && (
         <MapView
           // props
@@ -93,7 +97,9 @@ function MapScreen({ navigation }) {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
           }}
+          // region={props.region}
           showsUserLocation={true}
+          // onRegionChange={(reg) => props.onRegionChange(reg)}
         >
           {!tripActive ? (
             <ButtonIcon
@@ -184,6 +190,7 @@ function MapScreen({ navigation }) {
                 setTripName: setTripName,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
+                location: location,
               }}
             >
               <MemoryNavigator />

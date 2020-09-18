@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import AppText from "./AppText";
-import AppTextInput from "./AppTextInput";
-import ButtonIcon from "./ButtonIcon";
-import Screen from "./Screen";
-import TripModel from "../api/trips";
+import AppText from "../AppText";
+import AppTextInput from "../AppTextInput";
+import ButtonIcon from "../ButtonIcon";
+import Screen from "../Screen";
+import TripModel from "../../api/trips";
 
-import MemoryContext from "../context/memoryContext";
-import ActiveTripContext from "../context/activeTripContext";
-import colors from "../config/colors";
-import AppHeader from "./AppHeader";
+import MemoryContext from "../../context/memoryContext";
+import ActiveTripContext from "../../context/activeTripContext";
+import colors from "../../config/colors";
+import AppHeader from "../AppHeader";
 
 function NewTrip({ navigation }) {
   const { tripActive, storeTripActive } = useContext(ActiveTripContext);

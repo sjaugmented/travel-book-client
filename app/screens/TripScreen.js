@@ -33,6 +33,16 @@ function TripScreen({ navigation }) {
     }
   };
 
+  let memoryList;
+
+  if (displayTrip) {
+    memoryList = displayTrip.memories.map((item, key) => {
+      return <AppText key={key}>{item._id}</AppText>;
+    });
+  } else {
+    memoryList = <AppText>Loading...</AppText>;
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -45,6 +55,7 @@ function TripScreen({ navigation }) {
           {displayTrip ? displayTrip.name : "Loading..."}
         </AppHeader>
         <AppText>{displayTrip.year}</AppText>
+        {memoryList}
       </View>
     </View>
   );

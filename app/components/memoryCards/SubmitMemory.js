@@ -26,7 +26,7 @@ function SubmitMemory() {
             autoPlay
             loop={false}
             onAnimationFinish={memoryContext.onPress}
-            source={require("../../assets/animations/done.json")}
+            source={require("../../assets/animations/green-done.json")}
             style={styles.animation}
           />
         )}

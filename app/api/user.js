@@ -1,31 +1,31 @@
-const local = 'http://192.168.1.8:4000/api/v1'
-const evansLocal = 'http://192.168.1.8:4000/api/v1'
-const axios = require('axios')
+const local = "http://localhost:4000/api/v1";
+const evansLocal = "http://192.168.1.8:4000/api/v1";
+const axios = require("axios");
 
 export default class UserModel {
   static all = async () => {
     try {
-      const allUsers = await axios.get(`${local}/users`)
-      return allUsers
+      const allUsers = await axios.get(`${local}/users`);
+      return allUsers;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   static create = async (userData) => {
     // console.log('userData', userData)
-    const id = userData.user.id
+    const id = userData.user.id;
 
     try {
       const newUser = await axios.post(`${local}/users/${id}`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
-      })
-      return newUser
+      });
+      return newUser;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }

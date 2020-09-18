@@ -5,7 +5,7 @@ import MemoryContext from "../../context/memoryContext";
 import AppButton from "../AppButton";
 import AppText from "../AppText";
 import ButtonIcon from "../ButtonIcon";
-import LottieView from "lottie-react-native";
+// import LottieView from "lottie-react-native";
 
 function SubmitMemory() {
   //Set memoryContext objext
@@ -15,7 +15,12 @@ function SubmitMemory() {
   return (
     <View style={styles.memoryView}>
       <View style={styles.button}>
-        {!done ? (
+        <AppButton
+          title="Store Memory"
+          color={colors.confirm}
+          onPress={memoryContext.onPress}
+        />
+        {/* {!done ? (
           <AppButton
             title="Store Memory"
             color={colors.confirm}
@@ -29,7 +34,7 @@ function SubmitMemory() {
             source={require("../../assets/animations/green-done.json")}
             style={styles.animation}
           />
-        )}
+        )} */}
       </View>
     </View>
   );

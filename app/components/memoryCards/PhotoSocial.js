@@ -33,6 +33,7 @@ function PhotoSocial({ navigation }) {
 
   useEffect(() => {
     requestPermission()
+    memoryContext.setCheckInPhoto('')
   }, [])
 
   const selectImage = async (string) => {
@@ -54,25 +55,30 @@ function PhotoSocial({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader>Let's see some pictures!</AppHeader>
-      <View style={styles.iconContainer}>
-        <ButtonIcon
-          style={styles.icon}
-          name="camera"
-          size={60}
-          onPress={() => selectImage('camera')}
-        />
-        <AppButton onPress={handlePress} title="Submit" />
-        <Image
-          source={{ uri: memoryContext.checkInPhoto }}
-          style={{ width: 100, height: 100 }}
-        />
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => selectImage('library')}
-          name="image-album"
-          size={60}
-        />
+      <AppHeader style={styles.header}>Let's see some pictures!</AppHeader>
+
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.photo}
+            source={{ uri: memoryContext.checkInPhoto }}
+          />
+        </View>
+        <View style={styles.sideButtons}>
+          <AppButton onPress={handlePress} title="Submit" />
+          <ButtonIcon
+            style={styles.icon}
+            name="camera"
+            size={30}
+            onPress={() => selectImage('camera')}
+          />
+          <ButtonIcon
+            style={styles.icon}
+            onPress={() => selectImage('library')}
+            name="image-album"
+            size={30}
+          />
+        </View>
       </View>
       {/* <AppText>And tell us who you're with!</AppText>
       <View style={styles.iconContainer}>
@@ -99,18 +105,33 @@ function PhotoSocial({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.light,
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 50,
+    width: '100%',
+    height: '100%',
   },
-  iconContainer: {
+  header: {
+    marginTop: 10,
+  },
+  container: {
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginTop: 20,
     flexWrap: 'wrap',
+    position: 'relative',
   },
+  photo: {
+    width: 200,
+    height: 200,
+    borderRadius: 20,
+    // position: 'absolute',
+    // right: 15,
+  },
+  sideButtons: {},
   icon: {
-    margin: 10,
+    // margin: 10,
   },
 })
 

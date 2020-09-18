@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   memoryView: {
     flex: 1,
-    marginTop: 350,
+    marginTop: 250,
     marginBottom: 120,
     // margin: -20,
     backgroundColor: colors.light,

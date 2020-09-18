@@ -31,8 +31,9 @@ export default function App() {
   };
 
   useEffect(() => {
+    console.log("App.js useEffect");
     checkForUser();
-  }, []);
+  }, [user.userId]);
 
   const logout = async () => {
     try {

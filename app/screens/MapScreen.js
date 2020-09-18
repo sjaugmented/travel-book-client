@@ -106,6 +106,7 @@ function MapScreen({ navigation }) {
   };
 
   useEffect(() => {
+    console.log("MapScreen.js useEffect");
     getTripActive();
     getLocation();
   }, []);

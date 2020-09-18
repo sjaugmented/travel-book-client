@@ -27,6 +27,7 @@ function AppMenu({ navigation }) {
   const showTrip = useContext(TripShowContext);
 
   useEffect(() => {
+    console.log("AppMenu.js useEffect");
     loadTrips();
   }, []);
 

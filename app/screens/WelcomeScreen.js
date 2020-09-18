@@ -47,8 +47,8 @@ function WelcomeScreen({ navigation }) {
       } else {
         return { cancelled: true };
       }
-    } catch (e) {
-      return { error: true };
+    } catch (error) {
+      console.log(error);
     }
   };
 

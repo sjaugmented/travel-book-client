@@ -32,6 +32,7 @@ function TripScreen({ navigation }) {
   const [displayTrip, setDisplay] = useState("");
 
   useEffect(() => {
+    console.log("TripScreen.js useEffect");
     loadTrip();
     // tripContext.setPickedTrip("");
   }, []);

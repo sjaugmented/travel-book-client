@@ -36,6 +36,7 @@ function PhotoSocial({ navigation }) {
   };
 
   useEffect(() => {
+    console.log("PhotoSocial.js useEffect");
     requestPermission();
     memoryContext.setCheckInPhoto("");
   }, []);

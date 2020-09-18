@@ -1,47 +1,45 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   StyleSheet,
   FlatList,
   Text,
   TouchableWithoutFeedback,
-} from 'react-native'
-import colors from '../../config/colors'
-import ButtonIcon from '../ButtonIcon'
-import AppText from '../AppText'
-import TripModel from '../../api/trips'
-import ListItem from '../ListItem'
+} from "react-native";
+import colors from "../../config/colors";
+import ButtonIcon from "../ButtonIcon";
+import AppText from "../AppText";
+import TripModel from "../../api/trips";
+import ListItem from "../ListItem";
 
-import TripContext from '../../context/TripContext'
-import ActiveTripContext from '../../context/activeTripContext'
-import { ScrollView } from 'react-native-gesture-handler'
-import TripList from './TripList'
-import ModalContext from '../../context/modalContext'
-import TripShowContext from '../../context/TripShowContext'
+import TripContext from "../../context/TripContext";
+import ActiveTripContext from "../../context/activeTripContext";
+import { ScrollView } from "react-native-gesture-handler";
+import TripList from "./TripList";
+import ModalContext from "../../context/modalContext";
+import TripShowContext from "../../context/TripShowContext";
 
 function AppMenu({ navigation }) {
-  const tripActive = useContext(ActiveTripContext)
-  const tripContext = useContext(TripContext)
-  const setMenuVisible = useContext(ModalContext)
-  const [trips, setTrips] = useState([])
-  const showTrip = useContext(TripShowContext)
-
-  console.log('showTripCon:', showTrip)
+  const tripActive = useContext(ActiveTripContext);
+  const tripContext = useContext(TripContext);
+  const setMenuVisible = useContext(ModalContext);
+  const [trips, setTrips] = useState([]);
+  const showTrip = useContext(TripShowContext);
 
   useEffect(() => {
-    loadTrips()
-  }, [])
+    loadTrips();
+  }, []);
 
   const loadTrips = async () => {
-    const response = await TripModel.all()
-    setTrips(response.trips)
-  }
+    const response = await TripModel.all();
+    setTrips(response.trips);
+  };
 
   const handlePress = (trip) => {
-    showTrip.setShowTrip(trip)
-    setMenuVisible(false)
-    navigation.navigate('Trip')
-  }
+    showTrip.setShowTrip(trip);
+    setMenuVisible(false);
+    navigation.navigate("Trip");
+  };
 
   return (
     <View style={styles.container}>
@@ -70,7 +68,7 @@ function AppMenu({ navigation }) {
             size={75}
             backgroundColor={colors.light}
             iconColor={colors.danger}
-            onPress={() => tripActive.setTripActive(false)}
+            onPress={() => tripActive.storeTripActive(false)}
             activeOpacity={0.7}
           />
         )}
@@ -83,7 +81,7 @@ function AppMenu({ navigation }) {
         <TripList style={styles.trips} data={trips} handlePress={handlePress} />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -94,14 +92,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   navbar: {
-    position: 'absolute',
+    position: "absolute",
     right: 30,
     top: 225,
-    alignItems: 'center',
+    alignItems: "center",
     // backgroundColor: colors.background,
   },
   text: {
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.primary,
     // backgroundColor: colors.background,
   },
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.background
   },
   trips: {
-    position: 'absolute',
+    position: "absolute",
     top: 150,
     left: 30,
     width: 225,
@@ -118,6 +116,6 @@ const styles = StyleSheet.create({
   scrollView: {
     //
   },
-})
+});
 
-export default AppMenu
+export default AppMenu;

@@ -10,8 +10,6 @@ import ButtonIcon from '../ButtonIcon'
 import AppButton from '../AppButton'
 
 function PhotoSocial({ navigation }) {
-  //state hook for images
-  const [imageUri, setImageUri] = useState('')
   //Set memoryContext objext
   const memoryContext = useContext(MemoryContext)
 
@@ -78,6 +76,13 @@ function PhotoSocial({ navigation }) {
             size={30}
           />
         </View>
+
+        <AppButton
+          style={styles.moveAlong}
+          title="Nah, I'm good"
+          color={colors.primary}
+          onPress={() => navigation.navigate('SubmitMemory')}
+        />
       </View>
       {/* <AppText>And tell us who you're with!</AppText>
       <View style={styles.iconContainer}>
@@ -133,10 +138,11 @@ const styles = StyleSheet.create({
     left: 10,
     flexDirection: 'column',
   },
-  sideButtons: {},
+  sideButtons: { flex: 1 },
   icon: {
     // margin: 10,
   },
+  moveAlong: {},
 })
 
 export default PhotoSocial

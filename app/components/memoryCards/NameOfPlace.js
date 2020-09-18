@@ -7,8 +7,7 @@ import ListItem from '../ListItem'
 import AppHeader from '../AppHeader'
 
 const apiUrl =
-  // 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCngS-Qeu_5DKEwGV67vHybBNSK9XTSitc&location=49.246292,-123.116226&radius=500000'
-  'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCngS-Qeu_5DKEwGV67vHybBNSK9XTSitc&radius=500&type=gym'
+  'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=500&type=gym'
 const places = [
   {
     name: 'Black Barn Restaurant',

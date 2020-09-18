@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import MemoryContext from "../../context/memoryContext";
-import AppButton from "../AppButton";
-import AppText from "../AppText";
-import ButtonIcon from "../ButtonIcon";
+import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
+import colors from '../../config/colors'
+import MemoryContext from '../../context/memoryContext'
+import AppButton from '../AppButton'
+import AppText from '../AppText'
+import ButtonIcon from '../ButtonIcon'
 
 function SubmitMemory() {
   //Set memoryContext objext
-  const memoryContext = useContext(MemoryContext);
+  const memoryContext = useContext(MemoryContext)
 
   return (
     <View style={styles.memoryView}>
@@ -20,28 +20,28 @@ function SubmitMemory() {
         />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     backgroundColor: colors.light,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
     marginTop: 20,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   icon: {
     margin: 10,
   },
   button: {
-    width: "90%",
+    width: '90%',
   },
-});
+})
 
-export default SubmitMemory;
+export default SubmitMemory

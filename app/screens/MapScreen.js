@@ -24,7 +24,7 @@ import ModalContext from "../context/modalContext";
 import UserContext from "../context/userContext";
 
 function MapScreen({ navigation }) {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -166,8 +166,14 @@ function MapScreen({ navigation }) {
         onModalHide={() => getLocation()}
       >
         <View style={styles.menuView}>
-          <Button title="Close" onPress={() => setMenuVisible(false)} />
-          <Button title="Logout" onPress={() => console.log("logout")} />
+          <ButtonIcon
+            style={{ alignSelf: "center" }}
+            name={"chevron-down"}
+            backgroundColor={colors.light}
+            iconColor={colors.primary}
+            onPress={() => setMenuVisible(false)}
+          />
+          <Button title="Logout" onPress={logout} />
           <TripContext.Provider
             value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
           >

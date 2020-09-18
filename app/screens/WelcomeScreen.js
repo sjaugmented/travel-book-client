@@ -62,13 +62,13 @@ function WelcomeScreen({ navigation }) {
       source={require("../assets/milan-chalk.jpg")}
       resizeMode="cover"
     >
-      <View style={styles.mapButton}>
+      {/* <View style={styles.mapButton}>
         <AppButton
           title="Map"
           color={colors.dark}
           onPress={() => navigation.navigate("Map")}
         />
-      </View>
+      </View> */}
       <View style={styles.loginButton}></View>
       <View style={styles.loginButton}>
         <AppButton

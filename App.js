@@ -25,12 +25,21 @@ export default function App() {
     checkForUser();
   }, []);
 
+  const logout = async () => {
+    setUser(null);
+    await AsyncStorage.setItem("username", "");
+    await AsyncStorage.setItem("userId", "");
+    await AsyncStorage.setItem("tripActive", "false");
+  };
+
   console.log("App.js:", user);
 
   return (
     <>
       <NavigationContainer>
-        <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <UserContext.Provider
+          value={{ user: user, setUser: setUser, logout: logout }}
+        >
           <TripShowContext.Provider
             value={{ showTrip: showTrip, setShowTrip: setShowTrip }}
           >

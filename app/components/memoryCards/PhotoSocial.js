@@ -22,13 +22,17 @@ function PhotoSocial({ navigation }) {
 
   // async function to get permission to get photos
   const requestPermission = async () => {
-    const result = await Permissions.askAsync(
-      Permissions.CAMERA_ROLL,
-      Permissions.CAMERA
-    );
-    result.granted;
-    // const { granted } = await ImagePicker.requestCameraRollPermissionsAsync()
-    // if (!granted) alert('You need to enable permission to access the library')
+    try {
+      const result = await Permissions.askAsync(
+        Permissions.CAMERA_ROLL,
+        Permissions.CAMERA
+      );
+      result.granted;
+      // const { granted } = await ImagePicker.requestCameraRollPermissionsAsync()
+      // if (!granted) alert('You need to enable permission to access the library')
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

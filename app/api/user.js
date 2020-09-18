@@ -13,9 +13,8 @@ export default class UserModel {
     }
   };
   static create = async (userData) => {
-    const id = userData.user.id;
-
     try {
+      const id = userData.user.id;
       const newUser = await axios.post(`${local}/users/${id}`, {
         method: "POST",
         headers: {
@@ -29,7 +28,11 @@ export default class UserModel {
     }
   };
   static show = async (googleId) => {
-    const result = await axios.get(`${local}/users/${googleId}`);
-    return result.data.user;
+    try {
+      const result = await axios.get(`${local}/users/${googleId}`);
+      return result.data.user;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

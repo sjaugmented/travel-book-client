@@ -31,8 +31,12 @@ function AppMenu({ navigation }) {
   }, []);
 
   const loadTrips = async () => {
-    const response = await TripModel.all();
-    setTrips(response.trips);
+    try {
+      const response = await TripModel.all();
+      setTrips(response.trips);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handlePress = (trip) => {

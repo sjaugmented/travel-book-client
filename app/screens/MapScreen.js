@@ -19,12 +19,12 @@ import TripContext from "../context/TripContext";
 import ActiveTripContext from "../context/activeTripContext";
 
 //API
-import MemoryModal from "../api/memories";
+import MemoryModel from "../api/memories";
 import ModalContext from "../context/modalContext";
 import UserContext from "../context/userContext";
 
 function MapScreen({ navigation }) {
-  const { user, logout } = useContext(UserContext);
+  const { username, userId, logout } = useContext(UserContext);
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -84,20 +84,24 @@ function MapScreen({ navigation }) {
       memory,
       tripName,
     };
-    const result = await MemoryModal.create(data);
+    const result = await MemoryModel.create(data);
     setMemory(null);
   };
 
   //Setting latitude and longitude for current location
   const getLocation = async () => {
-    const { granted } = await Location.requestPermissionsAsync();
-    if (!granted) {
-      // error - we need your location dummy
-    } else {
-      const {
-        coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync();
-      setLocation({ latitude, longitude });
+    try {
+      const { granted } = await Location.requestPermissionsAsync();
+      if (!granted) {
+        // error - we need your location dummy
+      } else {
+        const {
+          coords: { latitude, longitude },
+        } = await Location.getCurrentPositionAsync();
+        setLocation({ latitude, longitude });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -215,6 +219,7 @@ function MapScreen({ navigation }) {
                 setTripName: setTripName,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
+                userId: userId,
               }}
             >
               <MemoryNavigator />

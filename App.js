@@ -9,13 +9,22 @@ import TripShowContext from "./app/context/TripShowContext";
 import UserContext from "./app/context/userContext";
 
 export default function App() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({
+    username: "",
+    userId: "",
+  });
   const [showTrip, setShowTrip] = useState("");
 
   const checkForUser = async () => {
     try {
       const localUser = await AsyncStorage.getItem("username");
-      if (localUser) setUser(localUser);
+      const localId = await AsyncStorage.getItem("userId");
+
+      if (localUser)
+        setUser({
+          username: localUser,
+          userId: localId,
+        });
     } catch (error) {
       console.log(error);
     }
@@ -26,22 +35,31 @@ export default function App() {
   }, []);
 
   const logout = async () => {
-    setUser(null);
-    await AsyncStorage.setItem("username", "");
-    await AsyncStorage.setItem("userId", "");
-    await AsyncStorage.setItem("tripActive", "false");
+    try {
+      setUser({ username: "", userId: "" });
+      await AsyncStorage.setItem("username", "");
+      await AsyncStorage.setItem("userId", "");
+      await AsyncStorage.setItem("tripActive", "false");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <NavigationContainer>
         <UserContext.Provider
-          value={{ user: user, setUser: setUser, logout: logout }}
+          value={{
+            username: user.username,
+            userId: user.userId,
+            setUser: setUser,
+            logout: logout,
+          }}
         >
           <TripShowContext.Provider
             value={{ showTrip: showTrip, setShowTrip: setShowTrip }}
           >
-            {user ? <AppNavigator /> : <AuthNavigator />}
+            {user.username ? <AppNavigator /> : <AuthNavigator />}
           </TripShowContext.Provider>
         </UserContext.Provider>
       </NavigationContainer>

@@ -16,13 +16,17 @@ function NewTrip({ navigation }) {
   const memoryContext = useContext(MemoryContext);
 
   const handleSubmit = async () => {
-    // lock it in
-    const result = await TripModel.create(memoryContext.tripName);
+    try {
+      // lock it in
+      const result = await TripModel.create(memoryContext.tripName);
 
-    storeTripActive(true);
+      storeTripActive(true);
 
-    //setModalVisible(false);
-    navigation.navigate("NameOfPlace");
+      //setModalVisible(false);
+      navigation.navigate("NameOfPlace");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

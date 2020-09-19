@@ -49,9 +49,12 @@ function TypeOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    backgroundColor: colors.light,
+    // backgroundColor: colors.light,
+    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 50,
+    // margin: 100,
   },
   iconContainer: {
     justifyContent: 'center',

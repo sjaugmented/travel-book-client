@@ -19,9 +19,16 @@ function MemoryNavigator(props) {
         headerShown: false,
       }}
     >
-      {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
+      {!tripActive && (
+        <Stack.Screen
+          name="NewTrip"
+          options={{ cardOverlayEnabled: false }}
+          component={NewTrip}
+        />
+      )}
       <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
+
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
       <Stack.Screen name="SubmitMemory" component={SubmitMemory} />

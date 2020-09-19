@@ -6,7 +6,7 @@ const evansLocal = 'http://192.168.1.8:4000/api/v1'
 export default class TripModel {
   static all = async () => {
     try {
-      const response = await fetch(`${evanslocal}/trips`)
+      const response = await fetch(`${evansLocal}/trips`)
       const trips = await response.json()
       return trips
     } catch (error) {

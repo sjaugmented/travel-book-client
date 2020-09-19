@@ -201,19 +201,23 @@ function MapScreen({ navigation }) {
       </NativeModal>
       {/* MEMORY MODAL */}
       <NativeModal
-        visible={modalVisible}
+        hasBackdrop={false}
+        isVisible={modalVisible}
+        avoidKeyboard={true}
         animationType="slide"
-        // transparent={true}
+        transparent={true}
         onBackdropPress={() => setModalVisible(false)}
-        // backdropColor="clear"
+        backdropColor="clear"
         backdropOpacity={0}
         onModalHide={() => getLocation()}
+        style={styles.memModal}
       >
         <View style={styles.memoryView}>
           <ActiveTripContext.Provider
             value={{ tripActive: tripActive, storeTripActive: storeTripActive }}
           >
             <MemoryContext.Provider
+              style={styles.activeTrip}
               value={{
                 onPress: addMemory,
                 setCheckInPlace: setCheckInPlace,
@@ -237,6 +241,9 @@ function MapScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  activeTrip: {
+    backgroundColor: 'blue',
+  },
   addButton: {
     position: 'absolute',
     bottom: 200,
@@ -254,13 +261,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  memModal: {
+    margin: 0,
+
+    // backgroundColor: 'green',
+  },
   memoryView: {
     flex: 1,
-    marginTop: 250,
-    marginBottom: 120,
+    // marginTop: 250,
+    // marginBottom: 120,
     // margin: -20,
-    backgroundColor: colors.light,
-    padding: 35,
+    // backgroundColor: colors.light,
+    // backgroundColor: 'blue',
+    paddingHorizontal: 50,
+    paddingTop: 200,
+    paddingBottom: 100,
+    borderRadius: 50,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

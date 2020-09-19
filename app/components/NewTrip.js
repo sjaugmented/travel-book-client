@@ -27,15 +27,13 @@ function NewTrip({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View>
-        <AppHeader>Where ya going?</AppHeader>
-        <AppTextInput
-          onChangeText={(text) => memoryContext.setTripName(text)}
-          icon="airplane"
-          placeholder="Name your trip!"
-        />
-        <ButtonIcon name="forward" size={30} onPress={() => handleSubmit()} />
-      </View>
+      <AppHeader>Where ya going?</AppHeader>
+      <AppTextInput
+        onChangeText={(text) => memoryContext.setTripName(text)}
+        icon="airplane"
+        placeholder="Name your trip!"
+      />
+      <ButtonIcon name="forward" size={30} onPress={() => handleSubmit()} />
     </View>
   )
 }
@@ -43,7 +41,9 @@ function NewTrip({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
+    backgroundColor: 'blue',
+    borderRadius: 50,
+    padding: 35,
   },
 })
 

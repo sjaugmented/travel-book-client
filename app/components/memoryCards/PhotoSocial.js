@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',

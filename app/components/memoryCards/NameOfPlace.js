@@ -38,7 +38,7 @@ function NameOfPlace({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader>Where Are You?</AppHeader>
+      <AppHeader>Are You At Any Of These Places?</AppHeader>
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={{ justifyContent: 'center' }}
@@ -55,6 +55,8 @@ function NameOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
+    borderRadius: 70,
+    opacity: 0.7,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',

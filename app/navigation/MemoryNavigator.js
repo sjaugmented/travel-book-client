@@ -14,6 +14,12 @@ const Stack = createStackNavigator()
 
 function MemoryNavigator(props) {
   const { tripActive } = useContext(ActiveTripContext)
+
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  })
   return (
     <Stack.Navigator
       mode="modal"
@@ -31,7 +37,11 @@ function MemoryNavigator(props) {
         />
       )}
       <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
-      <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
+      <Stack.Screen
+        name="NameOfPlace"
+        // options={{ cardStyleInterpolator: forFade }}
+        component={NameOfPlace}
+      />
 
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />

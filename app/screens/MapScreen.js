@@ -297,10 +297,10 @@ const styles = StyleSheet.create({
   menuView: {
     flex: 1,
     marginTop: 200,
-    margin: -21,
+    // margin: -21,
     backgroundColor: colors.light,
     borderRadius: 20,
-    // padding: 35,
+    padding: 35,
     height: '80%',
     shadowColor: '#000',
     shadowOffset: {

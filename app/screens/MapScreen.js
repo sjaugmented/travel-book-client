@@ -16,6 +16,7 @@ import MemoryNavigator from '../navigation/MemoryNavigator'
 //useContexts
 import MemoryContext from '../context/memoryContext'
 import TripContext from '../context/TripContext'
+import TripShowContext from '../context/TripShowContext'
 import ActiveTripContext from '../context/activeTripContext'
 
 //API
@@ -25,6 +26,8 @@ import UserContext from '../context/userContext'
 
 import MapInput from '../components/MapInput'
 function MapScreen({ navigation }) {
+  //useContext
+  const tripShowContext = useContext(TripShowContext)
   const { username, userId, logout } = useContext(UserContext)
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
@@ -33,6 +36,7 @@ function MapScreen({ navigation }) {
   const [tripActive, setTripActive] = useState()
 
   //Memory and Trip Hooks
+  const [allMemories, setAllMemories] = useState('')
   const [memory, setMemory] = useState(null)
   const [tripName, setTripName] = useState('')
   const [location, setLocation] = useState()
@@ -115,9 +119,31 @@ function MapScreen({ navigation }) {
     }
   }
 
+  // useEffect(() => {
+  //   async function loadMemories() {
+  //     const { memories } = await MemoryModel.all()
+  //     setAllMemories(memories)
+  //   }
+  //   if (allMemories) {
+  //     loadMemories()
+  //   } else {
+  //     console.log('something')
+  //   }
+  // }, [allMemories])
+
+  const loadMemories = async () => {
+    try {
+      const { memories } = await MemoryModel.all()
+      setAllMemories(memories)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getTripActive()
     getLocation()
+    loadMemories()
   }, [])
 
   return (
@@ -137,12 +163,10 @@ function MapScreen({ navigation }) {
           }}
           showsUserLocation={true}
         >
-          <Marker
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}
-          ></Marker>
+          {allMemories !== '' &&
+            allMemories.map((marker, index) => (
+              <MapView.Marker key={index} coordinate={marker.location} />
+            ))}
           {!tripActive ? (
             <ButtonIcon
               style={styles.addButton}

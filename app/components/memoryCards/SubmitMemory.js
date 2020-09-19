@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import MemoryContext from "../../context/memoryContext";
-import AppButton from "../AppButton";
-import AppText from "../AppText";
-import ButtonIcon from "../ButtonIcon";
+import React, { useContext, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
+import colors from '../../config/colors'
+import MemoryContext from '../../context/memoryContext'
+import AppButton from '../AppButton'
+import AppText from '../AppText'
+import ButtonIcon from '../ButtonIcon'
 // import LottieView from "lottie-react-native";
 
 function SubmitMemory() {
   //Set memoryContext objext
-  const memoryContext = useContext(MemoryContext);
-  const [done, setDone] = useState(false);
+  const memoryContext = useContext(MemoryContext)
+  const [done, setDone] = useState(false)
 
   return (
     <View style={styles.memoryView}>
@@ -37,29 +37,34 @@ function SubmitMemory() {
         )} */}
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   animations: { width: 150 },
   memoryView: {
     flex: 1,
+
     backgroundColor: colors.light,
-    alignItems: "center",
-    justifyContent: "center",
+    opacity: 0.7,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50,
+    marginTop: 60,
+    marginBottom: 90,
   },
   iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
     marginTop: 20,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   icon: {
     margin: 10,
   },
   button: {
-    width: "90%",
+    width: '90%',
   },
-});
+})
 
-export default SubmitMemory;
+export default SubmitMemory

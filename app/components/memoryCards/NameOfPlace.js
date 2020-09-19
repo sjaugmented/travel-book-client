@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
-import AppText from '../AppText'
+
 import colors from '../../config/colors'
 import ListItem from '../ListItem'
 import AppHeader from '../AppHeader'
+import ListItemSeparator from '../ListItemSeparator'
 
 const apiUrl =
   'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=350'
@@ -32,13 +33,12 @@ function NameOfPlace({ navigation }) {
 
   const handlePress = (name) => {
     memoryContext.setCheckInPlace(name)
-    console.log('state', results)
     navigation.navigate('Transpo')
   }
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader>Are You At Any Of These Places?</AppHeader>
+      <AppHeader style={styles.header}>Choose Your Location</AppHeader>
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={{ justifyContent: 'center' }}
@@ -47,6 +47,7 @@ function NameOfPlace({ navigation }) {
         renderItem={({ item }) => (
           <ListItem title={item.name} onPress={() => handlePress(item.name)} />
         )}
+        ItemSeparatorComponent={ListItemSeparator}
       />
     </View>
   )
@@ -55,15 +56,22 @@ function NameOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    borderRadius: 70,
-    opacity: 0.7,
+    borderRadius: 50,
+    opacity: 0,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 60,
+  },
+  header: {
+    fontSize: 30,
+    marginBottom: 0,
+    marginTop: 20,
   },
   listContainer: {
-    flexDirection: 'row',
+    marginTop: 10,
     flexWrap: 'wrap',
+    fontWeight: 'bold',
   },
 })
 

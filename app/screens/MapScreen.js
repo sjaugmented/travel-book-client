@@ -77,6 +77,10 @@ function MapScreen({ navigation }) {
     if (!tripActive) storeTripActive(true)
     saveMemory(memoryData)
     setModalVisible(false)
+    setCheckInType('')
+    setCheckInPlace('')
+    setCheckInTranspo('')
+    setCheckInPhoto('')
   }
 
   //Adding memory to db
@@ -207,9 +211,9 @@ function MapScreen({ navigation }) {
       </NativeModal>
       {/* MEMORY MODAL */}
       <NativeModal
-        hasBackdrop={false}
+        hasBackdrop={true}
         isVisible={modalVisible}
-        avoidKeyboard={true}
+        // avoidKeyboard={true}
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setModalVisible(false)}
@@ -270,7 +274,7 @@ const styles = StyleSheet.create({
   },
   memModal: {
     margin: 0,
-
+    // padding: 100,
     // backgroundColor: 'green',
   },
   memoryView: {

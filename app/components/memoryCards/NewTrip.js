@@ -38,15 +38,18 @@ function NewTrip({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View>
-        <AppHeader>Where ya going?</AppHeader>
-        <AppTextInput
-          onChangeText={(text) => memoryContext.setTripName(text)}
-          icon="airplane"
-          placeholder="Name your trip!"
-        />
-        <ButtonIcon name="forward" size={30} onPress={() => handleSubmit()} />
-      </View>
+      <AppHeader style={styles.header}>Where ya going?</AppHeader>
+      <AppTextInput
+        onChangeText={(text) => memoryContext.setTripName(text)}
+        icon="airplane"
+        placeholder="Name your trip!"
+      />
+      <ButtonIcon
+        name="forward"
+        backgroundColor="green"
+        size={60}
+        onPress={() => handleSubmit()}
+      />
     </View>
   )
 }
@@ -55,6 +58,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
+    opacity: 0.7,
+    alignItems: 'center',
+    // justifyContent: 'center',
+    borderRadius: 50,
+    marginTop: 60,
+    marginBottom: 250,
+  },
+  header: {
+    fontSize: 30,
+    marginTop: 30,
   },
 })
 

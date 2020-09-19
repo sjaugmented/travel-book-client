@@ -24,7 +24,7 @@ function TypeOfPlace({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader style={styles.header}>Where You At?</AppHeader>
+      <AppHeader style={styles.header}>Where Are You?</AppHeader>
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     opacity: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 70,
+    borderRadius: 50,
     marginTop: 60,
   },
   header: {
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     justifyContent: 'center',
-    // flexDirection: 'row',
     marginTop: 20,
     flexWrap: 'wrap',
   },

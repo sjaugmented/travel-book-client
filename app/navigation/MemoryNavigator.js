@@ -32,7 +32,7 @@ function MemoryNavigator(props) {
       {!tripActive && (
         <Stack.Screen
           name="NewTrip"
-          options={{ cardOverlay: false }}
+          // options={{ cardOverlay: false }}
           component={NewTrip}
         />
       )}

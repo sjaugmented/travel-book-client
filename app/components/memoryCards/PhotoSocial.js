@@ -35,7 +35,7 @@ function PhotoSocial({ navigation }) {
 
   useEffect(() => {
     requestPermission()
-    // memoryContext.setCheckInPhoto(' ')
+    memoryContext.setCheckInPhoto(' ')
   }, [])
 
   const selectImage = async (string) => {
@@ -57,55 +57,41 @@ function PhotoSocial({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader style={styles.header}>Let's see some pictures!</AppHeader>
+      <AppHeader style={styles.header}>Take A Pic!</AppHeader>
 
-      <View style={styles.container}>
-        <Image
-          style={styles.photo}
-          source={{ uri: memoryContext.checkInPhoto }}
+      <Image
+        style={styles.photo}
+        source={{ uri: memoryContext.checkInPhoto }}
+      />
+
+      <View style={styles.buttons}>
+        {/* <AppButton onPress={handlePress} title="Submit" /> */}
+        <ButtonIcon
+          style={styles.icon}
+          name="camera"
+          size={60}
+          onPress={() => selectImage('camera')}
         />
-
-        <View style={styles.sideButtons}>
-          <AppButton onPress={handlePress} title="Submit" />
-          <ButtonIcon
-            style={styles.icon}
-            name="camera"
-            size={30}
-            onPress={() => selectImage('camera')}
-          />
-          <ButtonIcon
-            style={styles.icon}
-            onPress={() => selectImage('library')}
-            name="image-album"
-            size={30}
-          />
-        </View>
-
-        <AppButton
-          style={styles.moveAlong}
-          title="Nah, I'm good"
-          color={colors.primary}
-          onPress={() => navigation.navigate('SubmitMemory')}
+        <ButtonIcon
+          style={styles.icon}
+          onPress={() => selectImage('library')}
+          name="image-album"
+          size={60}
+        />
+        <ButtonIcon
+          style={styles.check}
+          onPress={handlePress}
+          name="check"
+          size={60}
         />
       </View>
-      {/* <AppText>And tell us who you're with!</AppText>
-      <View style={styles.iconContainer}>
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-      </View> */}
+
+      {/* <AppButton
+        style={styles.moveAlong}
+        title="Nah, I'm good"
+        color={colors.primary}
+        onPress={() => navigation.navigate('SubmitMemory')}
+      /> */}
     </View>
   )
 }
@@ -113,38 +99,39 @@ function PhotoSocial({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    flexWrap: 'wrap',
+    borderRadius: 50,
+    opacity: 0,
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 50,
-    // width: 400,
-    // height: 500,
+    marginTop: 60,
   },
   header: {
-    marginTop: 100,
-  },
-  container: {
-    justifyContent: 'center',
-    // flexDirection: 'column',
-    marginTop: -200,
-    // flexWrap: 'wrap',
-    // position: 'relative',
+    fontSize: 30,
+    marginTop: 10,
+    // marginTop: 100,
   },
   photo: {
-    width: 200,
-    height: 200,
+    width: '85%',
+    height: '55%',
+
     borderRadius: 20,
-    alignSelf: 'center',
-    // position: 'absolute',
-    // right: 10,
-    left: 10,
-    flexDirection: 'column',
+    marginTop: 20,
+    // marginBottom: 0,
   },
-  sideButtons: { flex: 1 },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10,
+    justifyContent: 'flex-start',
+  },
+  check: {
+    backgroundColor: 'green',
+    margin: 3,
+  },
   icon: {
-    // margin: 10,
+    backgroundColor: colors.primary,
+    margin: 3,
   },
   moveAlong: {},
 })

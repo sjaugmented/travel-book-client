@@ -30,13 +30,13 @@ function AppMenu({ navigation }) {
   const showTrip = useContext(TripShowContext);
 
   useEffect(() => {
-    console.log("AppMenu.js useEffect");
     loadTrips();
   }, []);
 
   const loadTrips = async () => {
     try {
       const response = await UserModel.show(userId);
+      console.log("AppMenu - Trip Fetch:", response.trips);
       !response
         ? setTrips([{ name: "Kinda empty here...", year: "" }])
         : setTrips(response.trips);

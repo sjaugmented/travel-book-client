@@ -24,6 +24,7 @@ import {
   ContributionGraph,
 } from "react-native-chart-kit";
 import { ScrollView } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,7 +33,6 @@ function TripScreen({ navigation }) {
   const [displayTrip, setDisplay] = useState("");
 
   useEffect(() => {
-    console.log("TripScreen.js useEffect");
     loadTrip();
     // tripContext.setPickedTrip("");
   }, []);
@@ -50,7 +50,11 @@ function TripScreen({ navigation }) {
 
   if (displayTrip) {
     memoryList = displayTrip.memories.map((item, key) => {
-      return <AppText key={key}>{item.locationName}</AppText>;
+      return (
+        <Swipeable renderRightAction={() => console.log("delete!")}>
+          <AppText key={key}>{item.locationName}</AppText>;
+        </Swipeable>
+      );
     });
   } else {
     memoryList = <AppText>Loading...</AppText>;

@@ -1,83 +1,92 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Button, Modal } from "react-native";
-import NativeModal from "react-native-modal";
-import MapView from "react-native-maps";
-import * as Location from "expo-location";
-import AsyncStorage from "@react-native-community/async-storage";
+import React, { useContext, useEffect, useState } from 'react'
+import { View, StyleSheet, Button, Modal } from 'react-native'
+import NativeModal from 'react-native-modal'
+import MapView, { Marker } from 'react-native-maps'
+import * as Location from 'expo-location'
+import AsyncStorage from '@react-native-community/async-storage'
 
 //Styles
-import colors from "../config/colors";
-import ButtonIcon from "../components/ButtonIcon";
+import colors from '../config/colors'
+import ButtonIcon from '../components/ButtonIcon'
 
 //Navigators
-import MenuNavigator from "../navigation/MenuNavigator";
-import MemoryNavigator from "../navigation/MemoryNavigator";
+import MenuNavigator from '../navigation/MenuNavigator'
+import MemoryNavigator from '../navigation/MemoryNavigator'
 
 //useContexts
-import MemoryContext from "../context/memoryContext";
-import TripContext from "../context/TripContext";
-import ActiveTripContext from "../context/activeTripContext";
+import MemoryContext from '../context/memoryContext'
+import TripContext from '../context/TripContext'
+import TripShowContext from '../context/TripShowContext'
+import ActiveTripContext from '../context/activeTripContext'
 
 //API
-import MemoryModel from "../api/memories";
-import ModalContext from "../context/modalContext";
-import UserContext from "../context/userContext";
+import MemoryModel from '../api/memories'
+import ModalContext from '../context/modalContext'
+import UserContext from '../context/userContext'
 
-import MapInput from "../components/MapInput";
+import MapInput from '../components/MapInput'
 function MapScreen({ navigation }) {
-  const { username, userId, logout } = useContext(UserContext);
+  //useContext
+  const tripShowContext = useContext(TripShowContext)
+  const { username, userId, logout } = useContext(UserContext)
   //Hide and show
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
-  const [tripActive, setTripActive] = useState();
+  const [tripActive, setTripActive] = useState()
 
   //Memory and Trip Hooks
-  const [memory, setMemory] = useState(null);
-  const [tripName, setTripName] = useState("");
-  const [location, setLocation] = useState();
-  const [checkInPlace, setCheckInPlace] = useState("");
-  const [checkInType, setCheckInType] = useState("");
-  const [checkInTranspo, setCheckInTranspo] = useState("");
-  const [checkInPhoto, setCheckInPhoto] = useState("");
+  const [allMemories, setAllMemories] = useState('')
+  const [memory, setMemory] = useState(null)
+  const [tripName, setTripName] = useState('')
+  const [location, setLocation] = useState()
+  const [checkInPlace, setCheckInPlace] = useState('')
+  const [checkInType, setCheckInType] = useState('')
+  const [checkInTranspo, setCheckInTranspo] = useState('')
+  const [checkInPhoto, setCheckInPhoto] = useState('')
+  const [memoryLocation, setMemoryLocation] = useState('')
 
   //Hook for show trip window
-  const [pickedTrip, setPickedTrip] = useState("");
+  const [pickedTrip, setPickedTrip] = useState('')
 
   const getTripActive = async () => {
     try {
-      const tripState = await AsyncStorage.getItem("tripActive");
-      if (tripState === "true") setTripActive(true);
-      else setTripActive(false);
+      const tripState = await AsyncStorage.getItem('tripActive')
+      if (tripState === 'true') setTripActive(true)
+      else setTripActive(false)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const storeTripActive = async (bool) => {
     try {
-      const str = bool.toString();
-      setTripActive(bool);
-      await AsyncStorage.setItem("tripActive", str);
+      const str = bool.toString()
+      setTripActive(bool)
+      await AsyncStorage.setItem('tripActive', str)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   //setMemory with this data and call saveMemory function to add to db
   const addMemory = () => {
     let memoryData = {
-      location: location,
+      location: memoryLocation,
       locationName: checkInPlace,
       type: checkInType,
       transpo: checkInTranspo,
       photo: checkInPhoto,
-    };
-    setMemory(memoryData);
-    if (!tripActive) storeTripActive(true);
-    saveMemory(memoryData);
-    setModalVisible(false);
-  };
+    }
+    setMemory(memoryData)
+    if (!tripActive) storeTripActive(true)
+    saveMemory(memoryData)
+    setModalVisible(false)
+    setCheckInType('')
+    setCheckInPlace('')
+    setCheckInTranspo('')
+    setCheckInPhoto('')
+  }
 
   //Adding memory to db
   const saveMemory = async (memory) => {
@@ -85,35 +94,57 @@ function MapScreen({ navigation }) {
       const data = {
         memory,
         tripName,
-      };
-      const result = await MemoryModel.create(data);
-      setMemory(null);
+      }
+      const result = await MemoryModel.create(data)
+      setMemory(null)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   //Setting latitude and longitude for current location
   const getLocation = async () => {
     try {
-      const { granted } = await Location.requestPermissionsAsync();
+      const { granted } = await Location.requestPermissionsAsync()
       if (!granted) {
         // error - we need your location dummy
       } else {
         const {
           coords: { latitude, longitude },
-        } = await Location.getCurrentPositionAsync();
-        setLocation({ latitude, longitude });
+        } = await Location.getCurrentPositionAsync()
+        setLocation({ latitude, longitude })
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
+
+  // useEffect(() => {
+  //   async function loadMemories() {
+  //     const { memories } = await MemoryModel.all()
+  //     setAllMemories(memories)
+  //   }
+  //   if (allMemories) {
+  //     loadMemories()
+  //   } else {
+  //     console.log('something')
+  //   }
+  // }, [allMemories])
+
+  const loadMemories = async () => {
+    try {
+      const { memories } = await MemoryModel.all()
+      setAllMemories(memories)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    getTripActive();
-    getLocation();
-  }, []);
+    getTripActive()
+    getLocation()
+    loadMemories()
+  }, [])
 
   return (
     <>
@@ -130,10 +161,12 @@ function MapScreen({ navigation }) {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
           }}
-          // region={props.region}
           showsUserLocation={true}
-          // onRegionChange={(reg) => props.onRegionChange(reg)}
         >
+          {allMemories !== '' &&
+            allMemories.map((marker, index) => (
+              <MapView.Marker key={index} coordinate={marker.location} />
+            ))}
           {!tripActive ? (
             <ButtonIcon
               style={styles.addButton}
@@ -157,7 +190,7 @@ function MapScreen({ navigation }) {
           )}
           <ButtonIcon
             style={styles.menuButton}
-            name={"xbox-controller-menu"}
+            name={'xbox-controller-menu'}
             size={65}
             backgroundColor={colors.light}
             iconColor={colors.secondary}
@@ -179,8 +212,8 @@ function MapScreen({ navigation }) {
       >
         <View style={styles.menuView}>
           <ButtonIcon
-            style={{ alignSelf: "center" }}
-            name={"chevron-down"}
+            style={{ alignSelf: 'center' }}
+            name={'chevron-down'}
             backgroundColor={colors.light}
             iconColor={colors.primary}
             onPress={() => setMenuVisible(false)}
@@ -207,19 +240,23 @@ function MapScreen({ navigation }) {
       </NativeModal>
       {/* MEMORY MODAL */}
       <NativeModal
-        visible={modalVisible}
-        animationType="slide"
+        hasBackdrop={true}
+        isVisible={modalVisible}
+        // avoidKeyboard={true}
+        // animationType="slide"
         // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
-        // backdropColor="clear"
+        backdropColor="clear"
         backdropOpacity={0}
         onModalHide={() => getLocation()}
+        style={styles.memModal}
       >
         <View style={styles.memoryView}>
           <ActiveTripContext.Provider
             value={{ tripActive: tripActive, storeTripActive: storeTripActive }}
           >
             <MemoryContext.Provider
+              style={styles.activeTrip}
               value={{
                 onPress: addMemory,
                 setCheckInPlace: setCheckInPlace,
@@ -227,6 +264,7 @@ function MapScreen({ navigation }) {
                 setCheckInTranspo: setCheckInTranspo,
                 setCheckInPhoto: setCheckInPhoto,
                 setTripName: setTripName,
+                setMemoryLocation: setMemoryLocation,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,
@@ -240,35 +278,49 @@ function MapScreen({ navigation }) {
         </View>
       </NativeModal>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
+  activeTrip: {
+    backgroundColor: 'blue',
+  },
   addButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 200,
   },
   menuButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 75,
   },
   confirmation: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   mapStyle: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
+  },
+  memModal: {
+    marginHorizontal: 50,
+    marginTop: 200,
+    marginBottom: 150,
+    // backgroundColor: 'green',
+    padding: 0,
   },
   memoryView: {
     flex: 1,
-    marginTop: 250,
-    marginBottom: 120,
+    // marginTop: 250,
+    // marginBottom: 120,
     // margin: -20,
-    backgroundColor: colors.light,
-    padding: 35,
-    shadowColor: "#000",
+    // backgroundColor: colors.light,
+    // backgroundColor: 'blue',
+    // paddingHorizontal: 50,
+    // paddingTop: 200,
+    padding: 0,
+    borderRadius: 50,
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -281,12 +333,12 @@ const styles = StyleSheet.create({
   menuView: {
     flex: 1,
     marginTop: 200,
-    margin: -21,
+    // margin: -21,
     backgroundColor: colors.light,
     borderRadius: 20,
-    // padding: 35,
-    height: "80%",
-    shadowColor: "#000",
+    padding: 35,
+    height: '80%',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -295,6 +347,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
-});
+})
 
-export default MapScreen;
+export default MapScreen

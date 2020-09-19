@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react"
 import {
   StyleSheet,
   Text,
@@ -7,57 +7,63 @@ import {
   Image,
   Dimensions,
   FlatList,
-} from "react-native";
-import AppText from "../components/AppText";
+} from "react-native"
+import AppText from "../components/AppText"
 
-import TripContext from "../context/TripContext";
-import TripModel from "../api/trips";
-import AppHeader from "../components/AppHeader";
-import TripShowContext from "../context/TripShowContext";
-import colors from "../config/colors";
-import { PieChart as PieChart2 } from "react-native-svg-charts";
+import TripContext from "../context/TripContext"
+import TripModel from "../api/trips"
+import AppHeader from "../components/AppHeader"
+import TripShowContext from "../context/TripShowContext"
+import colors from "../config/colors"
+import { PieChart as PieChart2 } from "react-native-svg-charts"
 import {
   LineChart,
   BarChart,
   PieChart,
   ProgressChart,
   ContributionGraph,
-} from "react-native-chart-kit";
-import { ScrollView } from "react-native-gesture-handler";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+} from "react-native-chart-kit"
+import { ScrollView } from "react-native-gesture-handler"
+import Swipeable from "react-native-gesture-handler/Swipeable"
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window")
 
 function TripScreen({ navigation }) {
-  const showTrip = useContext(TripShowContext);
-  const [displayTrip, setDisplay] = useState("");
+  const showTrip = useContext(TripShowContext)
+  const [displayTrip, setDisplay] = useState("")
 
   useEffect(() => {
-    loadTrip();
+    loadTrip()
     // tripContext.setPickedTrip("");
-  }, []);
+  }, [])
 
   const loadTrip = async () => {
     try {
-      const response = await TripModel.show(showTrip.showTrip);
-      setDisplay(response.trip);
+      const response = await TripModel.show(showTrip.showTrip)
+      setDisplay(response.trip)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
-  let memoryList;
+  let memoryList
 
+  ////MEMORIES////
   if (displayTrip) {
     memoryList = displayTrip.memories.map((item, key) => {
       return (
         <Swipeable renderRightAction={() => console.log("delete!")}>
-          <AppText key={key}>{item.locationName}</AppText>;
+          <TouchableHighlight>
+            <View>
+              <Text key={key}>{item.locationName}</Text>
+            </View>
+            {/* <AppText key={key}>{item.locationName}</AppText>; */}
+          </TouchableHighlight>
         </Swipeable>
-      );
-    });
+      )
+    })
   } else {
-    memoryList = <AppText>Loading...</AppText>;
+    memoryList = <AppText>Loading...</AppText>
   }
 
   const data0 = [
@@ -89,7 +95,7 @@ function TripScreen({ navigation }) {
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
-  ];
+  ]
 
   const data = [
     {
@@ -127,31 +133,15 @@ function TripScreen({ navigation }) {
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
-  ];
+  ]
 
-  const data3 = [
-    50,
-    10,
-    40,
-    95,
-    -4,
-    -24,
-    85,
-    91,
-    35,
-    53,
-    -53,
-    24,
-    50,
-    -20,
-    -80,
-  ];
+  const data3 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
 
   const randomColor = () =>
     ("#" + ((Math.random() * 0xffffff) << 0).toString(16) + "000000").slice(
       0,
       7
-    );
+    )
 
   const pieData = data3
     .filter((value) => value > 0)
@@ -162,7 +152,7 @@ function TripScreen({ navigation }) {
         onPress: () => console.log("press", index),
       },
       key: `pie-${index}`,
-    }));
+    }))
 
   return (
     <View style={styles.container}>
@@ -260,7 +250,7 @@ function TripScreen({ navigation }) {
         </View>
       </ScrollView>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -325,7 +315,8 @@ const styles = StyleSheet.create({
   memoryList: {
     flex: 1,
     marginTop: 0,
+    marginBottom: 200,
   },
-});
+})
 
-export default TripScreen;
+export default TripScreen

@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import colors from "../config/colors";
-import AppText from "./AppText";
+import React from "react"
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native"
+import colors from "../../config/colors"
+import AppText from "../AppText"
 
 function ListItem({ title, id, onPress, subTitle, navigation, handlePress }) {
   return (
@@ -11,7 +11,7 @@ function ListItem({ title, id, onPress, subTitle, navigation, handlePress }) {
         <AppText>{subTitle}</AppText>
       </View>
     </TouchableHighlight>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginVertical: 5,
   },
-});
+})
 
-export default ListItem;
+export default ListItem

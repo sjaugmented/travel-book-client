@@ -1,9 +1,9 @@
-import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
-import { MaterialCommunityIcons, EvilIcons } from "@expo/vector-icons";
-import colors from "../config/colors";
+import React from 'react'
+import { View, StyleSheet, TextInput } from 'react-native'
+import { MaterialCommunityIcons, EvilIcons } from '@expo/vector-icons'
+import colors from '../config/colors'
 
-export default function AppTextInput({ icon, width = "100%", ...otherProps }) {
+export default function AppTextInput({ icon, width = '100%', ...otherProps }) {
   return (
     <View style={styles.container}>
       {icon && (
@@ -20,15 +20,15 @@ export default function AppTextInput({ icon, width = "100%", ...otherProps }) {
         {...otherProps}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.light,
     borderRadius: 25,
-    flexDirection: "row",
-    width: "90%",
+    flexDirection: 'row',
+    width: '90%',
     padding: 15,
     marginVertical: 10,
   },
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   input: {
     color: colors.dark,
-    fontSize: 18,
-    fontFamily: "Avenir Next",
+    fontSize: 22,
+    fontFamily: 'Avenir Next',
+    width: '100%',
   },
-});
+})

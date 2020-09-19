@@ -1,152 +1,139 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Image } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
+import React, { useContext, useEffect, useState } from 'react'
+import { View, StyleSheet, Image } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions'
 
-import colors from "../../config/colors";
-import MemoryContext from "../../context/memoryContext";
-import AppHeader from "../AppHeader";
-import ButtonIcon from "../ButtonIcon";
-import AppButton from "../AppButton";
+import colors from '../../config/colors'
+import MemoryContext from '../../context/memoryContext'
+import AppHeader from '../AppHeader'
+import ButtonIcon from '../ButtonIcon'
+import AppButton from '../AppButton'
 
 function PhotoSocial({ navigation }) {
   //Set memoryContext objext
-  const memoryContext = useContext(MemoryContext);
+  const memoryContext = useContext(MemoryContext)
 
   //Set photo/social check-in and go to final modal
   const handlePress = () => {
-    navigation.navigate("SubmitMemory");
-  };
+    navigation.navigate('SubmitMemory')
+  }
 
   // async function to get permission to get photos
   const requestPermission = async () => {
     try {
       const result = await Permissions.askAsync(
         Permissions.CAMERA_ROLL,
-        Permissions.CAMERA
-      );
-      result.granted;
+        Permissions.CAMERA,
+      )
+      result.granted
       // const { granted } = await ImagePicker.requestCameraRollPermissionsAsync()
       // if (!granted) alert('You need to enable permission to access the library')
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    requestPermission();
-    // memoryContext.setCheckInPhoto(' ')
-  }, []);
+    requestPermission()
+    memoryContext.setCheckInPhoto(' ')
+  }, [])
 
   const selectImage = async (string) => {
     try {
-      let result;
-      if (string === "camera") {
-        result = await ImagePicker.launchCameraAsync();
+      let result
+      if (string === 'camera') {
+        result = await ImagePicker.launchCameraAsync()
       } else {
-        result = await ImagePicker.launchImageLibraryAsync();
+        result = await ImagePicker.launchImageLibraryAsync()
       }
 
       if (!result.cancelled) {
-        memoryContext.setCheckInPhoto(result.uri);
+        memoryContext.setCheckInPhoto(result.uri)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader style={styles.header}>Let's see some pictures!</AppHeader>
+      <AppHeader style={styles.header}>Take A Pic!</AppHeader>
 
-      <View style={styles.container}>
-        <Image
-          style={styles.photo}
-          source={{ uri: memoryContext.checkInPhoto }}
+      <Image
+        style={styles.photo}
+        source={{ uri: memoryContext.checkInPhoto }}
+      />
+
+      <View style={styles.buttons}>
+        {/* <AppButton onPress={handlePress} title="Submit" /> */}
+        <ButtonIcon
+          style={styles.icon}
+          name="camera"
+          size={60}
+          onPress={() => selectImage('camera')}
         />
-
-        <View style={styles.sideButtons}>
-          <AppButton onPress={handlePress} title="Submit" />
-          <ButtonIcon
-            style={styles.icon}
-            name="camera"
-            size={30}
-            onPress={() => selectImage("camera")}
-          />
-          <ButtonIcon
-            style={styles.icon}
-            onPress={() => selectImage("library")}
-            name="image-album"
-            size={30}
-          />
-        </View>
-
-        <AppButton
-          style={styles.moveAlong}
-          title="Nah, I'm good"
-          color={colors.primary}
-          onPress={() => navigation.navigate("SubmitMemory")}
+        <ButtonIcon
+          style={styles.icon}
+          onPress={() => selectImage('library')}
+          name="image-album"
+          size={60}
+        />
+        <ButtonIcon
+          style={styles.check}
+          onPress={handlePress}
+          name="check"
+          size={60}
         />
       </View>
-      {/* <AppText>And tell us who you're with!</AppText>
-      <View style={styles.iconContainer}>
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-        <ButtonIcon
-          style={styles.icon}
-          onPress={() => handlePress("tag a friend")}
-          name="human"
-        />
-      </View> */}
+
+      {/* <AppButton
+        style={styles.moveAlong}
+        title="Nah, I'm good"
+        color={colors.primary}
+        onPress={() => navigation.navigate('SubmitMemory')}
+      /> */}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-    flexDirection: "row",
-    backgroundColor: "blue",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 50,
-    // width: 400,
-    // height: 500,
+    opacity: 0.7,
+    backgroundColor: colors.light,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 60,
   },
   header: {
-    marginTop: 100,
-  },
-  container: {
-    justifyContent: "center",
-    // flexDirection: 'column',
-    marginTop: -200,
-    // flexWrap: 'wrap',
-    // position: 'relative',
+    fontSize: 30,
+    marginTop: 10,
+    // marginTop: 100,
   },
   photo: {
-    width: 200,
-    height: 200,
+    width: '85%',
+    height: '55%',
+
     borderRadius: 20,
-    alignSelf: "center",
-    // position: 'absolute',
-    // right: 10,
-    left: 10,
-    flexDirection: "column",
+    marginTop: 20,
+    // marginBottom: 0,
   },
-  sideButtons: { flex: 1 },
+  buttons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10,
+    justifyContent: 'flex-start',
+  },
+  check: {
+    backgroundColor: 'green',
+    margin: 3,
+  },
   icon: {
-    // margin: 10,
+    backgroundColor: colors.primary,
+    margin: 3,
   },
   moveAlong: {},
-});
+})
 
-export default PhotoSocial;
+export default PhotoSocial

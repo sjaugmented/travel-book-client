@@ -273,9 +273,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   memModal: {
-    margin: 0,
-    // padding: 100,
-    // backgroundColor: 'green',
+    marginHorizontal: 50,
+    marginTop: 200,
+    marginBottom: 150,
+    backgroundColor: 'green',
+    padding: 0,
   },
   memoryView: {
     flex: 1,
@@ -284,9 +286,9 @@ const styles = StyleSheet.create({
     // margin: -20,
     // backgroundColor: colors.light,
     // backgroundColor: 'blue',
-    paddingHorizontal: 50,
-    paddingTop: 200,
-    paddingBottom: 100,
+    // paddingHorizontal: 50,
+    // paddingTop: 200,
+    padding: 0,
     borderRadius: 50,
     shadowColor: '#000',
     shadowOffset: {

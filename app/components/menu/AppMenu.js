@@ -1,55 +1,55 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from 'react'
 import {
   View,
   StyleSheet,
   FlatList,
   Text,
   TouchableWithoutFeedback,
-} from "react-native";
-import colors from "../../config/colors";
-import ButtonIcon from "../ButtonIcon";
-import AppText from "../AppText";
-import TripModel from "../../api/trips";
-import ListItem from "../ListItem";
+} from 'react-native'
+import colors from '../../config/colors'
+import ButtonIcon from '../ButtonIcon'
+import AppText from '../AppText'
+import TripModel from '../../api/trips'
+import ListItem from '../ListItem'
 
-import TripContext from "../../context/TripContext";
-import ActiveTripContext from "../../context/activeTripContext";
-import { ScrollView } from "react-native-gesture-handler";
-import TripList from "./TripList";
-import ModalContext from "../../context/modalContext";
-import TripShowContext from "../../context/TripShowContext";
-import UserModel from "../../api/user";
-import UserContext from "../../context/userContext";
+import TripContext from '../../context/TripContext'
+import ActiveTripContext from '../../context/activeTripContext'
+import { ScrollView } from 'react-native-gesture-handler'
+import TripList from './TripList'
+import ModalContext from '../../context/modalContext'
+import TripShowContext from '../../context/TripShowContext'
+import UserModel from '../../api/user'
+import UserContext from '../../context/userContext'
 
 function AppMenu({ navigation }) {
-  const { userId } = useContext(UserContext);
-  const tripActive = useContext(ActiveTripContext);
-  const tripContext = useContext(TripContext);
-  const setMenuVisible = useContext(ModalContext);
-  const [trips, setTrips] = useState([]);
-  const showTrip = useContext(TripShowContext);
+  const { userId } = useContext(UserContext)
+  const tripActive = useContext(ActiveTripContext)
+  const tripContext = useContext(TripContext)
+  const setMenuVisible = useContext(ModalContext)
+  const [trips, setTrips] = useState([])
+  const showTrip = useContext(TripShowContext)
 
   useEffect(() => {
-    console.log("AppMenu.js useEffect");
-    loadTrips();
-  }, []);
+    // console.log("AppMenu.js useEffect");
+    loadTrips()
+  }, [])
 
   const loadTrips = async () => {
     try {
-      const response = await UserModel.show(userId);
+      const response = await UserModel.show(userId)
       !response
-        ? setTrips({ name: "Kinda empty here..." })
-        : setTrips(response.trips);
+        ? setTrips({ name: 'Kinda empty here...' })
+        : setTrips(response.trips)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const handlePress = (trip) => {
-    showTrip.setShowTrip(trip);
-    setMenuVisible(false);
-    navigation.navigate("Trip");
-  };
+    showTrip.setShowTrip(trip)
+    setMenuVisible(false)
+    navigation.navigate('Trip')
+  }
 
   return (
     <View style={styles.container}>
@@ -91,7 +91,7 @@ function AppMenu({ navigation }) {
         <TripList style={styles.trips} data={trips} handlePress={handlePress} />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   navbar: {
-    position: "absolute",
+    position: 'absolute',
     right: 30,
     top: 225,
-    alignItems: "center",
+    alignItems: 'center',
     // backgroundColor: colors.background,
   },
   text: {
-    fontWeight: "500",
+    fontWeight: '500',
     color: colors.primary,
     // backgroundColor: colors.background,
   },
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     // backgroundColor: colors.background
   },
   trips: {
-    position: "absolute",
+    position: 'absolute',
     top: 150,
     left: 30,
     width: 225,
@@ -126,6 +126,6 @@ const styles = StyleSheet.create({
   scrollView: {
     //
   },
-});
+})
 
-export default AppMenu;
+export default AppMenu

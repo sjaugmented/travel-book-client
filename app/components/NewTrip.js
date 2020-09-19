@@ -12,26 +12,17 @@ import colors from '../config/colors'
 import AppHeader from './AppHeader'
 
 function NewTrip({ navigation }) {
-<<<<<<< HEAD
-  const { tripActive, setTripActive } = useContext(ActiveTripContext)
+  const { tripActive, storeTripActive } = useContext(ActiveTripContext)
   const memoryContext = useContext(MemoryContext)
-=======
-  const { tripActive, storeTripActive } = useContext(ActiveTripContext);
-  const memoryContext = useContext(MemoryContext);
->>>>>>> submaster
 
   const handleSubmit = async () => {
     // lock it in
     const result = await TripModel.create(memoryContext.tripName)
 
-<<<<<<< HEAD
-    setTripActive(true)
-=======
-    storeTripActive(true);
->>>>>>> submaster
+    storeTripActive(true)
 
     //setModalVisible(false);
-    navigation.navigate('NameOfPlace')
+    navigation.navigate('TypeOfPlace')
   }
 
   return (

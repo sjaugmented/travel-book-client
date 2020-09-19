@@ -224,6 +224,7 @@ function MapScreen({ navigation }) {
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,
+                checkInType: checkInType,
               }}
             >
               <MemoryNavigator />

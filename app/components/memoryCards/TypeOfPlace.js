@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../config/colors";
-import AppText from "../AppText";
-import ButtonIcon from "../ButtonIcon";
-import MemoryContext from "../../context/memoryContext";
-import AppHeader from "../AppHeader";
+import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
+import colors from '../../config/colors'
+import AppText from '../AppText'
+import ButtonIcon from '../ButtonIcon'
+import MemoryContext from '../../context/memoryContext'
+import AppHeader from '../AppHeader'
 
 function TypeOfPlace({ navigation }) {
   //set memoryContext object
-  const memoryContext = useContext(MemoryContext);
+  const memoryContext = useContext(MemoryContext)
 
   //Set typeofplace check-in and go to next modal
   const handlePress = (string) => {
-    memoryContext.setCheckInType(string);
-    navigation.navigate("Transpo");
-  };
+    memoryContext.setCheckInType(string)
+    navigation.navigate('NameOfPlace')
+  }
 
   return (
     <View style={styles.memoryView}>
@@ -22,46 +22,46 @@ function TypeOfPlace({ navigation }) {
       <View style={styles.iconContainer}>
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("food")}
+          onPress={() => handlePress('restaurant')}
           name="food"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("nightlife")}
-          name="beer"
+          onPress={() => handlePress('airport')}
+          name="airplane-takeoff"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("site-seeing")}
-          name="camera"
+          onPress={() => handlePress('park')}
+          name="pine-tree"
         />
         <ButtonIcon
           style={styles.icon}
-          onPress={() => handlePress("lodging")}
+          onPress={() => handlePress('lodging')}
           name="bed-empty"
           size={50}
         />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     backgroundColor: colors.light,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row',
     marginTop: 20,
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   icon: {
     margin: 10,
   },
-});
+})
 
-export default TypeOfPlace;
+export default TypeOfPlace

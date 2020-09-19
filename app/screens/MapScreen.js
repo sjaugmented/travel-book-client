@@ -111,9 +111,9 @@ function MapScreen({ navigation }) {
 
   return (
     <>
-      <View style={{ paddingTop: 50, flex: 0.4 }}>
+      {/* <View style={{ paddingTop: 50, flex: 0.4 }}>
         <MapInput />
-      </View>
+      </View> */}
       {location && (
         <MapView
           // props

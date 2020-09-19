@@ -24,7 +24,6 @@ function NameOfPlace({ navigation }) {
 
     console.log('results', list.results)
     setResults(list.results)
-    // console.log('state', results)
   }
 
   useEffect(() => {

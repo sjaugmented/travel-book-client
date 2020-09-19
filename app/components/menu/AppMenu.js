@@ -18,8 +18,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import TripList from "./TripList";
 import ModalContext from "../../context/modalContext";
 import TripShowContext from "../../context/TripShowContext";
+import UserModel from "../../api/user";
+import UserContext from "../../context/userContext";
 
 function AppMenu({ navigation }) {
+  const { userId } = useContext(UserContext);
   const tripActive = useContext(ActiveTripContext);
   const tripContext = useContext(TripContext);
   const setMenuVisible = useContext(ModalContext);
@@ -33,8 +36,12 @@ function AppMenu({ navigation }) {
 
   const loadTrips = async () => {
     try {
-      const response = await TripModel.all();
-      setTrips(response.trips);
+      console.log("AppMenuUserId:", userId);
+      const response = await UserModel.show(userId);
+      console.log("AppMenuResponse:", response);
+      // !response
+      //   ? setTrips({ name: "Kinda empty here..." })
+      //   : setTrips(response.trips);
     } catch (error) {
       console.log(error);
     }

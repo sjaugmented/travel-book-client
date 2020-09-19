@@ -30,7 +30,7 @@ export default class UserModel {
   static show = async (googleId) => {
     try {
       const result = await axios.get(`${local}/users/${googleId}`);
-      return result.data.user;
+      return result.data;
     } catch (error) {
       console.log(error);
     }

@@ -165,7 +165,12 @@ function MapScreen({ navigation }) {
         >
           {allMemories !== '' &&
             allMemories.map((marker, index) => (
-              <MapView.Marker key={index} coordinate={marker.location} />
+              <Marker
+                pinColor="blue"
+                key={index}
+                title={marker.locationName}
+                coordinate={marker.location}
+              />
             ))}
           {!tripActive ? (
             <ButtonIcon
@@ -192,7 +197,7 @@ function MapScreen({ navigation }) {
             style={styles.menuButton}
             name={'xbox-controller-menu'}
             size={65}
-            backgroundColor={colors.light}
+            backgroundColor="transparent"
             iconColor={colors.secondary}
             onPress={() => setMenuVisible(true)}
           />

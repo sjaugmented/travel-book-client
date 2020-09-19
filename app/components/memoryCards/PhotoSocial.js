@@ -7,7 +7,7 @@ import colors from '../../config/colors'
 import MemoryContext from '../../context/memoryContext'
 import AppHeader from '../AppHeader'
 import ButtonIcon from '../ButtonIcon'
-import AppButton from '../AppButton'
+import AppText from '../AppText'
 
 function PhotoSocial({ navigation }) {
   //Set memoryContext objext
@@ -35,7 +35,7 @@ function PhotoSocial({ navigation }) {
 
   useEffect(() => {
     requestPermission()
-    memoryContext.setCheckInPhoto(' ')
+    memoryContext.setCheckInPhoto('')
   }, [])
 
   const selectImage = async (string) => {
@@ -58,11 +58,16 @@ function PhotoSocial({ navigation }) {
   return (
     <View style={styles.memoryView}>
       <AppHeader style={styles.header}>Take A Pic!</AppHeader>
-
-      <Image
-        style={styles.photo}
-        source={{ uri: memoryContext.checkInPhoto }}
-      />
+      {memoryContext.checkInPhoto === '' ? (
+        <View style={styles.empty}>
+          <AppText>Image</AppText>
+        </View>
+      ) : (
+        <Image
+          style={styles.photo}
+          source={{ uri: memoryContext.checkInPhoto }}
+        />
+      )}
 
       <View style={styles.buttons}>
         {/* <AppButton onPress={handlePress} title="Submit" /> */}
@@ -110,6 +115,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 10,
     // marginTop: 100,
+  },
+  empty: {
+    width: '85%',
+    height: '55%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderStyle: 'dashed',
   },
   photo: {
     width: '85%',

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
 import AppText from '../AppText'
@@ -6,29 +6,34 @@ import colors from '../../config/colors'
 import ListItem from '../ListItem'
 import AppHeader from '../AppHeader'
 
-const places = [
-  {
-    name: 'Black Barn Restaurant',
-    id: 1,
-  },
-  {
-    name: 'The Waldorf Astoria',
-    id: 2,
-  },
-  {
-    name: 'Madison Square Park',
-    id: 3,
-  },
-  {
-    name: 'Empire State Building',
-    id: 4,
-  },
-]
+const apiUrl =
+  'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=350'
+
 function NameOfPlace({ navigation }) {
   const memoryContext = useContext(MemoryContext)
+  const checkInType = memoryContext.checkInType
+  const latitude = memoryContext.location.latitude
+  const longitude = memoryContext.location.longitude
+  const [results, setResults] = useState('')
+
+  const fetchData = async () => {
+    let response = await fetch(
+      `${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`,
+    )
+    let list = await response.json()
+
+    console.log('results', list.results)
+    setResults(list.results)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   const handlePress = (name) => {
     memoryContext.setCheckInPlace(name)
-    navigation.navigate('TypeOfPlace')
+    console.log('state', results)
+    navigation.navigate('Transpo')
   }
 
   return (
@@ -37,10 +42,10 @@ function NameOfPlace({ navigation }) {
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={{ justifyContent: 'center' }}
-        data={places}
-        keyExtractor={(place) => place.id.toString()}
+        data={results}
+        keyExtractor={(place) => place.place_id.toString()}
         renderItem={({ item }) => (
-          <ListItem title={item.name} onPress={() => handlePress(item.id)} />
+          <ListItem title={item.name} onPress={() => handlePress(item.name)} />
         )}
       />
     </View>

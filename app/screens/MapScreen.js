@@ -23,6 +23,7 @@ import MemoryModel from "../api/memories";
 import ModalContext from "../context/modalContext";
 import UserContext from "../context/userContext";
 
+import MapInput from "../components/MapInput";
 function MapScreen({ navigation }) {
   const { username, userId, logout } = useContext(UserContext);
   //Hide and show
@@ -110,13 +111,15 @@ function MapScreen({ navigation }) {
   };
 
   useEffect(() => {
-    console.log("MapScreen.js useEffect");
     getTripActive();
     getLocation();
   }, []);
 
   return (
     <>
+      {/* <View style={{ paddingTop: 50, flex: 0.4 }}>
+        <MapInput />
+      </View> */}
       {location && (
         <MapView
           // props
@@ -127,7 +130,9 @@ function MapScreen({ navigation }) {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
           }}
+          // region={props.region}
           showsUserLocation={true}
+          // onRegionChange={(reg) => props.onRegionChange(reg)}
         >
           {!tripActive ? (
             <ButtonIcon
@@ -224,6 +229,8 @@ function MapScreen({ navigation }) {
                 setTripName: setTripName,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
+                location: location,
+                checkInType: checkInType,
                 userId: userId,
               }}
             >

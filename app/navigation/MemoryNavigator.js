@@ -20,8 +20,8 @@ function MemoryNavigator(props) {
       }}
     >
       {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
-      <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
       <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
+      <Stack.Screen name="NameOfPlace" component={NameOfPlace} />
       <Stack.Screen name="Transpo" component={Transpo} />
       <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
       <Stack.Screen name="SubmitMemory" component={SubmitMemory} />

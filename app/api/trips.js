@@ -1,11 +1,12 @@
 const axios = require("axios");
 const local = "http://localhost:4000/api/v1";
 const sethLocal = "http://10.0.1.72:4000/api/v1";
+const evansLocal = "http://192.168.1.8:4000/api/v1";
 
 export default class TripModel {
   static all = async () => {
     try {
-      const response = await fetch(`${local}/trips`);
+      const response = await fetch(`${evanslocal}/trips`);
       const trips = await response.json();
       return trips;
     } catch (error) {
@@ -16,7 +17,7 @@ export default class TripModel {
   static create = async (data) => {
     console.log("tripData:", data);
     try {
-      const newTrip = await axios.post(`${local}/trips/create`, {
+      const newTrip = await axios.post(`${evansLocal}/trips/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export default class TripModel {
 
   static show = async (name) => {
     try {
-      const response = await fetch(`${local}/trips/${name}`);
+      const response = await fetch(`${evansLocal}/trips/${name}`);
       const trip = await response.json();
       return trip;
     } catch (error) {

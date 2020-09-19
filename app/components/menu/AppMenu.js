@@ -38,7 +38,7 @@ function AppMenu({ navigation }) {
     try {
       const response = await UserModel.show(userId);
       !response
-        ? setTrips({ name: "Kinda empty here..." })
+        ? setTrips([{ name: "Kinda empty here...", year: "" }])
         : setTrips(response.trips);
     } catch (error) {
       console.log(error);

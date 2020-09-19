@@ -15,14 +15,17 @@ export default class TripModel {
   }
 
   static create = async (data) => {
+    console.log('tripData:', data)
     try {
-      const newTrip = await axios.post(`${evansLocal}/trips/create`, {
+      const newTrip = await axios.post(`${local}/trips/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       })
+
+      return newTrip
     } catch (error) {
       console.log(error)
     }
@@ -30,7 +33,7 @@ export default class TripModel {
 
   static show = async (name) => {
     try {
-      const response = await fetch(`${evansLocal}/trips/${name}`)
+      const response = await fetch(`${local}/trips/${name}`)
       const trip = await response.json()
       return trip
     } catch (error) {

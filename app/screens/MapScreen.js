@@ -19,13 +19,13 @@ import TripContext from '../context/TripContext'
 import ActiveTripContext from '../context/activeTripContext'
 
 //API
-import MemoryModal from '../api/memories'
+import MemoryModel from '../api/memories'
 import ModalContext from '../context/modalContext'
 import UserContext from '../context/userContext'
 
 import MapInput from '../components/MapInput'
 function MapScreen({ navigation }) {
-  const { user, logout } = useContext(UserContext)
+  const { username, userId, logout } = useContext(UserContext)
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
@@ -47,7 +47,6 @@ function MapScreen({ navigation }) {
   const getTripActive = async () => {
     try {
       const tripState = await AsyncStorage.getItem('tripActive')
-      console.log('MapScreenTripState:', tripState)
       if (tripState === 'true') setTripActive(true)
       else setTripActive(false)
     } catch (error) {
@@ -58,7 +57,6 @@ function MapScreen({ navigation }) {
   const storeTripActive = async (bool) => {
     try {
       const str = bool.toString()
-      console.log('str:', str)
       setTripActive(bool)
       await AsyncStorage.setItem('tripActive', str)
     } catch (error) {
@@ -83,24 +81,32 @@ function MapScreen({ navigation }) {
 
   //Adding memory to db
   const saveMemory = async (memory) => {
-    const data = {
-      memory,
-      tripName,
+    try {
+      const data = {
+        memory,
+        tripName,
+      }
+      const result = await MemoryModel.create(data)
+      setMemory(null)
+    } catch (error) {
+      console.log(error)
     }
-    const result = await MemoryModal.create(data)
-    setMemory(null)
   }
 
   //Setting latitude and longitude for current location
   const getLocation = async () => {
-    const { granted } = await Location.requestPermissionsAsync()
-    if (!granted) {
-      // error - we need your location dummy
-    } else {
-      const {
-        coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync()
-      setLocation({ latitude, longitude })
+    try {
+      const { granted } = await Location.requestPermissionsAsync()
+      if (!granted) {
+        // error - we need your location dummy
+      } else {
+        const {
+          coords: { latitude, longitude },
+        } = await Location.getCurrentPositionAsync()
+        setLocation({ latitude, longitude })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -229,6 +235,7 @@ function MapScreen({ navigation }) {
                 checkInPhoto: checkInPhoto,
                 location: location,
                 checkInType: checkInType,
+                userId: userId,
               }}
             >
               <MemoryNavigator />

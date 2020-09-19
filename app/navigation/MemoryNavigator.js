@@ -1,5 +1,9 @@
 import React, { useContext } from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import {
+  createStackNavigator,
+  TransitionSpecs,
+  CardStyleInterpolators,
+} from '@react-navigation/stack'
 
 import TypeOfPlace from '../components/memoryCards/TypeOfPlace'
 import Transpo from '../components/memoryCards/Transpo'
@@ -15,14 +19,20 @@ const Stack = createStackNavigator()
 function MemoryNavigator(props) {
   const { tripActive } = useContext(ActiveTripContext)
 
-  const forFade = ({ current }) => ({
-    cardStyle: {
-      opacity: current.progress,
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
     },
-  })
+  }
   return (
     <Stack.Navigator
-      mode="modal"
+      // mode="modal"
       screenOptions={{
         cardStyle: { backgroundColor: 'transparent' },
 
@@ -36,10 +46,24 @@ function MemoryNavigator(props) {
           component={NewTrip}
         />
       )}
-      <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
+      <Stack.Screen
+        name="TypeOfPlace"
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
+        component={TypeOfPlace}
+      />
       <Stack.Screen
         name="NameOfPlace"
-        // options={{ cardStyleInterpolator: forFade }}
+        options={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
+        }}
         component={NameOfPlace}
       />
 

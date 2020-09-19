@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { View, StyleSheet, Button, Modal } from 'react-native'
 import NativeModal from 'react-native-modal'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -40,6 +40,7 @@ function MapScreen({ navigation }) {
   const [checkInType, setCheckInType] = useState('')
   const [checkInTranspo, setCheckInTranspo] = useState('')
   const [checkInPhoto, setCheckInPhoto] = useState('')
+  const [memoryLocation, setMemoryLocation] = useState('')
 
   //Hook for show trip window
   const [pickedTrip, setPickedTrip] = useState('')
@@ -67,7 +68,7 @@ function MapScreen({ navigation }) {
   //setMemory with this data and call saveMemory function to add to db
   const addMemory = () => {
     let memoryData = {
-      location: location,
+      location: memoryLocation,
       locationName: checkInPlace,
       type: checkInType,
       transpo: checkInTranspo,
@@ -134,10 +135,14 @@ function MapScreen({ navigation }) {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
           }}
-          // region={props.region}
           showsUserLocation={true}
-          // onRegionChange={(reg) => props.onRegionChange(reg)}
         >
+          <Marker
+            coordinate={{
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }}
+          ></Marker>
           {!tripActive ? (
             <ButtonIcon
               style={styles.addButton}
@@ -214,8 +219,8 @@ function MapScreen({ navigation }) {
         hasBackdrop={true}
         isVisible={modalVisible}
         // avoidKeyboard={true}
-        animationType="slide"
-        transparent={true}
+        // animationType="slide"
+        // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
         backdropOpacity={0}
@@ -235,6 +240,7 @@ function MapScreen({ navigation }) {
                 setCheckInTranspo: setCheckInTranspo,
                 setCheckInPhoto: setCheckInPhoto,
                 setTripName: setTripName,
+                setMemoryLocation: setMemoryLocation,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,
@@ -276,7 +282,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     marginTop: 200,
     marginBottom: 150,
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     padding: 0,
   },
   memoryView: {

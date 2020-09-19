@@ -23,7 +23,6 @@ function NameOfPlace({ navigation }) {
     )
     let list = await response.json()
 
-    console.log('results', list.results)
     setResults(list.results)
   }
 
@@ -31,7 +30,11 @@ function NameOfPlace({ navigation }) {
     fetchData()
   }, [])
 
-  const handlePress = (name) => {
+  const handlePress = (name, location) => {
+    console.log('place name', name)
+    const placeLat = location.location.lat
+    const placeLng = location.location.lng
+    memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
     memoryContext.setCheckInPlace(name)
     navigation.navigate('Transpo')
   }
@@ -45,7 +48,10 @@ function NameOfPlace({ navigation }) {
         data={results}
         keyExtractor={(place) => place.place_id.toString()}
         renderItem={({ item }) => (
-          <ListItem title={item.name} onPress={() => handlePress(item.name)} />
+          <ListItem
+            title={item.name}
+            onPress={() => handlePress(item.name, item.geometry)}
+          />
         )}
         ItemSeparatorComponent={ListItemSeparator}
       />

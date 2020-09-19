@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
-import AppText from '../AppText'
+
 import colors from '../../config/colors'
 import ListItem from '../ListItem'
 import AppHeader from '../AppHeader'
+import ListItemSeparator from '../ListItemSeparator'
 
 const apiUrl =
   'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=350'
@@ -22,7 +23,6 @@ function NameOfPlace({ navigation }) {
     )
     let list = await response.json()
 
-    console.log('results', list.results)
     setResults(list.results)
   }
 
@@ -30,23 +30,30 @@ function NameOfPlace({ navigation }) {
     fetchData()
   }, [])
 
-  const handlePress = (name) => {
+  const handlePress = (name, location) => {
+    console.log('place name', name)
+    const placeLat = location.location.lat
+    const placeLng = location.location.lng
+    memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
     memoryContext.setCheckInPlace(name)
-    console.log('state', results)
     navigation.navigate('Transpo')
   }
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader>Where Are You?</AppHeader>
+      <AppHeader style={styles.header}>Choose Your Location</AppHeader>
       <FlatList
         style={styles.listContainer}
         contentContainerStyle={{ justifyContent: 'center' }}
         data={results}
         keyExtractor={(place) => place.place_id.toString()}
         renderItem={({ item }) => (
-          <ListItem title={item.name} onPress={() => handlePress(item.name)} />
+          <ListItem
+            title={item.name}
+            onPress={() => handlePress(item.name, item.geometry)}
+          />
         )}
+        ItemSeparatorComponent={ListItemSeparator}
       />
     </View>
   )
@@ -55,13 +62,22 @@ function NameOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
+    borderRadius: 50,
+    opacity: 0.7,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 60,
+  },
+  header: {
+    fontSize: 30,
+    marginBottom: 0,
+    marginTop: 20,
   },
   listContainer: {
-    flexDirection: 'row',
+    marginTop: 10,
     flexWrap: 'wrap',
+    fontWeight: 'bold',
   },
 })
 

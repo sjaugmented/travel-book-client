@@ -1,69 +1,70 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet, Button, Modal } from "react-native";
-import NativeModal from "react-native-modal";
-import MapView from "react-native-maps";
-import * as Location from "expo-location";
-import AsyncStorage from "@react-native-community/async-storage";
+import React, { useContext, useEffect, useState } from 'react'
+import { View, StyleSheet, Button, Modal } from 'react-native'
+import NativeModal from 'react-native-modal'
+import MapView from 'react-native-maps'
+import * as Location from 'expo-location'
+import AsyncStorage from '@react-native-community/async-storage'
 
 //Styles
-import colors from "../config/colors";
-import ButtonIcon from "../components/ButtonIcon";
+import colors from '../config/colors'
+import ButtonIcon from '../components/ButtonIcon'
 
 //Navigators
-import MenuNavigator from "../navigation/MenuNavigator";
-import MemoryNavigator from "../navigation/MemoryNavigator";
+import MenuNavigator from '../navigation/MenuNavigator'
+import MemoryNavigator from '../navigation/MemoryNavigator'
 
 //useContexts
-import MemoryContext from "../context/memoryContext";
-import TripContext from "../context/TripContext";
-import ActiveTripContext from "../context/activeTripContext";
+import MemoryContext from '../context/memoryContext'
+import TripContext from '../context/TripContext'
+import ActiveTripContext from '../context/activeTripContext'
 
 //API
-import MemoryModal from "../api/memories";
-import ModalContext from "../context/modalContext";
-import UserContext from "../context/userContext";
+import MemoryModal from '../api/memories'
+import ModalContext from '../context/modalContext'
+import UserContext from '../context/userContext'
 
+import MapInput from '../components/MapInput'
 function MapScreen({ navigation }) {
-  const { user, logout } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext)
   //Hide and show
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
-  const [tripActive, setTripActive] = useState();
+  const [tripActive, setTripActive] = useState()
 
   //Memory and Trip Hooks
-  const [memory, setMemory] = useState(null);
-  const [tripName, setTripName] = useState("");
-  const [location, setLocation] = useState();
-  const [checkInPlace, setCheckInPlace] = useState("");
-  const [checkInType, setCheckInType] = useState("");
-  const [checkInTranspo, setCheckInTranspo] = useState("");
-  const [checkInPhoto, setCheckInPhoto] = useState("");
+  const [memory, setMemory] = useState(null)
+  const [tripName, setTripName] = useState('')
+  const [location, setLocation] = useState()
+  const [checkInPlace, setCheckInPlace] = useState('')
+  const [checkInType, setCheckInType] = useState('')
+  const [checkInTranspo, setCheckInTranspo] = useState('')
+  const [checkInPhoto, setCheckInPhoto] = useState('')
 
   //Hook for show trip window
-  const [pickedTrip, setPickedTrip] = useState("");
+  const [pickedTrip, setPickedTrip] = useState('')
 
   const getTripActive = async () => {
     try {
-      const tripState = await AsyncStorage.getItem("tripActive");
-      console.log("MapScreenTripState:", tripState);
-      if (tripState === "true") setTripActive(true);
-      else setTripActive(false);
+      const tripState = await AsyncStorage.getItem('tripActive')
+      console.log('MapScreenTripState:', tripState)
+      if (tripState === 'true') setTripActive(true)
+      else setTripActive(false)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const storeTripActive = async (bool) => {
     try {
-      const str = bool.toString();
-      console.log("str:", str);
-      setTripActive(bool);
-      await AsyncStorage.setItem("tripActive", str);
+      const str = bool.toString()
+      console.log('str:', str)
+      setTripActive(bool)
+      await AsyncStorage.setItem('tripActive', str)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   //setMemory with this data and call saveMemory function to add to db
   const addMemory = () => {
@@ -73,43 +74,46 @@ function MapScreen({ navigation }) {
       type: checkInType,
       transpo: checkInTranspo,
       photo: checkInPhoto,
-    };
-    setMemory(memoryData);
-    if (!tripActive) storeTripActive(true);
-    saveMemory(memoryData);
-    setModalVisible(false);
-  };
+    }
+    setMemory(memoryData)
+    if (!tripActive) storeTripActive(true)
+    saveMemory(memoryData)
+    setModalVisible(false)
+  }
 
   //Adding memory to db
   const saveMemory = async (memory) => {
     const data = {
       memory,
       tripName,
-    };
-    const result = await MemoryModal.create(data);
-    setMemory(null);
-  };
+    }
+    const result = await MemoryModal.create(data)
+    setMemory(null)
+  }
 
   //Setting latitude and longitude for current location
   const getLocation = async () => {
-    const { granted } = await Location.requestPermissionsAsync();
+    const { granted } = await Location.requestPermissionsAsync()
     if (!granted) {
       // error - we need your location dummy
     } else {
       const {
         coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync();
-      setLocation({ latitude, longitude });
+      } = await Location.getCurrentPositionAsync()
+      setLocation({ latitude, longitude })
     }
-  };
+  }
 
   useEffect(() => {
-    getTripActive();
-    getLocation();
-  }, []);
+    getTripActive()
+    getLocation()
+  }, [])
 
   return (
     <>
+      {/* <View style={{ paddingTop: 50, flex: 0.4 }}>
+        <MapInput />
+      </View> */}
       {location && (
         <MapView
           // props
@@ -120,7 +124,9 @@ function MapScreen({ navigation }) {
             latitudeDelta: 0.0222,
             longitudeDelta: 0.0121,
           }}
+          // region={props.region}
           showsUserLocation={true}
+          // onRegionChange={(reg) => props.onRegionChange(reg)}
         >
           {!tripActive ? (
             <ButtonIcon
@@ -145,7 +151,7 @@ function MapScreen({ navigation }) {
           )}
           <ButtonIcon
             style={styles.menuButton}
-            name={"xbox-controller-menu"}
+            name={'xbox-controller-menu'}
             size={65}
             backgroundColor={colors.light}
             iconColor={colors.secondary}
@@ -167,8 +173,8 @@ function MapScreen({ navigation }) {
       >
         <View style={styles.menuView}>
           <ButtonIcon
-            style={{ alignSelf: "center" }}
-            name={"chevron-down"}
+            style={{ alignSelf: 'center' }}
+            name={'chevron-down'}
             backgroundColor={colors.light}
             iconColor={colors.primary}
             onPress={() => setMenuVisible(false)}
@@ -217,6 +223,8 @@ function MapScreen({ navigation }) {
                 setTripName: setTripName,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
+                location: location,
+                checkInType: checkInType,
               }}
             >
               <MemoryNavigator />
@@ -225,26 +233,26 @@ function MapScreen({ navigation }) {
         </View>
       </NativeModal>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   addButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 200,
   },
   menuButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 75,
   },
   confirmation: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   mapStyle: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   memoryView: {
     flex: 1,
@@ -253,7 +261,7 @@ const styles = StyleSheet.create({
     // margin: -20,
     backgroundColor: colors.light,
     padding: 35,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -270,8 +278,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 20,
     // padding: 35,
-    height: "80%",
-    shadowColor: "#000",
+    height: '80%',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -280,6 +288,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
-});
+})
 
-export default MapScreen;
+export default MapScreen

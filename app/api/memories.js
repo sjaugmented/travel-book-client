@@ -2,7 +2,7 @@ const axios = require("axios");
 const local = "http://localhost:4000/api/v1";
 const sethLocal = "http://10.0.1.72:4000/api/v1";
 
-export default class MemoryModal {
+export default class MemoryModel {
   static create = async (data) => {
     try {
       const newMemory = await axios.post(`${local}/memories/create`, {
@@ -12,6 +12,8 @@ export default class MemoryModal {
         },
         body: JSON.stringify(data),
       });
+
+      return newMemory;
     } catch (error) {
       console.log(error);
     }

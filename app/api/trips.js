@@ -14,6 +14,7 @@ export default class TripModel {
   };
 
   static create = async (data) => {
+    // console.log("tripData:", data);
     try {
       const newTrip = await axios.post(`${local}/trips/create`, {
         method: "POST",
@@ -22,6 +23,8 @@ export default class TripModel {
         },
         body: JSON.stringify(data),
       });
+
+      return newTrip;
     } catch (error) {
       console.log(error);
     }

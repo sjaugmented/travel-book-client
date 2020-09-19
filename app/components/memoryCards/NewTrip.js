@@ -10,15 +10,22 @@ import MemoryContext from "../../context/memoryContext";
 import ActiveTripContext from "../../context/activeTripContext";
 import colors from "../../config/colors";
 import AppHeader from "../AppHeader";
+import UserContext from "../../context/userContext";
 
 function NewTrip({ navigation }) {
   const { tripActive, storeTripActive } = useContext(ActiveTripContext);
+  const { userId } = useContext(UserContext);
   const memoryContext = useContext(MemoryContext);
 
   const handleSubmit = async () => {
     try {
       // lock it in
-      const result = await TripModel.create(memoryContext.tripName);
+      let tripName = memoryContext.tripName;
+      let data = {
+        tripName,
+        userId,
+      };
+      await TripModel.create(data);
 
       storeTripActive(true);
 

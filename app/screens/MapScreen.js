@@ -80,12 +80,16 @@ function MapScreen({ navigation }) {
 
   //Adding memory to db
   const saveMemory = async (memory) => {
-    const data = {
-      memory,
-      tripName,
-    };
-    const result = await MemoryModel.create(data);
-    setMemory(null);
+    try {
+      const data = {
+        memory,
+        tripName,
+      };
+      const result = await MemoryModel.create(data);
+      setMemory(null);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //Setting latitude and longitude for current location

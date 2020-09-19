@@ -6,7 +6,7 @@ const axios = require("axios");
 export default class UserModel {
   static all = async () => {
     try {
-      const allUsers = await axios.get(`${evansLocal}/users`);
+      const allUsers = await axios.get(`${local}/users`);
       return allUsers;
     } catch (error) {
       console.log(error);

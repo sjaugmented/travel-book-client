@@ -5,7 +5,7 @@ const evansLocal = "http://192.168.1.8:4000/api/v1";
 export default class MemoryModel {
   static create = async (data) => {
     try {
-      const newMemory = await axios.post(`${evansLocal}/memories/create`, {
+      const newMemory = await axios.post(`${local}/memories/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

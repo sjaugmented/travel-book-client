@@ -14,7 +14,7 @@ export default class TripModel {
   };
 
   static create = async (data) => {
-    // console.log("tripData:", data);
+    console.log("tripData:", data);
     try {
       const newTrip = await axios.post(`${local}/trips/create`, {
         method: "POST",

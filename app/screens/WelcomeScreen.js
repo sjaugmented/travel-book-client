@@ -19,7 +19,7 @@ const storeData = async (key, value) => {
 };
 
 function WelcomeScreen({ navigation }) {
-  const { user, userId, setUser } = useContext(UserContext);
+  const { username, userId, setUser } = useContext(UserContext);
 
   const signInWithGoogleAsync = async () => {
     try {
@@ -33,16 +33,16 @@ function WelcomeScreen({ navigation }) {
 
       if (result.type === "success") {
         const foundUser = await UserModel.show(result.user.id);
-        console.log(foundUser);
         if (foundUser) {
           await AsyncStorage.setItem("username", foundUser.name);
-          await AsyncStorage.setItem("userId", foundUser._id);
-          setUser({ username: foundUser.name, userId: foundUser._id });
+          await AsyncStorage.setItem("userId", foundUser.googleId);
+          setUser({ username: foundUser.name, userId: foundUser.googleId });
         } else {
+          console.log("no user found in db");
           const newUser = await UserModel.create(result.user);
           await AsyncStorage.setItem("username", newUser.name);
-          await AsyncStorage.setItem("userId", newUser._id);
-          setUser({ username: newUser.name, userId: newUser._id });
+          await AsyncStorage.setItem("userId", newUser.googleId);
+          setUser({ username: newUser.name, userId: newUser.googleId });
         }
       } else {
         return { cancelled: true };

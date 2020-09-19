@@ -36,12 +36,10 @@ function AppMenu({ navigation }) {
 
   const loadTrips = async () => {
     try {
-      console.log("AppMenuUserId:", userId);
       const response = await UserModel.show(userId);
-      console.log("AppMenuResponse:", response);
-      // !response
-      //   ? setTrips({ name: "Kinda empty here..." })
-      //   : setTrips(response.trips);
+      !response
+        ? setTrips({ name: "Kinda empty here..." })
+        : setTrips(response.trips);
     } catch (error) {
       console.log(error);
     }

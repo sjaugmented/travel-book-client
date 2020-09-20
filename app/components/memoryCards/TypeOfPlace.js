@@ -13,7 +13,7 @@ function TypeOfPlace({ navigation }) {
   //Set typeofplace check-in and go to next modal
   const handlePress = (string) => {
     memoryContext.setCheckInType(string)
-    navigation.navigate('NameOfPlace')
+    navigation.replace('NameOfPlace')
   }
 
   // const forFade = ({ current }) => ({

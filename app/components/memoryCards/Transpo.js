@@ -13,7 +13,7 @@ function Transpo({ navigation }) {
   //Set way of transportation check-in and go to next modal
   const handlePress = (string) => {
     memoryContext.setCheckInTranspo(string)
-    navigation.navigate('PhotoSocial')
+    navigation.replace('PhotoSocial')
   }
 
   return (

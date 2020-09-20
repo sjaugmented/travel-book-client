@@ -4,7 +4,7 @@ import {
   TransitionSpecs,
   CardStyleInterpolators,
 } from '@react-navigation/stack'
-
+import { NavigationContainer } from '@react-navigation/native'
 import TypeOfPlace from '../components/memoryCards/TypeOfPlace'
 import Transpo from '../components/memoryCards/Transpo'
 import PhotoSocial from '../components/memoryCards/PhotoSocial'
@@ -35,17 +35,10 @@ function MemoryNavigator(props) {
       // mode="modal"
       screenOptions={{
         cardStyle: { backgroundColor: 'transparent' },
-
         headerShown: false,
       }}
     >
-      {!tripActive && (
-        <Stack.Screen
-          name="NewTrip"
-          // options={{ cardOverlay: false }}
-          component={NewTrip}
-        />
-      )}
+      {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
       <Stack.Screen
         name="TypeOfPlace"
         options={{

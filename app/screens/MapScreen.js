@@ -25,6 +25,7 @@ import ModalContext from '../context/modalContext'
 import UserContext from '../context/userContext'
 
 import MapInput from '../components/MapInput'
+
 function MapScreen({ navigation }) {
   //useContext
   const tripShowContext = useContext(TripShowContext)
@@ -86,6 +87,14 @@ function MapScreen({ navigation }) {
     setCheckInPlace('')
     setCheckInTranspo('')
     setCheckInPhoto('')
+    refreshMap(100)
+  }
+
+  const refreshMap = (delay) => {
+    setTimeout(() => {
+      getLocation()
+      loadMemories()
+    }, delay)
   }
 
   //Adding memory to db

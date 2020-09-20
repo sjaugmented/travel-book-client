@@ -36,7 +36,7 @@ function NameOfPlace({ navigation }) {
     const placeLng = location.location.lng
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
     memoryContext.setCheckInPlace(name)
-    navigation.navigate('Transpo')
+    navigation.replace('Transpo')
   }
 
   return (

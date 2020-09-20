@@ -15,7 +15,7 @@ function PhotoSocial({ navigation }) {
 
   //Set photo/social check-in and go to final modal
   const handlePress = () => {
-    navigation.navigate('SubmitMemory')
+    navigation.replace('SubmitMemory')
   }
 
   // async function to get permission to get photos

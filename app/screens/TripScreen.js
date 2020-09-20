@@ -188,6 +188,11 @@ function TripScreen({ navigation }) {
     }
   }
 
+  const deleteTrip = () => {
+    console.log("deleting trip", displayTrip._id)
+    navigation.goBack()
+  }
+
   return (
     <>
       <View style={styles.container}>
@@ -300,6 +305,23 @@ function TripScreen({ navigation }) {
               />
             </View>
           </View>
+          {/* EDIT & DELETE */}
+          <View style={styles.editDelete}>
+            <View style={{ marginBottom: 20 }}>
+              <AppButton
+                title="Edit Trip"
+                color={colors.medium}
+                onPress={() => console.log("edit", displayTrip)}
+              />
+            </View>
+            <View>
+              <AppButton
+                title="Delete Trip"
+                color={colors.danger}
+                onPress={() => deleteTrip()}
+              />
+            </View>
+          </View>
         </ScrollView>
       </View>
       {/* DELETE MODAL */}
@@ -400,7 +422,7 @@ const styles = StyleSheet.create({
   memoryList: {
     flex: 1,
     marginTop: 0,
-    marginBottom: 200,
+    marginBottom: 100,
     padding: 10,
   },
   deleteModal: {
@@ -430,6 +452,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalButton: { margin: 10 },
+  editDelete: {
+    marginBottom: 100,
+  },
 })
 
 export default TripScreen

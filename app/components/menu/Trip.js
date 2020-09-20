@@ -9,7 +9,6 @@ function Trip({ navigation }) {
   const tripContext = useContext(TripContext);
 
   useEffect(() => {
-    console.log("Trip.js useEffect");
     loadTrip();
     tripContext.setPickedTrip("");
   }, []);

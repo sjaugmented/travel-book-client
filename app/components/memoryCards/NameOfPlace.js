@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, FlatList, Button } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
-import { getDistance } from 'geolib'
+import HaversineGeolocation from 'haversine-geolocation'
 
 import colors from '../../config/colors'
-import ListItem from '../ListItem'
+import ListItem from '../lists/ListItem'
 import AppHeader from '../AppHeader'
-import ListItemSeparator from '../ListItemSeparator'
+import ListItemSeparator from '../lists/ListItemSeparator'
 
 import ButtonIcon from '../ButtonIcon'
 
@@ -35,16 +35,6 @@ function NameOfPlace({ navigation }) {
   const handlePress = (name, location) => {
     const placeLat = location.location.lat
     const placeLng = location.location.lng
-    // console.log(
-    //   'distance:',
-    //   getDistance(
-    //     {
-    //       latitude: memoryContext.prevLocation.latitude,
-    //       longitude: memoryContext.prevLocation.longitude,
-    //     },
-    //     { latitude: placeLat, longitude: placeLng },
-    //   ),
-    // )
 
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
     console.log('prevLocation', memoryContext.prevLocation)
@@ -86,7 +76,7 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     borderRadius: 50,
-    // opacity: 0.7,
+    // opacity: 0.9,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',

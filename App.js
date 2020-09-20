@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { StatusBar } from 'expo-status-bar'
-import AsyncStorage from '@react-native-community/async-storage'
+import React, { useEffect, useState } from "react"
+import { StatusBar } from "expo-status-bar"
+import AsyncStorage from "@react-native-community/async-storage"
 
-import { NavigationContainer } from '@react-navigation/native'
-import AppNavigator from './app/navigation/AppNavigator'
-import AuthNavigator from './app/navigation/AuthNavigator'
-import TripShowContext from './app/context/TripShowContext'
-import UserContext from './app/context/userContext'
+import { NavigationContainer } from "@react-navigation/native"
+import AppNavigator from "./app/navigation/AppNavigator"
+import AuthNavigator from "./app/navigation/AuthNavigator"
+import TripShowContext from "./app/context/TripShowContext"
+import UserContext from "./app/context/userContext"
 
 export default function App() {
   const [user, setUser] = useState({
-    username: '',
-    userId: '',
+    username: "",
+    userId: "",
   })
-  const [showTrip, setShowTrip] = useState('')
+  const [showTrip, setShowTrip] = useState("")
 
   const checkForUser = async () => {
     try {
-      const localUser = await AsyncStorage.getItem('username')
-      const localId = await AsyncStorage.getItem('userId')
+      const localUser = await AsyncStorage.getItem("username")
+      const localId = await AsyncStorage.getItem("userId")
 
       if (localUser)
         setUser({
@@ -36,10 +36,10 @@ export default function App() {
 
   const logout = async () => {
     try {
-      setUser({ username: '', userId: '' })
-      await AsyncStorage.setItem('username', '')
-      await AsyncStorage.setItem('userId', '')
-      await AsyncStorage.setItem('tripActive', 'false')
+      setUser({ username: "", userId: "" })
+      await AsyncStorage.setItem("username", "")
+      await AsyncStorage.setItem("userId", "")
+      await AsyncStorage.setItem("tripActive", "false")
     } catch (error) {
       console.log(error)
     }

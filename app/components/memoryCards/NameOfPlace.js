@@ -8,7 +8,7 @@ import AppHeader from "../AppHeader"
 import ListItemSeparator from "../lists/ListItemSeparator"
 
 const apiUrl =
-  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=350"
+  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=1050"
 
 function NameOfPlace({ navigation }) {
   const memoryContext = useContext(MemoryContext)

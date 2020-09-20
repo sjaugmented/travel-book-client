@@ -43,7 +43,7 @@ export default class MemoryModel {
     console.log('memAPI - memory arg:', memoryId)
     try {
       const deletedMemory = await axios.delete(
-        `${local}/memories/${memoryId}`,
+        `${evansLocal}/memories/${memoryId}`,
         {
           // method: 'DELETE',
           // headers: {

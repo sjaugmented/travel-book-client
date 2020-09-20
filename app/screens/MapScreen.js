@@ -331,11 +331,8 @@ const styles = StyleSheet.create({
   menuView: {
     flex: 1,
     marginLeft: 0,
-    marginTop: 50,
-    // margin: -21,
-    backgroundColor: 'blue',
+    marginTop: 250,
     borderRadius: 20,
-    // padding: 35,
     height: '80%',
     shadowColor: '#000',
     shadowOffset: {

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react"
 import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
   View,
-} from 'react-native'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import {} from 'react-native-gesture-handler'
+} from "react-native"
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
+import {} from "react-native-gesture-handler"
 
 const MapInput = () => {
   return (
@@ -16,9 +16,9 @@ const MapInput = () => {
       style={styles.input}
       placeholder="Search"
       minLength={2}
-      keyboardShouldPersistTaps={'never'}
+      keyboardShouldPersistTaps={"never"}
       autoFocus={false}
-      returnKeyType={'search'}
+      returnKeyType={"search"}
       listViewDisplayed="auto"
       fetchDetails={true}
       onPress={(data, details = null) => {
@@ -26,8 +26,8 @@ const MapInput = () => {
         // console.log(data, details)
       }}
       query={{
-        key: 'AIzaSyCngS-Qeu_5DKEwGV67vHybBNSK9XTSitc',
-        language: 'en',
+        key: "AIzaSyCngS-Qeu_5DKEwGV67vHybBNSK9XTSitc",
+        language: "en",
       }}
       nearbyPlacesAPI="GooglePlacesSearch"
       debounce={200}

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, StyleSheet, Button, Modal } from 'react-native'
+import { View, StyleSheet, Button, Modal, Dimensions } from 'react-native'
 import NativeModal from 'react-native-modal'
 import MapView, { Marker } from 'react-native-maps'
 import * as Location from 'expo-location'

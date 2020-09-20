@@ -4,9 +4,9 @@ import MemoryContext from '../../context/memoryContext'
 import HaversineGeolocation from 'haversine-geolocation'
 
 import colors from '../../config/colors'
-import ListItem from '../ListItem'
+import ListItem from '../lists/ListItem'
 import AppHeader from '../AppHeader'
-import ListItemSeparator from '../ListItemSeparator'
+import ListItemSeparator from '../lists/ListItemSeparator'
 
 import ButtonIcon from '../ButtonIcon'
 
@@ -37,6 +37,7 @@ function NameOfPlace({ navigation }) {
     const placeLng = location.location.lng
 
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
+    console.log('prevLocation', memoryContext.prevLocation)
     memoryContext.setCheckInPlace(name)
     navigation.navigate('Transpo')
   }

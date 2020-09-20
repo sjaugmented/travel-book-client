@@ -32,22 +32,19 @@ function NameOfPlace({ navigation }) {
     fetchData()
   }, [])
 
+  // getDistance(
+  //   {
+  //     latitude: memoryContext.prevLocation.latitude,
+  //     longitude: memoryContext.prevLocation.longitude,
+  //   },
+  //   { latitude: placeLat, longitude: placeLng },
+  // )
+
   const handlePress = (name, location) => {
     const placeLat = location.location.lat
     const placeLng = location.location.lng
-    // console.log(
-    //   'distance:',
-    //   getDistance(
-    //     {
-    //       latitude: memoryContext.prevLocation.latitude,
-    //       longitude: memoryContext.prevLocation.longitude,
-    //     },
-    //     { latitude: placeLat, longitude: placeLng },
-    //   ),
-    // )
-
+    // console.log('prevLocation', memoryContext.prevLocation)
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
-    console.log('prevLocation', memoryContext.prevLocation)
     memoryContext.setCheckInPlace(name)
     navigation.navigate('Transpo')
   }

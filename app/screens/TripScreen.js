@@ -40,8 +40,6 @@ function TripScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const [memoryToDelete, setMemoryToDelete] = useState("")
 
-  console.log("TripScreen loaded - memoryToDelete state:", memoryToDelete)
-
   useEffect(() => {
     loadTrip()
     // tripContext.setPickedTrip("");
@@ -182,9 +180,9 @@ function TripScreen({ navigation }) {
   const deleteMemory = async (memoryId) => {
     console.log("deleteMemory with ID:", memoryId)
     try {
-      const deletedMemory = await MemoryModel.delete(memoryId)
+      await MemoryModel.delete(memoryId)
       setModalVisible(false)
-      return deletedMemory
+      loadTrip()
     } catch (error) {
       console.log(error)
     }

@@ -15,7 +15,7 @@ function PhotoSocial({ navigation }) {
 
   //Set photo/social check-in and go to final modal
   const handlePress = () => {
-    navigation.replace('SubmitMemory')
+    navigation.navigate('SubmitMemory')
   }
 
   // async function to get permission to get photos
@@ -90,22 +90,22 @@ function PhotoSocial({ navigation }) {
           size={60}
         />
       </View>
-
-      {/* <AppButton
-        style={styles.moveAlong}
-        title="Nah, I'm good"
-        color={colors.primary}
-        onPress={() => navigation.navigate('SubmitMemory')}
-      /> */}
+      <ButtonIcon
+        style={styles.back}
+        name="chevron-left"
+        size={25}
+        onPress={() => navigation.goBack()}
+      />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   memoryView: {
+    flexGrow: 1,
     flex: 1,
     borderRadius: 50,
-    opacity: 0.7,
+    // opacity: 0.7,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
@@ -147,6 +147,10 @@ const styles = StyleSheet.create({
     margin: 3,
   },
   moveAlong: {},
+  back: {
+    position: 'absolute',
+    bottom: 5,
+  },
 })
 
 export default PhotoSocial

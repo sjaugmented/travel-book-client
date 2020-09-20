@@ -4,7 +4,7 @@ import {
   TransitionSpecs,
   CardStyleInterpolators,
 } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
+
 import TypeOfPlace from '../components/memoryCards/TypeOfPlace'
 import Transpo from '../components/memoryCards/Transpo'
 import PhotoSocial from '../components/memoryCards/PhotoSocial'
@@ -12,57 +12,53 @@ import NameOfPlace from '../components/memoryCards/NameOfPlace'
 import SubmitMemory from '../components/memoryCards/SubmitMemory'
 import NewTrip from '../components/memoryCards/NewTrip'
 import ActiveTripContext from '../context/activeTripContext'
-import { Overlay } from 'react-native-maps'
 
 const Stack = createStackNavigator()
-
+const forFade = ({ current }) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+})
 function MemoryNavigator(props) {
   const { tripActive } = useContext(ActiveTripContext)
 
-  const config = {
-    animation: 'spring',
-    config: {
-      stiffness: 1000,
-      damping: 500,
-      mass: 3,
-      overshootClamping: true,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-    },
-  }
   return (
     <Stack.Navigator
       // mode="modal"
       screenOptions={{
         cardStyle: { backgroundColor: 'transparent' },
+
         headerShown: false,
       }}
     >
-      {!tripActive && <Stack.Screen name="NewTrip" component={NewTrip} />}
-      <Stack.Screen
-        name="TypeOfPlace"
-        options={{
-          transitionSpec: {
-            open: config,
-            close: config,
-          },
-        }}
-        component={TypeOfPlace}
-      />
+      {!tripActive && (
+        <Stack.Screen
+          name="NewTrip"
+          options={{ cardStyleInterpolator: forFade }}
+          component={NewTrip}
+        />
+      )}
+      <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
       <Stack.Screen
         name="NameOfPlace"
-        options={{
-          transitionSpec: {
-            open: config,
-            close: config,
-          },
-        }}
+        options={{ cardStyleInterpolator: forFade }}
         component={NameOfPlace}
       />
-
-      <Stack.Screen name="Transpo" component={Transpo} />
-      <Stack.Screen name="PhotoSocial" component={PhotoSocial} />
-      <Stack.Screen name="SubmitMemory" component={SubmitMemory} />
+      <Stack.Screen
+        name="Transpo"
+        options={{ cardStyleInterpolator: forFade }}
+        component={Transpo}
+      />
+      <Stack.Screen
+        name="PhotoSocial"
+        options={{ cardStyleInterpolator: forFade }}
+        component={PhotoSocial}
+      />
+      <Stack.Screen
+        name="SubmitMemory"
+        options={{ cardStyleInterpolator: forFade }}
+        component={SubmitMemory}
+      />
     </Stack.Navigator>
   )
 }

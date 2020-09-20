@@ -87,7 +87,6 @@ function MapScreen({ navigation }) {
     setCheckInPlace('')
     setCheckInTranspo('')
     setCheckInPhoto('')
-    refreshMap(100)
   }
 
   const refreshMap = (delay) => {
@@ -127,18 +126,6 @@ function MapScreen({ navigation }) {
       console.log(error)
     }
   }
-
-  // useEffect(() => {
-  //   async function loadMemories() {
-  //     const { memories } = await MemoryModel.all()
-  //     setAllMemories(memories)
-  //   }
-  //   if (allMemories) {
-  //     loadMemories()
-  //   } else {
-  //     console.log('something')
-  //   }
-  // }, [allMemories])
 
   const loadMemories = async () => {
     try {
@@ -222,7 +209,10 @@ function MapScreen({ navigation }) {
         // swipeDirection="down"
         // backdropColor="clear"
         // backdropOpacity={0}
-        onModalHide={() => getLocation()}
+        onModalHide={() => {
+          getLocation()
+          refreshMap(100)
+        }}
       >
         <View style={styles.menuView}>
           <ButtonIcon
@@ -257,7 +247,7 @@ function MapScreen({ navigation }) {
         hasBackdrop={true}
         isVisible={modalVisible}
         // avoidKeyboard={true}
-        // animationType="slide"
+        animationType="slide"
         // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"

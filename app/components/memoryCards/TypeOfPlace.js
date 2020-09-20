@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import colors from '../../config/colors'
 import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
@@ -13,7 +13,7 @@ function TypeOfPlace({ navigation }) {
   //Set typeofplace check-in and go to next modal
   const handlePress = (string) => {
     memoryContext.setCheckInType(string)
-    navigation.replace('NameOfPlace')
+    navigation.navigate('NameOfPlace')
   }
 
   // const forFade = ({ current }) => ({
@@ -58,9 +58,7 @@ function TypeOfPlace({ navigation }) {
 const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
-
     backgroundColor: colors.light,
-    opacity: 0.7,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,

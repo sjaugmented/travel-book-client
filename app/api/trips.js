@@ -7,7 +7,7 @@ const evansLocal = "http://192.168.1.8:4000/api/v1"
 export default class TripModel {
   static all = async () => {
     try {
-      const response = await fetch(`${sethMacbook}/trips`)
+      const response = await fetch(`${local}/trips`)
       const trips = await response.json()
       return trips
     } catch (error) {
@@ -18,7 +18,7 @@ export default class TripModel {
   static create = async (data) => {
     console.log("tripData:", data)
     try {
-      const newTrip = await axios.post(`${sethMacbook}/trips/create`, {
+      const newTrip = await axios.post(`${local}/trips/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,9 +34,18 @@ export default class TripModel {
 
   static show = async (name) => {
     try {
-      const response = await fetch(`${sethMacbook}/trips/${name}`)
+      const response = await fetch(`${local}/trips/${name}`)
       const trip = await response.json()
       return trip
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  static delete = async (tripId) => {
+    try {
+      const deletedTrip = await axios.delete(`${local}/trips/${tripId}`)
+      return deletedTrip
     } catch (error) {
       console.log(error)
     }

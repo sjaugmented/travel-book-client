@@ -6,7 +6,7 @@ const evansLocal = "http://192.168.1.8:4000/api/v1"
 export default class MemoryModel {
   static all = async () => {
     try {
-      const response = await fetch(`${sethMacbook}/memories`)
+      const response = await fetch(`${local}/memories`)
       const memories = await response.json()
       return memories
     } catch (error) {
@@ -16,7 +16,7 @@ export default class MemoryModel {
 
   static create = async (data) => {
     try {
-      const newMemory = await axios.post(`${sethMacbook}/memories/create`, {
+      const newMemory = await axios.post(`${local}/memories/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default class MemoryModel {
   }
   static show = async (memory) => {
     try {
-      const foundMemory = await axios.get(`${sethMacbook}/memories/${memory._id}`)
+      const foundMemory = await axios.get(`${local}/memories/${memory._id}`)
       return foundMemory
     } catch (error) {
       console.log(error)
@@ -41,7 +41,8 @@ export default class MemoryModel {
     console.log("memAPI - memory arg:", memoryId)
     try {
       const deletedMemory = await axios.delete(
-        `${local}/memories/${memoryId}`, {
+        `${local}/memories/${memoryId}`,
+        {
           // method: 'DELETE',
           // headers: {
           //     'Content-Type': 'application/json'

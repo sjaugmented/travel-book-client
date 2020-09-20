@@ -188,8 +188,9 @@ function TripScreen({ navigation }) {
     }
   }
 
-  const deleteTrip = () => {
+  const deleteTrip = async () => {
     console.log("deleting trip", displayTrip._id)
+    await TripModel.delete(displayTrip._id)
     navigation.goBack()
   }
 

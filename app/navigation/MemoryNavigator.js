@@ -11,6 +11,7 @@ import PhotoSocial from '../components/memoryCards/PhotoSocial'
 import NameOfPlace from '../components/memoryCards/NameOfPlace'
 import SubmitMemory from '../components/memoryCards/SubmitMemory'
 import NewTrip from '../components/memoryCards/NewTrip'
+import Choice from '../components/memoryCards/Choice'
 import ActiveTripContext from '../context/activeTripContext'
 
 const Stack = createStackNavigator()
@@ -38,7 +39,12 @@ function MemoryNavigator(props) {
           component={NewTrip}
         />
       )}
-      <Stack.Screen name="TypeOfPlace" component={TypeOfPlace} />
+      <Stack.Screen name="Choice" component={Choice} />
+      <Stack.Screen
+        name="TypeOfPlace"
+        options={{ cardStyleInterpolator: forFade }}
+        component={TypeOfPlace}
+      />
       <Stack.Screen
         name="NameOfPlace"
         options={{ cardStyleInterpolator: forFade }}

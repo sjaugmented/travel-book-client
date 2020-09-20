@@ -37,7 +37,7 @@ function WelcomeScreen({ navigation }) {
           await AsyncStorage.setItem('username', foundUser.name)
           await AsyncStorage.setItem('userId', foundUser.googleId)
           setUser({ username: foundUser.name, userId: foundUser.googleId })
-          navigation.navigation('Map')
+          navigation.navigate('Map')
         } else {
           console.log('no user found in db')
           const newUser = await UserModel.create(result.user)

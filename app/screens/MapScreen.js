@@ -262,6 +262,7 @@ function MapScreen({ navigation }) {
             <MemoryContext.Provider
               style={styles.activeTrip}
               value={{
+                setModalVisible: setModalVisible,
                 onPress: addMemory,
                 setCheckInPlace: setCheckInPlace,
                 setCheckInType: setCheckInType,

@@ -30,7 +30,7 @@ function NewTrip({ navigation }) {
       storeTripActive(true)
 
       //setModalVisible(false);
-      navigation.navigate('TypeOfPlace')
+      navigation.navigate('Choice')
     } catch (error) {
       console.log(error)
     }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     borderRadius: 50,
     marginTop: 60,
-    marginBottom: 250,
+    marginBottom: 190,
   },
   header: {
     fontSize: 30,

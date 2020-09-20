@@ -39,7 +39,7 @@ function MemoryNavigator(props) {
           component={NewTrip}
         />
       )}
-      <Stack.Screen name="Choice" component={Choice} />
+      {/* {!tripActive && <Stack.Screen name="Choice" component={Choice} />} */}
       <Stack.Screen
         name="TypeOfPlace"
         options={{ cardStyleInterpolator: forFade }}

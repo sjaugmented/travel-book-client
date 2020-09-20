@@ -34,7 +34,7 @@ function MapScreen({ navigation }) {
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
 
-  const [tripActive, setTripActive] = useState()
+  const [tripActive, setTripActive] = useState('')
 
   //Memory and Trip Hooks
   const [allMemories, setAllMemories] = useState('')
@@ -168,37 +168,37 @@ function MapScreen({ navigation }) {
                 coordinate={marker.location}
               />
             ))}
-          {!tripActive ? (
-            <ButtonIcon
-              style={styles.addButton}
-              name="airplane"
-              size={100}
-              backgroundColor={colors.primary}
-              iconColor={colors.light}
-              onPress={() => setModalVisible(true)}
-              activeOpacity={0.7}
-            />
-          ) : (
-            <ButtonIcon
-              style={styles.addButton}
-              name="plus"
-              size={100}
-              backgroundColor={colors.confirm}
-              iconColor={colors.light}
-              onPress={() => setModalVisible(true)}
-              activeOpacity={0.7}
-            />
-          )}
-          <ButtonIcon
-            style={styles.menuButton}
-            name={'xbox-controller-menu'}
-            size={65}
-            backgroundColor="transparent"
-            iconColor={colors.secondary}
-            onPress={() => setMenuVisible(true)}
-          />
         </MapView>
       )}
+      {!tripActive ? (
+        <ButtonIcon
+          style={styles.addButton}
+          name="airplane"
+          size={100}
+          backgroundColor={colors.primary}
+          iconColor={colors.light}
+          onPress={() => setModalVisible(true)}
+          activeOpacity={0.7}
+        />
+      ) : (
+        <ButtonIcon
+          style={styles.addButton}
+          name="plus"
+          size={100}
+          backgroundColor={colors.confirm}
+          iconColor={colors.light}
+          onPress={() => setModalVisible(true)}
+          activeOpacity={0.7}
+        />
+      )}
+      <ButtonIcon
+        style={styles.menuButton}
+        name={'xbox-controller-menu'}
+        size={65}
+        backgroundColor="transparent"
+        iconColor={colors.secondary}
+        onPress={() => setMenuVisible(true)}
+      />
       {/* MENU MODAL */}
       <NativeModal
         visible={menuVisible}
@@ -293,10 +293,15 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     bottom: 200,
+    left: '50%',
+    marginLeft: -50,
   },
   menuButton: {
     position: 'absolute',
+    // backgroundColor: 'red',
     bottom: 75,
+    left: '50%',
+    marginLeft: -32.5,
   },
   confirmation: {
     fontSize: 30,
@@ -316,13 +321,6 @@ const styles = StyleSheet.create({
   },
   memoryView: {
     flex: 1,
-    // marginTop: 250,
-    // marginBottom: 120,
-    // margin: -20,
-    // backgroundColor: colors.light,
-    // backgroundColor: 'blue',
-    // paddingHorizontal: 50,
-    // paddingTop: 200,
     padding: 0,
     borderRadius: 50,
     shadowColor: '#000',

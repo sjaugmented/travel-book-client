@@ -26,11 +26,11 @@ function Choice({ navigation }) {
       <View style={styles.iconContainer}>
         <AppButton
           title="Sure"
-          color="confirm"
+          color={colors.confirm}
           onPress={() => handlePress('yes')}
         />
         <AppButton
-          color="dark"
+          color={colors.dark}
           title="Later"
           onPress={() => handlePress('later')}
         />

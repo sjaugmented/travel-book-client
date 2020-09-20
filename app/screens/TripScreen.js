@@ -56,8 +56,8 @@ function TripScreen({ navigation }) {
           <TouchableHighlight>
             <View>
               <Text key={key}>{item.locationName}</Text>
+              {/* <AppText key={key}>{item.locationName}</AppText>; */}
             </View>
-            {/* <AppText key={key}>{item.locationName}</AppText>; */}
           </TouchableHighlight>
         </Swipeable>
       )

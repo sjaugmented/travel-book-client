@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
   },
   navbar: {
     position: "absolute",
-    right: 30,
-    top: 225,
+    right: 0,
+    top: 175,
     alignItems: "center",
     // backgroundColor: colors.background,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 150,
     left: 30,
-    width: 225,
+    width: "70%",
     // backgroundColor: colors.background,
   },
   scrollView: {

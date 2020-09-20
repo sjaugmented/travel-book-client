@@ -1,28 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, FlatList, Button } from 'react-native'
-import MemoryContext from '../../context/memoryContext'
-import { getDistance } from 'geolib'
+import React, { useContext, useEffect, useState } from "react"
+import { StyleSheet, View, FlatList, Button } from "react-native"
+import MemoryContext from "../../context/memoryContext"
+import { getDistance } from "geolib"
 
-import colors from '../../config/colors'
-import ListItem from '../ListItem'
-import AppHeader from '../AppHeader'
-import ListItemSeparator from '../ListItemSeparator'
+import colors from "../../config/colors"
+import ListItem from "../lists/ListItem"
+import AppHeader from "../AppHeader"
+import ListItemSeparator from "../lists/ListItemSeparator"
 
-import ButtonIcon from '../ButtonIcon'
+import ButtonIcon from "../ButtonIcon"
 
 const apiUrl =
-  'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=350'
+  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=1050"
 
 function NameOfPlace({ navigation }) {
   const memoryContext = useContext(MemoryContext)
   const checkInType = memoryContext.checkInType
   const latitude = memoryContext.location.latitude
   const longitude = memoryContext.location.longitude
-  const [results, setResults] = useState('')
+  const [results, setResults] = useState("")
 
   const fetchData = async () => {
     let response = await fetch(
-      `${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`,
+      `${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`
     )
     let list = await response.json()
     setResults(list.results)
@@ -47,9 +47,9 @@ function NameOfPlace({ navigation }) {
     // )
 
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
-    console.log('prevLocation', memoryContext.prevLocation)
+    console.log("prevLocation", memoryContext.prevLocation)
     memoryContext.setCheckInPlace(name)
-    navigation.navigate('Transpo')
+    navigation.navigate("Transpo")
   }
 
   return (
@@ -61,7 +61,7 @@ function NameOfPlace({ navigation }) {
       <AppHeader style={styles.header}>Choose Your Location</AppHeader>
       <FlatList
         style={styles.listContainer}
-        contentContainerStyle={{ justifyContent: 'center' }}
+        contentContainerStyle={{ justifyContent: "center" }}
         data={results}
         keyExtractor={(place) => place.place_id.toString()}
         renderItem={({ item }) => (
@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     // opacity: 0.7,
     backgroundColor: colors.light,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 60,
   },
   header: {
@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     marginTop: 10,
-    flexWrap: 'wrap',
-    fontWeight: 'bold',
+    flexWrap: "wrap",
+    fontWeight: "bold",
     marginBottom: 10,
   },
   back: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 5,
   },
 })

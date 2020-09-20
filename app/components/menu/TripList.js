@@ -1,7 +1,7 @@
-import React from 'react'
-import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
-import AppText from '../AppText'
-import ListItem from '../ListItem'
+import React from "react"
+import { View, StyleSheet, FlatList, ScrollView } from "react-native"
+import AppText from "../AppText"
+import ListItem from "../lists/ListItem"
 
 function TripList({ data, handlePress }) {
   return (

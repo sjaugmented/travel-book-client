@@ -26,10 +26,8 @@ function NewTrip({ navigation }) {
         userId,
       }
       await TripModel.create(data)
-
       storeTripActive(true)
-
-      //setModalVisible(false);
+      // navigation.navigate('Choice')
       navigation.navigate('TypeOfPlace')
     } catch (error) {
       console.log(error)
@@ -58,12 +56,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
-    opacity: 0.7,
+    // opacity: 0.7,
     alignItems: 'center',
     // justifyContent: 'center',
     borderRadius: 50,
     marginTop: 60,
-    marginBottom: 250,
+    marginBottom: 10,
   },
   header: {
     fontSize: 30,

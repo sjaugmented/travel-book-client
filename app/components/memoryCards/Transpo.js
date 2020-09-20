@@ -57,6 +57,12 @@ function Transpo({ navigation }) {
           size={60}
         />
       </View>
+      <ButtonIcon
+        style={styles.back}
+        name="chevron-left"
+        size={25}
+        onPress={() => navigation.goBack()}
+      />
     </View>
   )
 }
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     borderRadius: 50,
-    opacity: 0.7,
+
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
@@ -74,17 +80,21 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     marginBottom: 0,
-    // marginTop: 20,
   },
   iconContainer: {
     justifyContent: 'center',
     flexDirection: 'row',
     marginTop: 20,
     flexWrap: 'wrap',
+    // marginBottom: 50,
   },
   icon: {
     margin: 10,
     backgroundColor: colors.primary,
+  },
+  back: {
+    position: 'absolute',
+    bottom: 5,
   },
 })
 

@@ -28,10 +28,18 @@ export default class MemoryModel {
       console.log(error)
     }
   }
+  static show = async (memory) => {
+    try {
+      const foundMemory = await axios.get(`${local}/memories/${memory._id}`)
+      return foundMemory
+    } catch (error) {
+      console.log(error)
+    }
+  }
   static delete = async (memory) => {
     console.log(memory)
     try {
-      const deletedMemory = await axios.delete(`${local}/posts/${memory}`, {
+      const deletedMemory = await axios.delete(`${local}/posts/${memory._id}`, {
         // method: 'DELETE',
         // headers: {
         //     'Content-Type': 'application/json'

@@ -166,9 +166,11 @@ function TripScreen({ navigation }) {
   const initialDelete = (memory) => {
     setModalVisible(true)
     setMemoryToDelete(memory)
+    console.log(`stored ${memory} to state`)
   }
 
   const deleteMemory = async (memory) => {
+    console.log("memory:", memoryToDelete)
     try {
       const deletedMemory = await MemoryModel.delete(memory)
       return deletedMemory
@@ -176,6 +178,13 @@ function TripScreen({ navigation }) {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  let memObj = [{ locationName: "Loading...", _id: 1 }]
+
+  if (displayTrip) {
+    console.log(displayTrip.memories)
+    memObj = displayTrip.memories
   }
 
   return (
@@ -273,15 +282,15 @@ function TripScreen({ navigation }) {
             <AppText style={{ fontWeight: "bold" }}>MEMORIES</AppText>
             <View style={styles.memoryList}>
               <FlatList
-                data={displayTrip.memories}
+                data={memObj}
                 keyExtractor={(memory) => memory._id}
-                renderItem={({ memory }) => (
+                renderItem={({ item }) => (
                   <ListItem
-                    title={memory.locationName}
-                    onPress={() => console.log("Memory selected", memory)}
+                    title={item.locationName}
+                    onPress={() => console.log("Memory selected", item)}
                     renderRightActions={() => (
                       <ListItemDeleteAction
-                        onPress={() => initialDelete(memory)}
+                        onPress={() => initialDelete(item)}
                       />
                     )}
                   />

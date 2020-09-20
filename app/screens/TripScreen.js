@@ -52,7 +52,7 @@ function TripScreen({ navigation }) {
   if (displayTrip) {
     memoryList = displayTrip.memories.map((item, key) => {
       return (
-        <Swipeable renderRightAction={() => console.log("delete!")}>
+        <Swipeable key={key} renderRightAction={() => console.log("delete!")}>
           <TouchableHighlight>
             <View>
               <Text key={key}>{item.locationName}</Text>

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.light,
     padding: 30,
-    borderRadius: 20,
+    // borderRadius: 20,
   },
   navbar: {
     position: "absolute",

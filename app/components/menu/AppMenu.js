@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native"
 import colors from "../../config/colors"
 import ButtonIcon from "../ButtonIcon"
@@ -86,24 +87,32 @@ function AppMenu({ navigation }) {
       <View style={styles.trophies}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>
       </View>
-      <View style={styles.trips}>
+      <View style={styles.tripsContainer}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-        <TripList style={styles.trips} data={trips} handlePress={handlePress} />
+        <TripList
+          style={styles.tripList}
+          data={trips}
+          handlePress={handlePress}
+        />
       </View>
     </View>
   )
 }
 
+const width = Dimensions.get("screen").width
+console.log(width)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
-    padding: 30,
+    padding: width * 0.05,
+    // padding: 30,
     // borderRadius: 20,
   },
   navbar: {
     position: "absolute",
-    right: 0,
+    right: width * 0.05,
     top: 175,
     alignItems: "center",
     // backgroundColor: colors.background,
@@ -116,12 +125,15 @@ const styles = StyleSheet.create({
   trophies: {
     // backgroundColor: colors.background
   },
-  trips: {
+  tripsContainer: {
     position: "absolute",
     top: 150,
-    left: 30,
+    left: width * 0.05,
     width: "70%",
     // backgroundColor: colors.background,
+  },
+  tripList: {
+    //
   },
   scrollView: {
     //

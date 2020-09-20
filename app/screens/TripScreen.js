@@ -38,7 +38,9 @@ function TripScreen({ navigation }) {
   const showTrip = useContext(TripShowContext)
   const [displayTrip, setDisplay] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
-  const [memoryToDelete, setMemoryToDelete] = useState(null)
+  const [memoryToDelete, setMemoryToDelete] = useState("")
+
+  console.log("TripScreen loaded - memoryToDelete state:", memoryToDelete)
 
   useEffect(() => {
     loadTrip()
@@ -54,28 +56,28 @@ function TripScreen({ navigation }) {
     }
   }
 
-  let memoryList
+  // let memoryList
 
-  ////MEMORIES////
-  if (displayTrip) {
-    console.log(displayTrip.memories)
-    memoryList = displayTrip.memories.map((item, key) => {
-      return (
-        <Swipeable key={key} renderRightAction={() => console.log("delete!")}>
-          <TouchableHighlight>
-            <View>
-              <Text key={key}>{item.locationName}</Text>
-              {/* <AppText key={key}>{item.locationName}</AppText>; */}
-            </View>
-          </TouchableHighlight>
-        </Swipeable>
-      )
-    })
-  } else {
-    memoryList = <AppText>Loading...</AppText>
-  }
+  // ////MEMORIES////
+  // if (displayTrip) {
+  //   console.log(displayTrip.memories)
+  //   memoryList = displayTrip.memories.map((item, key) => {
+  //     return (
+  //       <Swipeable key={key} renderRightAction={() => console.log("delete!")}>
+  //         <TouchableHighlight>
+  //           <View>
+  //             <Text key={key}>{item.locationName}</Text>
+  //             {/* <AppText key={key}>{item.locationName}</AppText>; */}
+  //           </View>
+  //         </TouchableHighlight>
+  //       </Swipeable>
+  //     )
+  //   })
+  // } else {
+  //   memoryList = <AppText>Loading...</AppText>
+  // }
 
-  const data0 = [
+  const pieChart1 = [
     {
       name: "Eating",
       mileage: 10,
@@ -106,7 +108,7 @@ function TripScreen({ navigation }) {
     },
   ]
 
-  const data = [
+  const pieChart2 = [
     {
       name: "Air",
       mileage: 6500,
@@ -152,7 +154,7 @@ function TripScreen({ navigation }) {
       7
     )
 
-  const pieData = data3
+  const overviewData = data3
     .filter((value) => value > 0)
     .map((value, index) => ({
       value,
@@ -163,28 +165,29 @@ function TripScreen({ navigation }) {
       key: `pie-${index}`,
     }))
 
-  const initialDelete = (memory) => {
-    setModalVisible(true)
-    setMemoryToDelete(memory)
-    console.log(`stored ${memory} to state`)
-  }
-
-  const deleteMemory = async (memory) => {
-    console.log("memory:", memoryToDelete)
-    try {
-      const deletedMemory = await MemoryModel.delete(memory)
-      return deletedMemory
-      setModalVisible(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  ////MEMORY STORAGE AND FUNCTION////
   let memObj = [{ locationName: "Loading...", _id: 1 }]
 
   if (displayTrip) {
-    console.log(displayTrip.memories)
     memObj = displayTrip.memories
+  }
+
+  const setDeleteState = (memoryId) => {
+    console.log("storing ID...", memoryId)
+    setModalVisible(true)
+    setMemoryToDelete(memoryId)
+    console.log(`stored ${memoryId} to state`)
+  }
+
+  const deleteMemory = async (memoryId) => {
+    console.log("deleteMemory with ID:", memoryId)
+    try {
+      const deletedMemory = await MemoryModel.delete(memoryId)
+      setModalVisible(false)
+      return deletedMemory
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -208,7 +211,7 @@ function TripScreen({ navigation }) {
 
           <View style={styles.overview}>
             <AppText>This is a bullshit chart.</AppText>
-            <PieChart2 style={styles.mainChart} data={pieData} />
+            <PieChart2 style={styles.mainChart} data={overviewData} />
           </View>
 
           <ScrollView
@@ -227,7 +230,7 @@ function TripScreen({ navigation }) {
             <View style={styles.charts}>
               <AppText>Here's another bullshit chart.</AppText>
               <PieChart
-                data={data0}
+                data={pieChart1}
                 width={Dimensions.get("screen").width}
                 height={220}
                 chartConfig={{
@@ -253,7 +256,7 @@ function TripScreen({ navigation }) {
             <View style={styles.charts2}>
               <AppText>And one more. Also bullshit.</AppText>
               <PieChart
-                data={data}
+                data={pieChart2}
                 width={Dimensions.get("screen").width}
                 height={220}
                 chartConfig={{
@@ -290,7 +293,7 @@ function TripScreen({ navigation }) {
                     onPress={() => console.log("Memory selected", item)}
                     renderRightActions={() => (
                       <ListItemDeleteAction
-                        onPress={() => initialDelete(item)}
+                        onPress={() => setDeleteState(item._id)}
                       />
                     )}
                   />

@@ -17,10 +17,10 @@ import App from '../../../App'
 function AppMenu({ navigation }) {
   const { username, userId, logout } = useContext(UserContext)
   const tripActive = useContext(ActiveTripContext)
-  const tripContext = useContext(TripContext)
+  const { tripName } = useContext(TripContext)
   const { setMenuVisible } = useContext(ModalContext)
   const [trips, setTrips] = useState([])
-  const showTrip = useContext(TripShowContext)
+  const { showTrip, setShowTrip } = useContext(TripShowContext)
 
   useEffect(() => {
     loadTrips()
@@ -39,7 +39,7 @@ function AppMenu({ navigation }) {
   }
 
   const handlePress = (trip) => {
-    showTrip.setShowTrip(trip)
+    setShowTrip(trip)
     setMenuVisible(false)
     navigation.navigate('Trip')
   }
@@ -59,11 +59,14 @@ function AppMenu({ navigation }) {
         title="Logout"
         onPress={logout}
       />
-      <AppButton
-        color={colors.primary}
-        title="Current Trip"
-        style={styles.current}
-      />
+      {tripActive && (
+        <AppButton
+          color={colors.primary}
+          title={tripName}
+          style={styles.current}
+          onPress={() => handlePress(tripName)}
+        />
+      )}
       <View style={styles.navbar}>
         <ButtonIcon
           name="account"

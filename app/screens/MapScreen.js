@@ -221,7 +221,11 @@ function MapScreen({ navigation }) {
       >
         <View style={styles.menuView}>
           <TripContext.Provider
-            value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
+            value={{
+              setPickedTrip: setPickedTrip,
+              tripName: tripName,
+              pickedTrip: pickedTrip,
+            }}
           >
             <ActiveTripContext.Provider
               value={{

@@ -4,6 +4,7 @@ import NativeModal from "react-native-modal"
 import MapView, { Marker } from "react-native-maps"
 import * as Location from "expo-location"
 import AsyncStorage from "@react-native-community/async-storage"
+import { getDistance } from "geolib"
 
 //Styles
 import colors from "../config/colors"
@@ -25,6 +26,7 @@ import ModalContext from "../context/modalContext"
 import UserContext from "../context/userContext"
 
 import MapInput from "../components/MapInput"
+
 function MapScreen({ navigation }) {
   //useContext
   const tripShowContext = useContext(TripShowContext)
@@ -33,7 +35,7 @@ function MapScreen({ navigation }) {
   const [menuVisible, setMenuVisible] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
 
-  const [tripActive, setTripActive] = useState()
+  const [tripActive, setTripActive] = useState("")
 
   //Memory and Trip Hooks
   const [allMemories, setAllMemories] = useState("")
@@ -45,6 +47,7 @@ function MapScreen({ navigation }) {
   const [checkInTranspo, setCheckInTranspo] = useState("")
   const [checkInPhoto, setCheckInPhoto] = useState("")
   const [memoryLocation, setMemoryLocation] = useState("")
+  const [prevLocation, setPrevLocation] = useState("")
 
   //Hook for show trip window
   const [pickedTrip, setPickedTrip] = useState("")
@@ -88,6 +91,13 @@ function MapScreen({ navigation }) {
     setCheckInPhoto("")
   }
 
+  const refreshMap = (delay) => {
+    setTimeout(() => {
+      getLocation()
+      loadMemories()
+    }, delay)
+  }
+
   //Adding memory to db
   const saveMemory = async (memory) => {
     try {
@@ -97,6 +107,7 @@ function MapScreen({ navigation }) {
       }
       const result = await MemoryModel.create(data)
       setMemory(null)
+      setPrevLocation(memoryLocation)
     } catch (error) {
       console.log(error)
     }
@@ -118,18 +129,6 @@ function MapScreen({ navigation }) {
       console.log(error)
     }
   }
-
-  // useEffect(() => {
-  //   async function loadMemories() {
-  //     const { memories } = await MemoryModel.all()
-  //     setAllMemories(memories)
-  //   }
-  //   if (allMemories) {
-  //     loadMemories()
-  //   } else {
-  //     console.log('something')
-  //   }
-  // }, [allMemories])
 
   const loadMemories = async () => {
     try {
@@ -165,39 +164,44 @@ function MapScreen({ navigation }) {
         >
           {allMemories !== "" &&
             allMemories.map((marker, index) => (
-              <MapView.Marker key={index} coordinate={marker.location} />
+              <Marker
+                pinColor="blue"
+                key={index}
+                title={marker.locationName}
+                coordinate={marker.location}
+              />
             ))}
-          {!tripActive ? (
-            <ButtonIcon
-              style={styles.addButton}
-              name="airplane"
-              size={100}
-              backgroundColor={colors.primary}
-              iconColor={colors.light}
-              onPress={() => setModalVisible(true)}
-              activeOpacity={0.7}
-            />
-          ) : (
-            <ButtonIcon
-              style={styles.addButton}
-              name="plus"
-              size={100}
-              backgroundColor={colors.confirm}
-              iconColor={colors.light}
-              onPress={() => setModalVisible(true)}
-              activeOpacity={0.7}
-            />
-          )}
-          <ButtonIcon
-            style={styles.menuButton}
-            name={"xbox-controller-menu"}
-            size={65}
-            backgroundColor={colors.light}
-            iconColor={colors.secondary}
-            onPress={() => setMenuVisible(true)}
-          />
         </MapView>
       )}
+      {!tripActive ? (
+        <ButtonIcon
+          style={styles.addButton}
+          name="airplane"
+          size={100}
+          backgroundColor={colors.primary}
+          iconColor={colors.light}
+          onPress={() => setModalVisible(true)}
+          activeOpacity={0.7}
+        />
+      ) : (
+        <ButtonIcon
+          style={styles.addButton}
+          name="plus"
+          size={100}
+          backgroundColor={colors.confirm}
+          iconColor={colors.light}
+          onPress={() => setModalVisible(true)}
+          activeOpacity={0.7}
+        />
+      )}
+      <ButtonIcon
+        style={styles.menuButton}
+        name={"xbox-controller-menu"}
+        size={65}
+        backgroundColor="transparent"
+        iconColor={colors.secondary}
+        onPress={() => setMenuVisible(true)}
+      />
       {/* MENU MODAL */}
       <NativeModal
         visible={menuVisible}
@@ -208,7 +212,10 @@ function MapScreen({ navigation }) {
         // swipeDirection="down"
         // backdropColor="clear"
         // backdropOpacity={0}
-        onModalHide={() => getLocation()}
+        onModalHide={() => {
+          getLocation()
+          refreshMap(100)
+        }}
       >
         <View style={styles.menuView}>
           <ButtonIcon
@@ -243,7 +250,7 @@ function MapScreen({ navigation }) {
         hasBackdrop={true}
         isVisible={modalVisible}
         // avoidKeyboard={true}
-        // animationType="slide"
+        animationType="slide"
         // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
@@ -258,6 +265,7 @@ function MapScreen({ navigation }) {
             <MemoryContext.Provider
               style={styles.activeTrip}
               value={{
+                setModalVisible: setModalVisible,
                 onPress: addMemory,
                 setCheckInPlace: setCheckInPlace,
                 setCheckInType: setCheckInType,
@@ -268,6 +276,7 @@ function MapScreen({ navigation }) {
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,
+                prevLocation: prevLocation,
                 checkInType: checkInType,
                 userId: userId,
               }}
@@ -287,11 +296,16 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: "absolute",
-    bottom: 200,
+    bottom: 175,
+    left: "50%",
+    marginLeft: -50,
   },
   menuButton: {
     position: "absolute",
+    // backgroundColor: 'red',
     bottom: 75,
+    left: "50%",
+    marginLeft: -32.5,
   },
   confirmation: {
     fontSize: 30,
@@ -311,13 +325,6 @@ const styles = StyleSheet.create({
   },
   memoryView: {
     flex: 1,
-    // marginTop: 250,
-    // marginBottom: 120,
-    // margin: -20,
-    // backgroundColor: colors.light,
-    // backgroundColor: 'blue',
-    // paddingHorizontal: 50,
-    // paddingTop: 200,
     padding: 0,
     borderRadius: 50,
     shadowColor: "#000",

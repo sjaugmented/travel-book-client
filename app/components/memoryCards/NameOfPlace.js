@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
-import { StyleSheet, View, FlatList } from "react-native"
+import { StyleSheet, View, FlatList, Button } from "react-native"
 import MemoryContext from "../../context/memoryContext"
+import { getDistance } from "geolib"
 
 import colors from "../../config/colors"
 import ListItem from "../lists/ListItem"
 import AppHeader from "../AppHeader"
 import ListItemSeparator from "../lists/ListItemSeparator"
+
+import ButtonIcon from "../ButtonIcon"
 
 const apiUrl =
   "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=1050"
@@ -22,7 +25,6 @@ function NameOfPlace({ navigation }) {
       `${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`
     )
     let list = await response.json()
-
     setResults(list.results)
   }
 
@@ -31,16 +33,31 @@ function NameOfPlace({ navigation }) {
   }, [])
 
   const handlePress = (name, location) => {
-    console.log("place name", name)
     const placeLat = location.location.lat
     const placeLng = location.location.lng
+    // console.log(
+    //   'distance:',
+    //   getDistance(
+    //     {
+    //       latitude: memoryContext.prevLocation.latitude,
+    //       longitude: memoryContext.prevLocation.longitude,
+    //     },
+    //     { latitude: placeLat, longitude: placeLng },
+    //   ),
+    // )
+
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
+    console.log("prevLocation", memoryContext.prevLocation)
     memoryContext.setCheckInPlace(name)
     navigation.navigate("Transpo")
   }
 
   return (
     <View style={styles.memoryView}>
+      {/* <AppButton
+        onPress={() => navigation.replace('TypeOfPlace')}
+        title="Go Back"
+      /> */}
       <AppHeader style={styles.header}>Choose Your Location</AppHeader>
       <FlatList
         style={styles.listContainer}
@@ -55,6 +72,12 @@ function NameOfPlace({ navigation }) {
         )}
         ItemSeparatorComponent={ListItemSeparator}
       />
+      <ButtonIcon
+        style={styles.back}
+        name="chevron-left"
+        size={25}
+        onPress={() => navigation.goBack()}
+      />
     </View>
   )
 }
@@ -63,7 +86,7 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     borderRadius: 50,
-    opacity: 0.7,
+    // opacity: 0.7,
     backgroundColor: colors.light,
     alignItems: "center",
     justifyContent: "center",
@@ -78,6 +101,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexWrap: "wrap",
     fontWeight: "bold",
+    marginBottom: 10,
+  },
+  back: {
+    position: "absolute",
+    bottom: 5,
   },
 })
 

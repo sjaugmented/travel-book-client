@@ -4,6 +4,7 @@ import {
   StyleSheet,
   FlatList,
   Text,
+  Button,
   TouchableWithoutFeedback,
 } from 'react-native'
 import colors from '../../config/colors'
@@ -22,10 +23,10 @@ import UserModel from '../../api/user'
 import UserContext from '../../context/userContext'
 
 function AppMenu({ navigation }) {
-  const { userId } = useContext(UserContext)
+  const { username, userId, logout } = useContext(UserContext)
   const tripActive = useContext(ActiveTripContext)
   const tripContext = useContext(TripContext)
-  const setMenuVisible = useContext(ModalContext)
+  const { setMenuVisible } = useContext(ModalContext)
   const [trips, setTrips] = useState([])
   const showTrip = useContext(TripShowContext)
 
@@ -53,6 +54,14 @@ function AppMenu({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <ButtonIcon
+        style={{ alignSelf: 'center' }}
+        name={'chevron-down'}
+        backgroundColor={colors.light}
+        iconColor={colors.primary}
+        onPress={() => setMenuVisible(false)}
+      />
+      <Button title="Logout" onPress={logout} />
       <View style={styles.navbar}>
         <ButtonIcon
           name="account"

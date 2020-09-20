@@ -212,20 +212,13 @@ function MapScreen({ navigation }) {
         // swipeDirection="down"
         // backdropColor="clear"
         // backdropOpacity={0}
+        style={styles.menuModal}
         onModalHide={() => {
           getLocation()
           refreshMap(100)
         }}
       >
         <View style={styles.menuView}>
-          <ButtonIcon
-            style={{ alignSelf: 'center' }}
-            name={'chevron-down'}
-            backgroundColor={colors.light}
-            iconColor={colors.primary}
-            onPress={() => setMenuVisible(false)}
-          />
-          <Button title="Logout" onPress={logout} />
           <TripContext.Provider
             value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
           >
@@ -235,7 +228,7 @@ function MapScreen({ navigation }) {
                 storeTripActive: storeTripActive,
               }}
             >
-              <ModalContext.Provider value={setMenuVisible}>
+              <ModalContext.Provider value={{ setMenuVisible }}>
                 <MenuNavigator
                   tripActive={tripActive}
                   storeTripActive={storeTripActive}
@@ -249,9 +242,7 @@ function MapScreen({ navigation }) {
       <NativeModal
         hasBackdrop={true}
         isVisible={modalVisible}
-        // avoidKeyboard={true}
         animationType="slide"
-        // transparent={true}
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
         backdropOpacity={0}
@@ -291,9 +282,6 @@ function MapScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  activeTrip: {
-    backgroundColor: 'blue',
-  },
   addButton: {
     position: 'absolute',
     bottom: 175,
@@ -302,7 +290,7 @@ const styles = StyleSheet.create({
   },
   menuButton: {
     position: 'absolute',
-    // backgroundColor: 'red',
+
     bottom: 75,
     left: '50%',
     marginLeft: -32.5,
@@ -320,9 +308,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     marginTop: 200,
     marginBottom: 150,
-    // backgroundColor: 'green',
     padding: 0,
   },
+  menuModal: {
+    margin: 0,
+  },
+
   memoryView: {
     flex: 1,
     padding: 0,
@@ -339,11 +330,12 @@ const styles = StyleSheet.create({
   },
   menuView: {
     flex: 1,
-    marginTop: 200,
+    marginLeft: 0,
+    marginTop: 50,
     // margin: -21,
-    backgroundColor: colors.light,
+    backgroundColor: 'blue',
     borderRadius: 20,
-    padding: 35,
+    // padding: 35,
     height: '80%',
     shadowColor: '#000',
     shadowOffset: {

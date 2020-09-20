@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, FlatList, Button } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
-import { getDistance } from 'geolib'
+import HaversineGeolocation from 'haversine-geolocation'
 
 import colors from '../../config/colors'
 import ListItem from '../ListItem'
@@ -32,18 +32,10 @@ function NameOfPlace({ navigation }) {
     fetchData()
   }, [])
 
-  // getDistance(
-  //   {
-  //     latitude: memoryContext.prevLocation.latitude,
-  //     longitude: memoryContext.prevLocation.longitude,
-  //   },
-  //   { latitude: placeLat, longitude: placeLng },
-  // )
-
   const handlePress = (name, location) => {
     const placeLat = location.location.lat
     const placeLng = location.location.lng
-    // console.log('prevLocation', memoryContext.prevLocation)
+
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
     memoryContext.setCheckInPlace(name)
     navigation.navigate('Transpo')
@@ -83,7 +75,7 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     borderRadius: 50,
-    // opacity: 0.7,
+    // opacity: 0.9,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',

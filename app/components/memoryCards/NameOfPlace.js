@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, FlatList, Button } from 'react-native'
 import MemoryContext from '../../context/memoryContext'
+import { getDistance } from 'geolib'
 
 import colors from '../../config/colors'
 import ListItem from '../ListItem'
@@ -34,7 +35,19 @@ function NameOfPlace({ navigation }) {
   const handlePress = (name, location) => {
     const placeLat = location.location.lat
     const placeLng = location.location.lng
+    // console.log(
+    //   'distance:',
+    //   getDistance(
+    //     {
+    //       latitude: memoryContext.prevLocation.latitude,
+    //       longitude: memoryContext.prevLocation.longitude,
+    //     },
+    //     { latitude: placeLat, longitude: placeLng },
+    //   ),
+    // )
+
     memoryContext.setMemoryLocation({ latitude: placeLat, longitude: placeLng })
+    console.log('prevLocation', memoryContext.prevLocation)
     memoryContext.setCheckInPlace(name)
     navigation.navigate('Transpo')
   }

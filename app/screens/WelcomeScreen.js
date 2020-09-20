@@ -51,7 +51,6 @@ function WelcomeScreen({ navigation }) {
     } catch (error) {
       console.log(error)
     }
-    console.log('username', username)
   }
 
   return (

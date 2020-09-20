@@ -4,6 +4,7 @@ import NativeModal from 'react-native-modal'
 import MapView, { Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
 import AsyncStorage from '@react-native-community/async-storage'
+import { getDistance } from 'geolib'
 
 //Styles
 import colors from '../config/colors'
@@ -46,6 +47,7 @@ function MapScreen({ navigation }) {
   const [checkInTranspo, setCheckInTranspo] = useState('')
   const [checkInPhoto, setCheckInPhoto] = useState('')
   const [memoryLocation, setMemoryLocation] = useState('')
+  const [prevLocation, setPrevLocation] = useState('')
 
   //Hook for show trip window
   const [pickedTrip, setPickedTrip] = useState('')
@@ -105,6 +107,7 @@ function MapScreen({ navigation }) {
       }
       const result = await MemoryModel.create(data)
       setMemory(null)
+      setPrevLocation(memoryLocation)
     } catch (error) {
       console.log(error)
     }
@@ -273,6 +276,7 @@ function MapScreen({ navigation }) {
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,
+                prevLocation: prevLocation,
                 checkInType: checkInType,
                 userId: userId,
               }}
@@ -292,7 +296,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    bottom: 200,
+    bottom: 175,
     left: '50%',
     marginLeft: -50,
   },

@@ -12,6 +12,7 @@ import ModalContext from '../../context/modalContext'
 import TripShowContext from '../../context/TripShowContext'
 import UserModel from '../../api/user'
 import UserContext from '../../context/userContext'
+import App from '../../../App'
 
 function AppMenu({ navigation }) {
   const { username, userId, logout } = useContext(UserContext)
@@ -58,6 +59,11 @@ function AppMenu({ navigation }) {
         title="Logout"
         onPress={logout}
       />
+      <AppButton
+        color={colors.primary}
+        title="Current Trip"
+        style={styles.current}
+      />
       <View style={styles.navbar}>
         <ButtonIcon
           name="account"
@@ -77,16 +83,18 @@ function AppMenu({ navigation }) {
           iconColor={colors.secondary}
           style={{ marginBottom: 40 }}
         />
-        {tripActive.tripActive && (
-          <ButtonIcon
-            name="minus-circle"
-            size={75}
-            backgroundColor={colors.light}
-            iconColor={colors.danger}
-            onPress={() => tripActive.storeTripActive(false)}
-            activeOpacity={0.7}
-          />
-        )}
+        {tripActive.tripActive &&
+          ((<AppText style={{ backgroundColor: 'blue' }}>End Trip</AppText>),
+          (
+            <ButtonIcon
+              name="minus-circle"
+              size={75}
+              backgroundColor={colors.light}
+              iconColor={colors.danger}
+              onPress={() => tripActive.storeTripActive(false)}
+              activeOpacity={0.7}
+            />
+          ))}
       </View>
       <View style={styles.trophyContainer}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>
@@ -114,7 +122,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.light,
     padding: width * 0.05,
-    borderRadius: 50,
+    borderTopStartRadius: 50,
+    borderTopRightRadius: 50,
   },
   logout: {
     width: 100,
@@ -122,6 +131,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     left: 20,
+  },
+  current: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    width: 100,
+    height: 50,
   },
   navbar: {
     position: 'absolute',

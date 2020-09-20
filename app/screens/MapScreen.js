@@ -162,15 +162,16 @@ function MapScreen({ navigation }) {
           }}
           showsUserLocation={true}
         >
-          {allMemories !== '' &&
-            allMemories.map((marker, index) => (
-              <Marker
-                pinColor="blue"
-                key={index}
-                title={marker.locationName}
-                coordinate={marker.location}
-              />
-            ))}
+          {allMemories
+            ? allMemories.map((marker, index) => (
+                <Marker
+                  pinColor="blue"
+                  key={index}
+                  title={marker.locationName}
+                  coordinate={marker.location}
+                />
+              ))
+            : console.log('none')}
         </MapView>
       )}
       {!tripActive ? (
@@ -246,7 +247,9 @@ function MapScreen({ navigation }) {
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
         backdropOpacity={0}
-        onModalHide={() => getLocation()}
+        onModalHide={() => {
+          getLocation(), refreshMap(100)
+        }}
         style={styles.memModal}
       >
         <View style={styles.memoryView}>

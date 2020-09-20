@@ -1,6 +1,7 @@
 const local = "http://localhost:4000/api/v1"
 const evansLocal = "http://192.168.1.8:4000/api/v1"
-const sethLocal = "http://10.0.1.72:4000/api/v1"
+const sethImac = "http://10.0.1.72:4000/api/v1"
+const sethMacbook = "http://10.0.1.73:4000/api/v1"
 const axios = require("axios")
 
 export default class UserModel {

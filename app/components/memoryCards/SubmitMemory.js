@@ -16,31 +16,15 @@ function SubmitMemory({ navigation }) {
       <AppButton
         title="Store Memory"
         color={colors.confirm}
+        style={styles.submit}
         onPress={memoryContext.onPress}
       />
-      {/* <View > */}
       <ButtonIcon
         style={styles.back}
         name="chevron-left"
         size={25}
         onPress={() => navigation.goBack()}
       />
-      {/* </View> */}
-      {/* {!done ? (
-        <AppButton
-          title="Store Memory"
-          color={colors.confirm}
-          onPress={() => setDone(true)}
-        />
-      ) : (
-        <LottieView
-          autoPlay
-          loop={false}
-          onAnimationFinish={memoryContext.onPress}
-          source={require('../../assets/animations/green-done.json')}
-          style={styles.animation}
-        />
-      )} */}
     </View>
   )
 }
@@ -48,6 +32,7 @@ function SubmitMemory({ navigation }) {
 const styles = StyleSheet.create({
   animations: { width: 150 },
   memoryView: {
+    // opacity: 0.7,
     flex: 1,
     backgroundColor: colors.light,
     alignItems: 'center',
@@ -55,22 +40,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginTop: 60,
   },
+  submit: {
+    width: '60%',
+  },
   back: {
     position: 'absolute',
     bottom: 5,
   },
-  // iconContainer: {
-  //   justifyContent: 'center',
-  //   flexDirection: 'row',
-  //   marginTop: 20,
-  //   flexWrap: 'wrap',
-  // },
-  // icon: {
-  //   margin: 10,
-  // },
-  // button: {
-  //   width: '90%',
-  // },
 })
 
 export default SubmitMemory

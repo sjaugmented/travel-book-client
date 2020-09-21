@@ -105,9 +105,19 @@ function AppMenu({ navigation }) {
       <View style={styles.trophyContainer}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>
         <View style={styles.trophies}>
-          <ButtonIcon margin={5} iconColor="red" name="trophy" />
-          <ButtonIcon margin={5} iconColor="green" name="trophy-award" />
-          <ButtonIcon margin={5} iconColor="white" name="trophy-variant" />
+          <ButtonIcon margin={5} size={30} iconColor="red" name="trophy" />
+          <ButtonIcon
+            margin={5}
+            size={30}
+            iconColor="green"
+            name="trophy-award"
+          />
+          <ButtonIcon
+            margin={5}
+            size={30}
+            iconColor="white"
+            name="trophy-variant"
+          />
         </View>
       </View>
       <View style={styles.tripsContainer}>
@@ -157,7 +167,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '500',
     color: colors.primary,
-    marginBottom: 10,
+    marginBottom: 5,
     // backgroundColor: colors.background,
   },
   trophyContainer: {
@@ -171,13 +181,12 @@ const styles = StyleSheet.create({
   },
   tripsContainer: {
     position: 'absolute',
-    top: 220,
+    top: 160,
     left: width * 0.05,
     width: '70%',
-    // backgroundColor: colors.background,
   },
   tripList: {
-    //
+    backgroundColor: colors.background,
   },
   scrollView: {
     //

@@ -6,12 +6,13 @@ import {
   TouchableHighlight,
   Image,
   Dimensions,
+  SafeAreaView,
   FlatList,
 } from 'react-native'
 import NativeModal from 'react-native-modal'
 import AppText from '../components/AppText'
-
-import TripContext from '../context/TripContext'
+import ButtonIcon from '../components/ButtonIcon'
+import MapView, { Marker } from 'react-native-maps'
 import TripModel from '../api/trips'
 import AppHeader from '../components/AppHeader'
 import TripShowContext from '../context/TripShowContext'
@@ -35,7 +36,7 @@ import AppButton from '../components/AppButton'
 const { width, height } = Dimensions.get('window')
 
 function TripScreen({ navigation }) {
-  const showTrip = useContext(TripShowContext)
+  const { showTrip } = useContext(TripShowContext)
   const [displayTrip, setDisplay] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
   const [memoryToDelete, setMemoryToDelete] = useState('')
@@ -47,33 +48,12 @@ function TripScreen({ navigation }) {
 
   const loadTrip = async () => {
     try {
-      const response = await TripModel.show(showTrip.showTrip)
+      const response = await TripModel.show(showTrip)
       setDisplay(response.trip)
     } catch (error) {
       console.log(error)
     }
   }
-
-  // let memoryList
-
-  // ////MEMORIES////
-  // if (displayTrip) {
-  //   console.log(displayTrip.memories)
-  //   memoryList = displayTrip.memories.map((item, key) => {
-  //     return (
-  //       <Swipeable key={key} renderRightAction={() => console.log("delete!")}>
-  //         <TouchableHighlight>
-  //           <View>
-  //             <Text key={key}>{item.locationName}</Text>
-  //             {/* <AppText key={key}>{item.locationName}</AppText>; */}
-  //           </View>
-  //         </TouchableHighlight>
-  //       </Swipeable>
-  //     )
-  //   })
-  // } else {
-  //   memoryList = <AppText>Loading...</AppText>
-  // }
 
   const pieChart1 = [
     {
@@ -108,7 +88,7 @@ function TripScreen({ navigation }) {
 
   const pieChart2 = [
     {
-      name: 'Air',
+      name: 'Plane',
       mileage: 6500,
       color: 'rgb(255, 255, 255)',
       legendFontColor: colors.light,
@@ -116,28 +96,28 @@ function TripScreen({ navigation }) {
     },
     {
       name: 'Car',
-      mileage: 340,
+      mileage: 940,
       color: '#F00',
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
       name: 'Bus',
-      mileage: 782,
+      mileage: 1802,
       color: 'orange',
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
       name: 'Boat',
-      mileage: 0,
+      mileage: 500,
       color: 'blue',
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
       name: 'Foot',
-      mileage: 108,
+      mileage: 1080,
       color: 'rgb(0, 128, 0)',
       legendFontColor: colors.light,
       legendFontSize: 15,
@@ -195,134 +175,126 @@ function TripScreen({ navigation }) {
 
   return (
     <>
+      <View style={styles.mapContainer}>
+        <MapView style={styles.mapStyle}></MapView>
+      </View>
+
       <View style={styles.container}>
-        <Image
-          source={require('../assets/welcome_palms.jpg')}
-          style={styles.tripPic}
-          resizeMode="center"
-        />
-        <ScrollView
+        {/* <ScrollView
           style={styles.trip}
           snapToInterval={height / 3}
           snapToAlignment={'center'}
-        >
-          <AppHeader style={styles.header}>
-            {displayTrip ? displayTrip.name : 'Loading...'}
-          </AppHeader>
-
-          <AppText>{displayTrip.year}</AppText>
-
-          <View style={styles.overview}>
-            <AppText>This is a bullshit chart.</AppText>
-            <PieChart2 style={styles.mainChart} data={overviewData} />
+        > */}
+        <View style={styles.headerContainer}>
+          <View style={styles.currentTrip}>
+            <AppHeader style={styles.header}>
+              {displayTrip && displayTrip.name}
+            </AppHeader>
+            <AppText>{displayTrip.year}</AppText>
           </View>
+          <View style={styles.editDelete}>
+            <ButtonIcon
+              name="pencil-outline"
+              margin={5}
+              size={40}
+              backgroundColor={colors.primary}
+              color={colors.medium}
+              onPress={() => console.log('edit', displayTrip)}
+            />
+            <ButtonIcon
+              name="trash-can"
+              margin={5}
+              size={40}
+              backgroundColor={colors.danger}
+              onPress={() => deleteTrip()}
+            />
+          </View>
+        </View>
 
-          <ScrollView
-            style={styles.chartsContainer}
-            horizontal={true}
-            decelerationRate={0}
-            snapToInterval={200}
-            snapToAlignment={'center'}
-            contentInset={{
-              top: 0,
-              left: 30,
-              bottom: 0,
-              right: 30,
+        {/* <ScrollView
+          style={styles.chartsContainer}
+          horizontal={true}
+          decelerationRate={0}
+          snapToInterval={200}
+          snapToAlignment={'center'}
+          contentInset={{
+            top: 0,
+            left: 30,
+            bottom: 0,
+            right: 30,
+          }}
+        >
+          <View style={styles.charts}>
+            <PieChart
+              data={pieChart1}
+              width={Dimensions.get('screen').width}
+              height={220}
+              chartConfig={{
+                backgroundColor: '#e26a00',
+                backgroundGradientFrom: '#fb8c00',
+                backgroundGradientTo: '#ffa726',
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+              }}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 16,
+              }}
+              accessor="mileage"
+              backgroundColor="transparent"
+              paddingLeft="15"
+            />
+          </View> */}
+        <View style={styles.charts2}>
+          <PieChart
+            data={pieChart2}
+            width={Dimensions.get('screen').width}
+            height={220}
+            chartConfig={{
+              backgroundColor: '#e26a00',
+              backgroundGradientFrom: '#fb8c00',
+              backgroundGradientTo: '#ffa726',
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
             }}
-          >
-            <View style={styles.charts}>
-              <AppText>Here's another bullshit chart.</AppText>
-              <PieChart
-                data={pieChart1}
-                width={Dimensions.get('screen').width}
-                height={220}
-                chartConfig={{
-                  backgroundColor: '#e26a00',
-                  backgroundGradientFrom: '#fb8c00',
-                  backgroundGradientTo: '#ffa726',
-                  decimalPlaces: 2, // optional, defaults to 2dp
-                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  style: {
-                    borderRadius: 16,
-                  },
-                }}
-                bezier
-                style={{
-                  marginVertical: 8,
-                  borderRadius: 16,
-                }}
-                accessor="mileage"
-                backgroundColor="transparent"
-                paddingLeft="15"
-              />
-            </View>
-            <View style={styles.charts2}>
-              <AppText>And one more. Also bullshit.</AppText>
-              <PieChart
-                data={pieChart2}
-                width={Dimensions.get('screen').width}
-                height={220}
-                chartConfig={{
-                  backgroundColor: '#e26a00',
-                  backgroundGradientFrom: '#fb8c00',
-                  backgroundGradientTo: '#ffa726',
-                  decimalPlaces: 2, // optional, defaults to 2dp
-                  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  style: {
-                    borderRadius: 16,
-                  },
-                }}
-                bezier
-                style={{
-                  marginVertical: 8,
-                  borderRadius: 16,
-                }}
-                accessor="mileage"
-                backgroundColor="transparent"
-                paddingLeft="15"
-              />
-            </View>
-          </ScrollView>
-
-          <View>
-            <AppText style={{ fontWeight: 'bold' }}>MEMORIES</AppText>
-            <View style={styles.memoryList}>
-              <FlatList
-                data={memObj}
-                keyExtractor={(memory) => memory._id.toString()}
-                renderItem={({ item }) => (
-                  <ListItem
-                    title={item.locationName}
-                    onPress={() => console.log('Memory selected', item)}
-                    renderRightActions={() => (
-                      <ListItemDeleteAction
-                        onPress={() => setDeleteState(item._id)}
-                      />
-                    )}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+            }}
+            accessor="mileage"
+            backgroundColor="transparent"
+            paddingLeft="25"
+          />
+        </View>
+        {/* </ScrollView> */}
+        <View>
+          <AppHeader style={{ fontWeight: 'bold' }}>MEMORIES</AppHeader>
+          <FlatList
+            data={memObj}
+            keyExtractor={(memory) => memory._id.toString()}
+            renderItem={({ item }) => (
+              <ListItem
+                title={item.locationName}
+                onPress={() => console.log('Memory selected', item)}
+                renderRightActions={() => (
+                  <ListItemDeleteAction
+                    onPress={() => setDeleteState(item._id)}
                   />
                 )}
-                ItemSeparatorComponent={ListItemSeparator}
               />
-            </View>
-          </View>
-          {/* EDIT & DELETE */}
-          <View style={styles.editDelete}>
-            <View style={{ marginBottom: 20 }}>
-              <AppButton
-                title="Edit Trip"
-                color={colors.medium}
-                onPress={() => console.log('edit', displayTrip)}
-              />
-            </View>
-            <View>
-              <AppButton
-                title="Delete Trip"
-                color={colors.danger}
-                onPress={() => deleteTrip()}
-              />
-            </View>
-          </View>
-        </ScrollView>
+            )}
+            ItemSeparatorComponent={ListItemSeparator}
+          />
+        </View>
+        {/* EDIT & DELETE  */}
       </View>
       {/* DELETE MODAL */}
       <NativeModal
@@ -361,64 +333,85 @@ function TripScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  mapContainer: {
+    marginTop: 10,
+    height: 200,
+    // paddingTop: 30,
+  },
+  mapStyle: {
+    flex: 1,
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
+    padding: 10,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  header: {
+    marginTop: 10,
+  },
+  editDelete: {
+    flexDirection: 'row',
   },
   window: {
     flex: 1,
     width: '100%',
     height: '100%',
   },
-  tripPic: { width: '100%', height: 200 },
-  trip: {
-    flex: 1,
-    padding: 10,
-  },
-  overview: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    padding: 5,
-  },
-  mainChart: {
-    marginTop: 20,
-    backgroundColor: colors.white,
-    width: width - 80,
-    margin: 10,
-    height: 200,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // elevation: 3,
-  },
-  chartsContainer: {
-    // marginTop: 50,
-    padding: 25,
-    // backgroundColor: "black",
-  },
-  charts: {
-    // marginTop: 50,
-    backgroundColor: colors.medium,
-    color: 'white',
-    width: width - 80,
-    margin: 10,
-    height: 200,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   charts2: {
-    // marginTop: 50,
-    backgroundColor: colors.medium,
-    color: colors.light,
-    width: width - 80,
+    backgroundColor: colors.secondary,
+    // color: colors.light,
+    // opacity: 0.8,
+    width: width - 50,
     margin: 10,
     height: 200,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  // tripPic: { width: '100%', height: 200 },
+  // trip: {
+  //   flex: 1,
+  //   padding: 10,
+  // },
+  // overview: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   marginTop: 20,
+  //   padding: 5,
+  // },
+  // mainChart: {
+  //   marginTop: 20,
+  //   backgroundColor: colors.white,
+  //   width: width - 80,
+  //   margin: 10,
+  //   height: 200,
+  //   borderRadius: 10,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   elevation: 3,
+  // },
+  // chartsContainer: {
+  //   marginTop: 50,
+  //   padding: 25,
+  //   backgroundColor: 'black',
+  // },
+  // charts: {
+  //   marginTop: 50,
+  //   backgroundColor: colors.medium,
+  //   color: 'white',
+  //   width: width - 80,
+  //   margin: 10,
+  //   height: 200,
+  //   borderRadius: 10,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+
   memoryList: {
     flex: 1,
     marginTop: 0,
@@ -452,9 +445,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   modalButton: { margin: 10 },
-  editDelete: {
-    marginBottom: 100,
-  },
 })
 
 export default TripScreen

@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, StyleSheet, Button, Modal, Dimensions } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import NativeModal from 'react-native-modal'
 import MapView, { Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
 import AsyncStorage from '@react-native-community/async-storage'
-import { getDistance } from 'geolib'
 
 //Styles
 import colors from '../config/colors'
@@ -17,7 +16,6 @@ import MemoryNavigator from '../navigation/MemoryNavigator'
 //useContexts
 import MemoryContext from '../context/memoryContext'
 import TripContext from '../context/TripContext'
-import TripShowContext from '../context/TripShowContext'
 import ActiveTripContext from '../context/activeTripContext'
 
 //API

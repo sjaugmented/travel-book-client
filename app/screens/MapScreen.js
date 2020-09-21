@@ -163,13 +163,20 @@ function MapScreen({ navigation }) {
           showsUserLocation={true}
         >
           {allMemories
-            ? allMemories.map((marker, index) => <Marker pinColor="blue" key={index} title={marker.locationName} coordinate={marker.location} />)
+            ? allMemories.map((marker, index) => (
+                <Marker
+                  pinColor="blue"
+                  key={index}
+                  title={marker.locationName}
+                  coordinate={marker.location}
+                />
+              ))
             : console.log("none")}
         </MapView>
       )}
       {!tripActive ? (
         <>
-          <AppHeader style={styles.buttonHeader}>Take a Trip</AppHeader>
+          {/* <AppHeader style={styles.buttonHeader}>Take a Trip</AppHeader> */}
           <ButtonIcon
             style={styles.addButton}
             name="airplane"
@@ -182,8 +189,7 @@ function MapScreen({ navigation }) {
         </>
       ) : (
         <>
-          <AppHeader style={styles.buttonHeader}>Add a Memory</AppHeader>
-
+          {/* <AppHeader style={styles.buttonHeader}>Add a Memory</AppHeader> */}
           <ButtonIcon
             style={styles.addButton}
             name="plus"
@@ -237,7 +243,10 @@ function MapScreen({ navigation }) {
               }}
             >
               <ModalContext.Provider value={{ setMenuVisible }}>
-                <MenuNavigator tripActive={tripActive} storeTripActive={storeTripActive} />
+                <MenuNavigator
+                  tripActive={tripActive}
+                  storeTripActive={storeTripActive}
+                />
               </ModalContext.Provider>
             </ActiveTripContext.Provider>
           </TripContext.Provider>
@@ -257,7 +266,9 @@ function MapScreen({ navigation }) {
         style={styles.memModal}
       >
         <View style={styles.memoryView}>
-          <ActiveTripContext.Provider value={{ tripActive: tripActive, storeTripActive: storeTripActive }}>
+          <ActiveTripContext.Provider
+            value={{ tripActive: tripActive, storeTripActive: storeTripActive }}
+          >
             <MemoryContext.Provider
               style={styles.activeTrip}
               value={{

@@ -85,21 +85,21 @@ function AppMenu({ navigation }) {
           iconColor={colors.primary}
           style={{ marginBottom: 40 }}
         />
-        {tripActive &&
-          ((<AppText style={{ backgroundColor: "blue" }}>End Trip</AppText>),
-          (
-            <>
-              <AppText style={{ color: colors.danger }}>End Trip</AppText>
-              <ButtonIcon
-                name="minus-circle"
-                size={75}
-                backgroundColor={colors.light}
-                iconColor={colors.danger}
-                onPress={() => storeTripActive(false)}
-                activeOpacity={0.7}
-              />
-            </>
-          ))}
+        {tripActive && (
+          <>
+            <AppText style={{ color: colors.danger, marginBottom: -7 }}>
+              End Trip
+            </AppText>
+            <ButtonIcon
+              name="minus-circle"
+              size={75}
+              backgroundColor={colors.light}
+              iconColor={colors.danger}
+              onPress={() => storeTripActive(false)}
+              activeOpacity={0.7}
+            />
+          </>
+        )}
       </View>
       <View style={styles.trophyContainer}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>

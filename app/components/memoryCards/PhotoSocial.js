@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: '85%',
-    height: '55%',
+    height: '51%',
 
     borderRadius: 20,
-    marginTop: 20,
-    // marginBottom: 0,
+    marginTop: 15,
+    marginBottom: 0,
   },
   buttons: {
     flexDirection: 'row',

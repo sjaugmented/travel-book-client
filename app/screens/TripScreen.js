@@ -44,7 +44,6 @@ function TripScreen({ navigation }) {
 
   useEffect(() => {
     loadTrip()
-    console.log('memObjyooooo', memObj)
   }, [])
 
   const loadTrip = async () => {
@@ -56,36 +55,36 @@ function TripScreen({ navigation }) {
     }
   }
 
-  const pieChart1 = [
-    {
-      name: 'Eating',
-      mileage: 10,
-      color: 'rgba(131, 167, 234, 1)',
-      legendFontColor: colors.light,
-      legendFontSize: 15,
-    },
-    {
-      name: 'Drinking',
-      mileage: 6,
-      color: '#F00',
-      legendFontColor: colors.light,
-      legendFontSize: 15,
-    },
-    {
-      name: 'Sight-Seeing',
-      mileage: 25,
-      color: 'purple',
-      legendFontColor: colors.light,
-      legendFontSize: 15,
-    },
-    {
-      name: 'Sleeping',
-      mileage: 30,
-      color: 'rgb(40, 167, 44)',
-      legendFontColor: colors.light,
-      legendFontSize: 15,
-    },
-  ]
+  // const pieChart1 = [
+  //   {
+  //     name: 'Eating',
+  //     mileage: 10,
+  //     color: 'rgba(131, 167, 234, 1)',
+  //     legendFontColor: colors.light,
+  //     legendFontSize: 15,
+  //   },
+  //   {
+  //     name: 'Drinking',
+  //     mileage: 6,
+  //     color: '#F00',
+  //     legendFontColor: colors.light,
+  //     legendFontSize: 15,
+  //   },
+  //   {
+  //     name: 'Sight-Seeing',
+  //     mileage: 25,
+  //     color: 'purple',
+  //     legendFontColor: colors.light,
+  //     legendFontSize: 15,
+  //   },
+  //   {
+  //     name: 'Sleeping',
+  //     mileage: 30,
+  //     color: 'rgb(40, 167, 44)',
+  //     legendFontColor: colors.light,
+  //     legendFontSize: 15,
+  //   },
+  // ]
 
   const pieChart2 = [
     {
@@ -149,19 +148,15 @@ function TripScreen({ navigation }) {
 
   if (displayTrip) {
     memObj = displayTrip.memories
-    // console.log('displayTrip', displayTrip)
-    // console.log('memObj', memObj)
   }
 
   const setDeleteState = (memoryId) => {
     console.log('storing ID...', memoryId)
     setModalVisible(true)
     setMemoryToDelete(memoryId)
-    console.log(`stored ${memoryId} to state`)
   }
 
   const deleteMemory = async (memoryId) => {
-    console.log('deleteMemory with ID:', memoryId)
     try {
       await MemoryModel.delete(memoryId)
       setModalVisible(false)
@@ -176,47 +171,34 @@ function TripScreen({ navigation }) {
     navigation.goBack()
   }
 
-  // //Setting latitude and longitude for current location
-  // const getLocation = async () => {
-  //   try {
-  //     const { granted } = await Location.requestPermissionsAsync()
-  //     if (!granted) {
-  //       // error - we need your location dummy
-  //     } else {
-  //       const {
-  //         coords: { latitude, longitude },
-  //       } = await Location.getCurrentPositionAsync()
-  //       setLocation({ latitude, longitude })
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   return (
     <>
       <View style={styles.tripContainer}>
         <View style={styles.mapContainer}>
-          <MapView
-            style={styles.mapStyle}
-            // region={{
-            //   latitude: location.latitude - 0.0055,
-            //   longitude: location.longitude,
-            //   latitudeDelta: 0.0222,
-            //   longitudeDelta: 0.0121,
-            // }}
-          >
-            {displayTrip
-              ? displayTrip.memories.map((marker, index) => (
-                  <Marker
-                    pinColor="blue"
-                    key={index}
-                    title={marker.locationName}
-                    coordinate={marker.location}
-                  />
-                ))
-              : console.log('fuck u')}
-          </MapView>
+          {displayTrip ? (
+            <MapView
+              style={styles.mapStyle}
+              region={{
+                latitude: displayTrip.memories[0].location.latitude,
+                longitude: displayTrip.memories[0].location.longitude,
+                latitudeDelta: 0.0222,
+                longitudeDelta: 0.0121,
+              }}
+            >
+              {displayTrip.memories
+                ? displayTrip.memories.map((marker, index) => (
+                    <Marker
+                      pinColor="blue"
+                      key={index}
+                      title={marker.locationName}
+                      coordinate={marker.location}
+                    />
+                  ))
+                : console.log('fuck u')}
+            </MapView>
+          ) : (
+            console.log('nope')
+          )}
         </View>
 
         <View style={styles.container}>

@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   memoryView: {
     flex: 1,
     borderRadius: 50,
-    // opacity: 0.9,
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',

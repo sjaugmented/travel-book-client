@@ -8,7 +8,7 @@ const sethMacbook = "http://10.0.1.73:4000/api/v1"
 export default class TripModel {
   static all = async () => {
     try {
-      const response = await fetch(`${local}/trips`)
+      const response = await fetch(`${apiUrl}/trips`)
       const trips = await response.json()
       return trips
     } catch (error) {
@@ -18,7 +18,7 @@ export default class TripModel {
 
   static create = async (data) => {
     try {
-      const newTrip = await axios.post(`${local}/trips/create`, {
+      const newTrip = await axios.post(`${apiUrl}/trips/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export default class TripModel {
 
   static show = async (name) => {
     try {
-      const response = await fetch(`${local}/trips/${name}`)
+      const response = await fetch(`${apiUrl}/trips/${name}`)
       const trip = await response.json()
       return trip
     } catch (error) {
@@ -44,7 +44,7 @@ export default class TripModel {
 
   static delete = async (tripId) => {
     try {
-      const deletedTrip = await axios.delete(`${local}/trips/${tripId}`)
+      const deletedTrip = await axios.delete(`${apiUrl}/trips/${tripId}`)
       return deletedTrip
     } catch (error) {
       console.log(error)

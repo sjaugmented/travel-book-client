@@ -7,7 +7,7 @@ const sethMacbook = "http://10.0.1.73:4000/api/v1"
 export default class MemoryModel {
   static all = async () => {
     try {
-      const response = await fetch(`${local}/memories`)
+      const response = await fetch(`${apiUrl}/memories`)
       const memories = await response.json()
       return memories
     } catch (error) {
@@ -17,7 +17,7 @@ export default class MemoryModel {
 
   static create = async (data) => {
     try {
-      const newMemory = await axios.post(`${local}/memories/create`, {
+      const newMemory = await axios.post(`${apiUrl}/memories/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default class MemoryModel {
   }
   static show = async (memory) => {
     try {
-      const foundMemory = await axios.get(`${local}/memories/${memory._id}`)
+      const foundMemory = await axios.get(`${apiUrl}/memories/${memory._id}`)
       return foundMemory
     } catch (error) {
       console.log(error)
@@ -40,12 +40,15 @@ export default class MemoryModel {
   }
   static delete = async (memoryId) => {
     try {
-      const deletedMemory = await axios.delete(`${local}/memories/${memoryId}`, {
-        // method: 'DELETE',
-        // headers: {
-        //     'Content-Type': 'application/json'
-        // }
-      })
+      const deletedMemory = await axios.delete(
+        `${apiUrl}/memories/${memoryId}`,
+        {
+          // method: 'DELETE',
+          // headers: {
+          //     'Content-Type': 'application/json'
+          // }
+        }
+      )
       return deletedMemory
     } catch (error) {
       console.log(error)

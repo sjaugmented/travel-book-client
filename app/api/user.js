@@ -8,7 +8,7 @@ const sethMacbook = "http://10.0.1.73:4000/api/v1"
 export default class UserModel {
   static all = async () => {
     try {
-      const allUsers = await axios.get(`${apiUrl}/users`)
+      const allUsers = await axios.get(`${local}/users`)
       return allUsers
     } catch (error) {
       console.log(error)
@@ -17,7 +17,7 @@ export default class UserModel {
   static create = async (userData) => {
     try {
       const id = userData.id
-      const newUser = await axios.post(`${apiUrl}/users/${id}`, {
+      const newUser = await axios.post(`${local}/users/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default class UserModel {
   }
   static show = async (googleId) => {
     try {
-      const result = await axios.get(`${apiUrl}/users/${googleId}`)
+      const result = await axios.get(`${local}/users/${googleId}`)
       return result.data
     } catch (error) {
       console.log(error)

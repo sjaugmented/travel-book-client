@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import colors from '../../config/colors'
-import ButtonIcon from '../ButtonIcon'
-import AppText from '../AppText'
+import React, { useState, useEffect, useContext } from "react"
+import { View, StyleSheet, Dimensions } from "react-native"
+import colors from "../../config/colors"
+import ButtonIcon from "../ButtonIcon"
+import AppText from "../AppText"
 
-import TripContext from '../../context/TripContext'
-import ActiveTripContext from '../../context/activeTripContext'
-import AppButton from '../AppButton'
-import TripList from './TripList'
-import ModalContext from '../../context/modalContext'
-import TripShowContext from '../../context/TripShowContext'
-import UserModel from '../../api/user'
-import UserContext from '../../context/userContext'
+import TripContext from "../../context/TripContext"
+import ActiveTripContext from "../../context/activeTripContext"
+import AppButton from "../AppButton"
+import TripList from "./TripList"
+import ModalContext from "../../context/modalContext"
+import TripShowContext from "../../context/TripShowContext"
+import UserModel from "../../api/user"
+import UserContext from "../../context/userContext"
+import AppHeader from "../AppHeader"
 
 function AppMenu({ navigation }) {
   const { username, userId, logout } = useContext(UserContext)
@@ -30,7 +31,7 @@ function AppMenu({ navigation }) {
       const response = await UserModel.show(userId)
 
       !response
-        ? setTrips([{ name: 'Kinda empty here...', year: '' }])
+        ? setTrips([{ name: "Kinda empty here...", year: "" }])
         : setTrips(response.trips)
     } catch (error) {
       console.log(error)
@@ -40,7 +41,7 @@ function AppMenu({ navigation }) {
   const handlePress = (trip) => {
     setShowTrip(trip)
     setMenuVisible(false)
-    navigation.navigate('Trip', {
+    navigation.navigate("Trip", {
       trip: trip,
     })
   }
@@ -69,24 +70,26 @@ function AppMenu({ navigation }) {
         <ButtonIcon
           name="account"
           backgroundColor={colors.light}
-          iconColor={colors.secondary}
+          iconColor={colors.primary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="account-multiple"
           backgroundColor={colors.light}
-          iconColor={colors.secondary}
+          iconColor={colors.primary}
           style={{ marginBottom: 20 }}
         />
         <ButtonIcon
           name="trophy-award"
           backgroundColor={colors.light}
-          iconColor={colors.secondary}
+          iconColor={colors.primary}
           style={{ marginBottom: 40 }}
         />
-        {tripActive &&
-          ((<AppText style={{ backgroundColor: 'blue' }}>End Trip</AppText>),
-          (
+        {tripActive && (
+          <>
+            <AppText style={{ color: colors.danger, marginBottom: -7 }}>
+              End Trip
+            </AppText>
             <ButtonIcon
               name="minus-circle"
               size={75}
@@ -95,7 +98,8 @@ function AppMenu({ navigation }) {
               onPress={() => storeTripActive(false)}
               activeOpacity={0.7}
             />
-          ))}
+          </>
+        )}
       </View>
       <View style={styles.trophyContainer}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>
@@ -127,7 +131,7 @@ function AppMenu({ navigation }) {
   )
 }
 
-const width = Dimensions.get('screen').width
+const width = Dimensions.get("screen").width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -139,46 +143,46 @@ const styles = StyleSheet.create({
   logout: {
     width: 100,
     height: 50,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     right: 20,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   current: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     left: 20,
     width: 150,
     height: 50,
-    alignItems: 'baseline',
+    alignItems: "baseline",
   },
   navbar: {
-    position: 'absolute',
+    position: "absolute",
     right: width * 0.05,
     bottom: 50,
-    alignItems: 'center',
+    alignItems: "center",
     // backgroundColor: colors.background,
   },
   text: {
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.primary,
     marginBottom: 5,
     // backgroundColor: colors.background,
   },
   trophyContainer: {
     // backgroundColor: colors.background,
-    position: 'absolute',
+    position: "absolute",
     top: 70,
     left: width * 0.05,
   },
   trophies: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tripsContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 160,
     left: width * 0.05,
-    width: '70%',
+    width: "70%",
   },
   tripList: {
     backgroundColor: colors.background,

@@ -45,13 +45,6 @@ function AppMenu({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <ButtonIcon
-        style={{ alignSelf: 'center', marginBottom: 20 }}
-        name={'chevron-down'}
-        backgroundColor={colors.light}
-        iconColor={colors.primary}
-        onPress={() => setMenuVisible(false)}
-      /> */}
       <AppButton
         textColor={colors.primary}
         color="transparent"
@@ -187,9 +180,6 @@ const styles = StyleSheet.create({
   },
   tripList: {
     backgroundColor: colors.background,
-  },
-  scrollView: {
-    //
   },
 })
 

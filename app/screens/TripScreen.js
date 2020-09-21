@@ -175,43 +175,44 @@ function TripScreen({ navigation }) {
 
   return (
     <>
-      <View style={styles.mapContainer}>
-        <MapView style={styles.mapStyle}></MapView>
-      </View>
+      <View style={styles.tripContainer}>
+        <View style={styles.mapContainer}>
+          <MapView style={styles.mapStyle}></MapView>
+        </View>
 
-      <View style={styles.container}>
-        {/* <ScrollView
+        <View style={styles.container}>
+          {/* <ScrollView
           style={styles.trip}
           snapToInterval={height / 3}
           snapToAlignment={'center'}
         > */}
-        <View style={styles.headerContainer}>
-          <View style={styles.currentTrip}>
-            <AppHeader style={styles.header}>
-              {displayTrip && displayTrip.name}
-            </AppHeader>
-            <AppText>{displayTrip.year}</AppText>
+          <View style={styles.headerContainer}>
+            <View style={styles.currentTrip}>
+              <AppHeader style={styles.header}>
+                {displayTrip && displayTrip.name}
+              </AppHeader>
+              <AppText>{displayTrip.year}</AppText>
+            </View>
+            <View style={styles.editDelete}>
+              <ButtonIcon
+                name="pencil-outline"
+                margin={5}
+                size={40}
+                backgroundColor={colors.primary}
+                color={colors.medium}
+                onPress={() => console.log('edit', displayTrip)}
+              />
+              <ButtonIcon
+                name="trash-can"
+                margin={5}
+                size={40}
+                backgroundColor={colors.danger}
+                onPress={() => deleteTrip()}
+              />
+            </View>
           </View>
-          <View style={styles.editDelete}>
-            <ButtonIcon
-              name="pencil-outline"
-              margin={5}
-              size={40}
-              backgroundColor={colors.primary}
-              color={colors.medium}
-              onPress={() => console.log('edit', displayTrip)}
-            />
-            <ButtonIcon
-              name="trash-can"
-              margin={5}
-              size={40}
-              backgroundColor={colors.danger}
-              onPress={() => deleteTrip()}
-            />
-          </View>
-        </View>
 
-        {/* <ScrollView
+          {/* <ScrollView
           style={styles.chartsContainer}
           horizontal={true}
           decelerationRate={0}
@@ -249,52 +250,56 @@ function TripScreen({ navigation }) {
               paddingLeft="15"
             />
           </View> */}
-        <View style={styles.charts2}>
-          <PieChart
-            data={pieChart2}
-            width={Dimensions.get('screen').width}
-            height={220}
-            chartConfig={{
-              backgroundColor: '#e26a00',
-              backgroundGradientFrom: '#fb8c00',
-              backgroundGradientTo: '#ffa726',
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
+          <View style={styles.charts2}>
+            <PieChart
+              data={pieChart2}
+              width={Dimensions.get('screen').width}
+              height={220}
+              chartConfig={{
+                backgroundColor: '#e26a00',
+                backgroundGradientFrom: '#fb8c00',
+                backgroundGradientTo: '#ffa726',
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
+                style: {
+                  borderRadius: 16,
+                },
+              }}
+              bezier
+              style={{
+                marginVertical: 8,
                 borderRadius: 16,
-              },
-            }}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 16,
-            }}
-            accessor="mileage"
-            backgroundColor="transparent"
-            paddingLeft="25"
-          />
-        </View>
-        {/* </ScrollView> */}
-        <View>
-          <AppHeader style={{ fontWeight: 'bold' }}>MEMORIES</AppHeader>
-          <FlatList
-            data={memObj}
-            keyExtractor={(memory) => memory._id.toString()}
-            renderItem={({ item }) => (
-              <ListItem
-                title={item.locationName}
-                onPress={() => console.log('Memory selected', item)}
-                renderRightActions={() => (
-                  <ListItemDeleteAction
-                    onPress={() => setDeleteState(item._id)}
+              }}
+              accessor="mileage"
+              backgroundColor="transparent"
+              paddingLeft="25"
+            />
+          </View>
+          {/* </ScrollView> */}
+          <View style={{ marginBottom: 10 }}>
+            <AppHeader style={{ fontWeight: 'bold' }}>MEMORIES</AppHeader>
+            <View>
+              <FlatList
+                contentInset={{ bottom: 70, top: 0 }}
+                data={memObj}
+                keyExtractor={(memory) => memory._id.toString()}
+                renderItem={({ item }) => (
+                  <ListItem
+                    style={styles.memoryContainer}
+                    title={item.locationName}
+                    onPress={() => console.log('Memory selected', item)}
+                    renderRightActions={() => (
+                      <ListItemDeleteAction
+                        onPress={() => setDeleteState(item._id)}
+                      />
+                    )}
                   />
                 )}
+                ItemSeparatorComponent={ListItemSeparator}
               />
-            )}
-            ItemSeparatorComponent={ListItemSeparator}
-          />
+            </View>
+          </View>
         </View>
-        {/* EDIT & DELETE  */}
       </View>
       {/* DELETE MODAL */}
       <NativeModal
@@ -333,6 +338,9 @@ function TripScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  tripContainer: {
+    flex: 1,
+  },
   mapContainer: {
     marginTop: 10,
     height: 200,
@@ -356,15 +364,13 @@ const styles = StyleSheet.create({
   editDelete: {
     flexDirection: 'row',
   },
-  window: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
+  // window: {
+  //   flex: 1,
+  //   width: '100%',
+  //   height: '100%',
+  // },
   charts2: {
     backgroundColor: colors.secondary,
-    // color: colors.light,
-    // opacity: 0.8,
     width: width - 50,
     margin: 10,
     height: 200,
@@ -372,6 +378,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  // memoryContainer: {
+  //   flexWrap: 'wrap',
+  //   flexDirection: 'row',
+  //   marginTop: 0,
+  //   flex: 1,
+  // },
   // tripPic: { width: '100%', height: 200 },
   // trip: {
   //   flex: 1,
@@ -412,12 +424,13 @@ const styles = StyleSheet.create({
   //   justifyContent: 'center',
   // },
 
-  memoryList: {
-    flex: 1,
-    marginTop: 0,
-    marginBottom: 100,
-    padding: 10,
-  },
+  // memoryList: {
+  //   flex: 1,
+  //   marginTop: 0,
+  //   marginBottom: 100,
+  //   padding: 10,
+  // },
+
   deleteModal: {
     flex: 1,
     marginHorizontal: 50,

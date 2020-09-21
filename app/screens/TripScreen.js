@@ -1,13 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  Image,
-  Dimensions,
-  FlatList,
-} from "react-native"
+import { StyleSheet, Text, View, TouchableHighlight, Image, Dimensions, FlatList } from "react-native"
 import NativeModal from "react-native-modal"
 import AppText from "../components/AppText"
 
@@ -17,13 +9,7 @@ import AppHeader from "../components/AppHeader"
 import TripShowContext from "../context/TripShowContext"
 import colors from "../config/colors"
 import { PieChart as PieChart2 } from "react-native-svg-charts"
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-} from "react-native-chart-kit"
+import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph } from "react-native-chart-kit"
 import { ScrollView } from "react-native-gesture-handler"
 import Swipeable from "react-native-gesture-handler/Swipeable"
 import ListItemSeparator from "../components/lists/ListItemSeparator"
@@ -146,11 +132,7 @@ function TripScreen({ navigation }) {
 
   const data3 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
 
-  const randomColor = () =>
-    ("#" + ((Math.random() * 0xffffff) << 0).toString(16) + "000000").slice(
-      0,
-      7
-    )
+  const randomColor = () => ("#" + ((Math.random() * 0xffffff) << 0).toString(16) + "000000").slice(0, 7)
 
   const overviewData = data3
     .filter((value) => value > 0)
@@ -171,14 +153,11 @@ function TripScreen({ navigation }) {
   }
 
   const setDeleteState = (memoryId) => {
-    console.log("storing ID...", memoryId)
     setModalVisible(true)
     setMemoryToDelete(memoryId)
-    console.log(`stored ${memoryId} to state`)
   }
 
   const deleteMemory = async (memoryId) => {
-    console.log("deleteMemory with ID:", memoryId)
     try {
       await MemoryModel.delete(memoryId)
       setModalVisible(false)
@@ -196,19 +175,9 @@ function TripScreen({ navigation }) {
   return (
     <>
       <View style={styles.container}>
-        <Image
-          source={require("../assets/welcome_palms.jpg")}
-          style={styles.tripPic}
-          resizeMode="center"
-        />
-        <ScrollView
-          style={styles.trip}
-          snapToInterval={height / 3}
-          snapToAlignment={"center"}
-        >
-          <AppHeader style={styles.header}>
-            {displayTrip ? displayTrip.name : "Loading..."}
-          </AppHeader>
+        <Image source={require("../assets/welcome_palms.jpg")} style={styles.tripPic} resizeMode="center" />
+        <ScrollView style={styles.trip} snapToInterval={height / 3} snapToAlignment={"center"}>
+          <AppHeader style={styles.header}>{displayTrip ? displayTrip.name : "Loading..."}</AppHeader>
 
           <AppText>{displayTrip.year}</AppText>
 
@@ -294,11 +263,7 @@ function TripScreen({ navigation }) {
                   <ListItem
                     title={item.locationName}
                     onPress={() => console.log("Memory selected", item)}
-                    renderRightActions={() => (
-                      <ListItemDeleteAction
-                        onPress={() => setDeleteState(item._id)}
-                      />
-                    )}
+                    renderRightActions={() => <ListItemDeleteAction onPress={() => setDeleteState(item._id)} />}
                   />
                 )}
                 ItemSeparatorComponent={ListItemSeparator}
@@ -308,18 +273,10 @@ function TripScreen({ navigation }) {
           {/* EDIT & DELETE */}
           <View style={styles.editDelete}>
             <View style={{ marginBottom: 20 }}>
-              <AppButton
-                title="Edit Trip"
-                color={colors.medium}
-                onPress={() => console.log("edit", displayTrip)}
-              />
+              <AppButton title="Edit Trip" color={colors.medium} onPress={() => console.log("edit", displayTrip)} />
             </View>
             <View>
-              <AppButton
-                title="Delete Trip"
-                color={colors.danger}
-                onPress={() => deleteTrip()}
-              />
+              <AppButton title="Delete Trip" color={colors.danger} onPress={() => deleteTrip()} />
             </View>
           </View>
         </ScrollView>
@@ -337,22 +294,12 @@ function TripScreen({ navigation }) {
         style={styles.deleteModal}
       >
         <View style={styles.deleteView}>
-          <AppText style={styles.deleteText}>
-            Are you sure you want to delete this memory?
-          </AppText>
+          <AppText style={styles.deleteText}>Are you sure you want to delete this memory?</AppText>
           <View style={styles.modalButton}>
-            <AppButton
-              title="Fuck yes"
-              color={colors.confirm}
-              onPress={() => deleteMemory(memoryToDelete)}
-            />
+            <AppButton title="Fuck yes" color={colors.confirm} onPress={() => deleteMemory(memoryToDelete)} />
           </View>
           <View style={styles.modalButton}>
-            <AppButton
-              title="Shit, go back!"
-              color={colors.danger}
-              onPress={() => setModalVisible(false)}
-            />
+            <AppButton title="Shit, go back!" color={colors.danger} onPress={() => setModalVisible(false)} />
           </View>
         </View>
       </NativeModal>

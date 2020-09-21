@@ -10,8 +10,8 @@ import ListItemSeparator from "../lists/ListItemSeparator"
 
 import ButtonIcon from "../ButtonIcon"
 
-const apiUrl =
-  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=1050"
+let baseRadius = 500
+let radius = baseRadius
 
 function NameOfPlace({ navigation }) {
   const memoryContext = useContext(MemoryContext)
@@ -20,17 +20,35 @@ function NameOfPlace({ navigation }) {
   const longitude = memoryContext.location.longitude
   const [results, setResults] = useState("")
 
-  const fetchData = async () => {
-    let response = await fetch(
-      `${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`
-    )
+  const fetchData = async (radius) => {
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDrvZS4PB_SJNZV4Eaz4jX5yTEUi51P4Ks&radius=${radius}`
+
+    let response = await fetch(`${apiUrl}&location=${latitude},${longitude}&type=${checkInType}`)
+
     let list = await response.json()
-    setResults(list.results)
+
+    if (list.results.length < 10 && radius <= 25000) {
+      setResults([
+        {
+          name: `Searching ${radius / 1000} km's around you`,
+          place_id: "ChIJQfa0jA7awoARMwBvbju-IK4",
+          geometry: {
+            location: {
+              lat: 34.0848443,
+              lng: -118.033012,
+            },
+          },
+        },
+      ])
+      fetchData((radius *= 2))
+    } else {
+      setResults(list.results)
+    }
   }
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData(radius)
+  }, [radius])
 
   const handlePress = (name, location) => {
     const placeLat = location.location.lat
@@ -54,20 +72,10 @@ function NameOfPlace({ navigation }) {
         contentContainerStyle={{ justifyContent: "center" }}
         data={results}
         keyExtractor={(place) => place.place_id.toString()}
-        renderItem={({ item }) => (
-          <ListItem
-            title={item.name}
-            onPress={() => handlePress(item.name, item.geometry)}
-          />
-        )}
+        renderItem={({ item }) => <ListItem title={item.name} onPress={() => handlePress(item.name, item.geometry)} />}
         ItemSeparatorComponent={ListItemSeparator}
       />
-      <ButtonIcon
-        style={styles.back}
-        name="chevron-left"
-        size={25}
-        onPress={() => navigation.goBack()}
-      />
+      <ButtonIcon style={styles.back} name="chevron-left" size={25} onPress={() => navigation.goBack()} />
     </View>
   )
 }

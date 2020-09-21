@@ -24,10 +24,8 @@ function WelcomeScreen({ navigation }) {
   const signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
-        androidClientId:
-          "469615040442-h1n11vjc6oh6bhoa4ss1rdntoo66mqdk.apps.googleusercontent.com",
-        iosClientId:
-          "469615040442-lcalo53k63uk825532pp92dgqbdle0g0.apps.googleusercontent.com",
+        androidClientId: "469615040442-h1n11vjc6oh6bhoa4ss1rdntoo66mqdk.apps.googleusercontent.com",
+        iosClientId: "469615040442-lcalo53k63uk825532pp92dgqbdle0g0.apps.googleusercontent.com",
         scopes: ["profile", "email"],
       })
 
@@ -39,7 +37,6 @@ function WelcomeScreen({ navigation }) {
           setUser({ username: foundUser.name, userId: foundUser.googleId })
           // navigation.navigate("Map")
         } else {
-          console.log("no user found in db")
           const newUser = await UserModel.create(result.user)
           await AsyncStorage.setItem("username", newUser.name)
           await AsyncStorage.setItem("userId", newUser.googleId)
@@ -55,18 +52,9 @@ function WelcomeScreen({ navigation }) {
   }
 
   return (
-    <ImageBackground
-      blurRadius={0}
-      style={styles.background}
-      source={require("../assets/milan-chalk.jpg")}
-      resizeMode="cover"
-    >
+    <ImageBackground blurRadius={0} style={styles.background} source={require("../assets/milan-chalk.jpg")} resizeMode="cover">
       <View style={styles.loginButton}>
-        <AppButton
-          title="Login With Google"
-          color={colors.primary}
-          onPress={() => signInWithGoogleAsync()}
-        />
+        <AppButton title="Login With Google" color={colors.primary} onPress={() => signInWithGoogleAsync()} />
       </View>
     </ImageBackground>
   )

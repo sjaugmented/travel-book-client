@@ -15,7 +15,6 @@ export default class UserModel {
     }
   }
   static create = async (userData) => {
-    console.log("user.js:", userData)
     try {
       const id = userData.id
       const newUser = await axios.post(`${local}/users/${id}`, {

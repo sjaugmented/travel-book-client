@@ -40,16 +40,12 @@ export default class MemoryModel {
   }
   static delete = async (memoryId) => {
     try {
-      const deletedMemory = await axios.delete(
-        `${local}/memories/${memoryId}`,
-        {
-          // method: 'DELETE',
-          // headers: {
-          //     'Content-Type': 'application/json'
-          // }
-        }
-      )
-      console.log("deleted>>>>>", deletedMemory)
+      const deletedMemory = await axios.delete(`${local}/memories/${memoryId}`, {
+        // method: 'DELETE',
+        // headers: {
+        //     'Content-Type': 'application/json'
+        // }
+      })
       return deletedMemory
     } catch (error) {
       console.log(error)

@@ -40,7 +40,9 @@ function AppMenu({ navigation }) {
   const handlePress = (trip) => {
     setShowTrip(trip)
     setMenuVisible(false)
-    navigation.navigate('Trip')
+    navigation.navigate('Trip', {
+      trip: trip,
+    })
   }
 
   return (

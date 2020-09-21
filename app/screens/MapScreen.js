@@ -26,6 +26,7 @@ import ModalContext from "../context/modalContext"
 import UserContext from "../context/userContext"
 
 import MapInput from "../components/MapInput"
+import AppHeader from "../components/AppHeader"
 
 function MapScreen({ navigation }) {
   //useContext
@@ -168,25 +169,32 @@ function MapScreen({ navigation }) {
         </MapView>
       )}
       {!tripActive ? (
-        <ButtonIcon
-          style={styles.addButton}
-          name="airplane"
-          size={100}
-          backgroundColor={colors.primary}
-          iconColor={colors.light}
-          onPress={() => setModalVisible(true)}
-          activeOpacity={0.7}
-        />
+        <>
+          <AppHeader style={styles.buttonHeader}>Take a Trip</AppHeader>
+          <ButtonIcon
+            style={styles.addButton}
+            name="airplane"
+            size={100}
+            backgroundColor={colors.primary}
+            iconColor={colors.light}
+            onPress={() => setModalVisible(true)}
+            activeOpacity={0.7}
+          />
+        </>
       ) : (
-        <ButtonIcon
-          style={styles.addButton}
-          name="plus"
-          size={100}
-          backgroundColor={colors.confirm}
-          iconColor={colors.light}
-          onPress={() => setModalVisible(true)}
-          activeOpacity={0.7}
-        />
+        <>
+          <AppHeader style={styles.buttonHeader}>Add a Memory</AppHeader>
+
+          <ButtonIcon
+            style={styles.addButton}
+            name="plus"
+            size={100}
+            backgroundColor={colors.confirm}
+            iconColor={colors.light}
+            onPress={() => setModalVisible(true)}
+            activeOpacity={0.7}
+          />
+        </>
       )}
       <ButtonIcon
         style={styles.menuButton}
@@ -293,6 +301,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.55,
     shadowRadius: 10,
     elevation: 5,
+  },
+  buttonHeader: {
+    bottom: Dimensions.get("screen").height * 0.33,
+    textAlign: "center",
   },
   menuButton: {
     position: "absolute",

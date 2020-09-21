@@ -10,6 +10,7 @@ export default function ButtonIcon({
   style,
   onPress,
   activeOpacity,
+  margin,
 }) {
   return (
     <TouchableOpacity
@@ -21,6 +22,7 @@ export default function ButtonIcon({
           backgroundColor,
           justifyContent: 'center',
           alignItems: 'center',
+          margin: margin,
         },
         style,
       ]}

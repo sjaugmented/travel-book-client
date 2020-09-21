@@ -29,7 +29,7 @@ import MapInput from '../components/MapInput'
 
 function MapScreen({ navigation }) {
   //useContext
-  const tripShowContext = useContext(TripShowContext)
+  // const { refreshMap } = useContext(TripShowContext)
   const { username, userId, logout } = useContext(UserContext)
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
@@ -205,14 +205,16 @@ function MapScreen({ navigation }) {
       />
       {/* MENU MODAL */}
       <NativeModal
-        visible={menuVisible}
+        isVisible={menuVisible}
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setMenuVisible(false)}
-        // onSwipeComplete={() => setMenuVisible(false)}
-        // swipeDirection="down"
-        // backdropColor="clear"
-        // backdropOpacity={0}
+        onSwipeComplete={() => setMenuVisible(false)}
+        swipeThreshold={100}
+        swipeDirection="down"
+        backdropColor="clear"
+        backdropOpacity={0}
+        propagateSwipe={true}
         style={styles.menuModal}
         onModalHide={() => {
           getLocation()
@@ -225,6 +227,7 @@ function MapScreen({ navigation }) {
               setPickedTrip: setPickedTrip,
               tripName: tripName,
               pickedTrip: pickedTrip,
+              refreshMap: refreshMap,
             }}
           >
             <ActiveTripContext.Provider

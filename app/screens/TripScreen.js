@@ -1,14 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  Image,
-  Dimensions,
-  SafeAreaView,
-  FlatList,
-} from 'react-native'
+import { StyleSheet, View, Image, Dimensions, FlatList } from 'react-native'
 import NativeModal from 'react-native-modal'
 import AppText from '../components/AppText'
 import ButtonIcon from '../components/ButtonIcon'
@@ -17,7 +8,7 @@ import TripModel from '../api/trips'
 import AppHeader from '../components/AppHeader'
 import TripShowContext from '../context/TripShowContext'
 import colors from '../config/colors'
-import { PieChart as PieChart2 } from 'react-native-svg-charts'
+
 import {
   LineChart,
   BarChart,
@@ -177,6 +168,12 @@ function TripScreen({ navigation }) {
   return (
     <>
       <View style={styles.tripContainer}>
+        <ButtonIcon
+          style={styles.back}
+          name="chevron-left"
+          size={35}
+          onPress={() => navigation.goBack('Map')}
+        />
         <View style={styles.mapContainer}>
           {displayTrip ? (
             <MapView
@@ -205,11 +202,6 @@ function TripScreen({ navigation }) {
         </View>
 
         <View style={styles.container}>
-          {/* <ScrollView
-          style={styles.trip}
-          snapToInterval={height / 3}
-          snapToAlignment={'center'}
-        > */}
           <View style={styles.headerContainer}>
             <View style={styles.currentTrip}>
               <AppHeader style={styles.header}>
@@ -310,18 +302,22 @@ function TripScreen({ navigation }) {
               )}
             />
           </View>
-          <View style={{ marginBottom: 10 }}>
+          <View style={{ flex: 1, marginBottom: 55 }}>
             <AppHeader style={{ fontWeight: 'bold' }}>MEMORIES</AppHeader>
-            <View>
+            <View style={{ flex: 1 }}>
               <FlatList
-                contentInset={{ bottom: 110, top: 0 }}
+                contentContainerStyle={{
+                  flexGrow: 1,
+                }}
                 data={displayTrip.memories}
                 keyExtractor={(memory) => memory._id.toString()}
                 renderItem={({ item }) => (
                   <ListItem
-                    style={styles.memoryContainer}
+                    fontSize={20}
+                    marginBottom={0}
+                    color={colors.primary}
+                    underlayColor={colors.light}
                     title={item.locationName}
-                    // onPress={showMemory(item._id)}
                     onPress={() => showMemory(item._id)}
                     renderRightActions={() => (
                       <ListItemDeleteAction
@@ -396,6 +392,16 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 10,
   },
+  back: {
+    // marginTop: 10,
+    position: 'absolute',
+    right: 30,
+    bottom: 30,
+    backgroundColor: colors.primary,
+  },
+  currentTrip: {
+    paddingLeft: 20,
+  },
   editDelete: {
     flexDirection: 'row',
   },
@@ -406,12 +412,7 @@ const styles = StyleSheet.create({
   // },
 
   image: { width: 220, height: 220, margin: 10, borderRadius: 20 },
-  // memoryContainer: {
-  //   flexWrap: 'wrap',
-  //   flexDirection: 'row',
-  //   marginTop: 0,
-  //   flex: 1,
-  // },
+
   // tripPic: { width: '100%', height: 200 },
   // trip: {
   //   flex: 1,

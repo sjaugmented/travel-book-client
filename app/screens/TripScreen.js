@@ -25,7 +25,6 @@ import {
   ProgressChart,
   ContributionGraph,
 } from 'react-native-chart-kit'
-import { ScrollView } from 'react-native-gesture-handler'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import ListItemSeparator from '../components/lists/ListItemSeparator'
 import ListItem from '../components/lists/ListItem'
@@ -36,7 +35,7 @@ import AppButton from '../components/AppButton'
 const { width, height } = Dimensions.get('window')
 
 function TripScreen({ navigation }) {
-  const { showTrip } = useContext(TripShowContext)
+  const { showTrip, setShowMemory } = useContext(TripShowContext)
   const [displayTrip, setDisplay] = useState('')
   // const [memObj, setMemObj] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
@@ -53,6 +52,11 @@ function TripScreen({ navigation }) {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const showMemory = (memory) => {
+    setShowMemory(memory)
+    navigation.navigate('Memory')
   }
 
   // const pieChart1 = [
@@ -270,44 +274,55 @@ function TripScreen({ navigation }) {
               paddingLeft="15"
             />
           </View> */}
-          <View style={styles.charts2}>
-            <PieChart
-              data={pieChart2}
-              width={Dimensions.get('screen').width}
-              height={220}
-              chartConfig={{
-                backgroundColor: '#e26a00',
-                backgroundGradientFrom: '#fb8c00',
-                backgroundGradientTo: '#ffa726',
-                decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,
-                style: {
-                  borderRadius: 16,
-                },
-              }}
-              bezier
-              style={{
-                marginVertical: 8,
-                borderRadius: 16,
-              }}
-              accessor="mileage"
-              backgroundColor="transparent"
-              paddingLeft="25"
+          <View style={styles.photoContainer}>
+            <FlatList
+              horizontal={true}
+              ListHeaderComponent={
+                <PieChart
+                  data={pieChart2}
+                  width={Dimensions.get('screen').width}
+                  height={220}
+                  chartConfig={{
+                    backgroundColor: '#e26a00',
+                    backgroundGradientFrom: '#fb8c00',
+                    backgroundGradientTo: '#ffa726',
+                    decimalPlaces: 2, // optional, defaults to 2dp
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    style: {
+                      borderRadius: 16,
+                    },
+                  }}
+                  bezier
+                  style={{
+                    backgroundColor: colors.secondary,
+                    marginVertical: 8,
+                    borderRadius: 20,
+                    width: width - 40,
+                  }}
+                  accessor="mileage"
+                  paddingLeft="10"
+                />
+              }
+              data={displayTrip.memories}
+              keyExtractor={(memory) => memory._id.toString()}
+              renderItem={({ item }) => (
+                <Image source={{ uri: item.photo }} style={styles.image} />
+              )}
             />
           </View>
-          {/* </ScrollView> */}
           <View style={{ marginBottom: 10 }}>
             <AppHeader style={{ fontWeight: 'bold' }}>MEMORIES</AppHeader>
             <View>
               <FlatList
                 contentInset={{ bottom: 110, top: 0 }}
-                data={memObj}
+                data={displayTrip.memories}
                 keyExtractor={(memory) => memory._id.toString()}
                 renderItem={({ item }) => (
                   <ListItem
                     style={styles.memoryContainer}
                     title={item.locationName}
-                    onPress={() => console.log('Memory selected', item)}
+                    // onPress={showMemory(item._id)}
+                    onPress={() => showMemory(item._id)}
                     renderRightActions={() => (
                       <ListItemDeleteAction
                         onPress={() => setDeleteState(item._id)}
@@ -389,15 +404,8 @@ const styles = StyleSheet.create({
   //   width: '100%',
   //   height: '100%',
   // },
-  charts2: {
-    backgroundColor: colors.secondary,
-    width: width - 50,
-    margin: 10,
-    height: 200,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
+  image: { width: 220, height: 220, margin: 10, borderRadius: 20 },
   // memoryContainer: {
   //   flexWrap: 'wrap',
   //   flexDirection: 'row',

@@ -32,9 +32,7 @@ export default class MemoryModel {
   }
   static show = async (memory) => {
     try {
-      const foundMemory = await axios.get(
-        `${evansLocal}/memories/${memory._id}`,
-      )
+      const foundMemory = await axios.get(`${evansLocal}/memories/${memory}`)
       return foundMemory
     } catch (error) {
       console.log(error)

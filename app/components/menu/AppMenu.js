@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import colors from '../../config/colors'
-import ButtonIcon from '../ButtonIcon'
-import AppText from '../AppText'
+import React, { useState, useEffect, useContext } from "react"
+import { View, StyleSheet, Dimensions } from "react-native"
+import colors from "../../config/colors"
+import ButtonIcon from "../ButtonIcon"
+import AppText from "../AppText"
 
-import TripContext from '../../context/TripContext'
-import ActiveTripContext from '../../context/activeTripContext'
-import AppButton from '../AppButton'
-import TripList from './TripList'
-import ModalContext from '../../context/modalContext'
-import TripShowContext from '../../context/TripShowContext'
-import UserModel from '../../api/user'
-import UserContext from '../../context/userContext'
-import AppHeader from '../AppHeader'
+import TripContext from "../../context/TripContext"
+import ActiveTripContext from "../../context/activeTripContext"
+import AppButton from "../AppButton"
+import TripList from "./TripList"
+import ModalContext from "../../context/modalContext"
+import TripShowContext from "../../context/TripShowContext"
+import UserModel from "../../api/user"
+import UserContext from "../../context/userContext"
+import AppHeader from "../AppHeader"
 
 function AppMenu({ navigation }) {
   const { username, userId, logout } = useContext(UserContext)
@@ -29,10 +29,10 @@ function AppMenu({ navigation }) {
   const loadTrips = async () => {
     try {
       const response = await UserModel.show(userId)
-
-      !response
-        ? setTrips([{ name: 'Kinda empty here...', year: '' }])
-        : setTrips(response.trips)
+      // !response.trips.length
+      //   ? setTrips([{ name: "You should get out more", year: "" }])
+      //   : setTrips(response.trips)
+      setTrips(response.trips)
     } catch (error) {
       console.log(error)
     }
@@ -41,7 +41,7 @@ function AppMenu({ navigation }) {
   const handlePress = (trip) => {
     setShowTrip(trip)
     setMenuVisible(false)
-    navigation.navigate('Trip')
+    navigation.navigate("Trip")
   }
 
   return (
@@ -119,17 +119,21 @@ function AppMenu({ navigation }) {
       </View>
       <View style={styles.tripsContainer}>
         <AppText style={styles.text}>MY TRIPS</AppText>
-        <TripList
-          style={styles.tripList}
-          data={trips}
-          handlePress={handlePress}
-        />
+        {trips.length ? (
+          <TripList
+            style={styles.tripList}
+            data={trips}
+            handlePress={handlePress}
+          />
+        ) : (
+          <AppHeader>You need to get out more</AppHeader>
+        )}
       </View>
     </View>
   )
 }
 
-const width = Dimensions.get('screen').width
+const width = Dimensions.get("screen").width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -141,46 +145,46 @@ const styles = StyleSheet.create({
   logout: {
     width: 100,
     height: 50,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     right: 20,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   current: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     left: 20,
     width: 150,
     height: 50,
-    alignItems: 'baseline',
+    alignItems: "baseline",
   },
   navbar: {
-    position: 'absolute',
+    position: "absolute",
     right: width * 0.05,
     bottom: 50,
-    alignItems: 'center',
+    alignItems: "center",
     // backgroundColor: colors.background,
   },
   text: {
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.primary,
     marginBottom: 5,
     // backgroundColor: colors.background,
   },
   trophyContainer: {
     // backgroundColor: colors.background,
-    position: 'absolute',
+    position: "absolute",
     top: 70,
     left: width * 0.05,
   },
   trophies: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tripsContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 160,
     left: width * 0.05,
-    width: '70%',
+    width: "70%",
   },
   tripList: {
     backgroundColor: colors.background,

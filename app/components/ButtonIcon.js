@@ -1,12 +1,12 @@
-import React from 'react'
-import { TouchableOpacity } from 'react-native'
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import React from "react"
+import { TouchableOpacity } from "react-native"
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 
 export default function ButtonIcon({
-  name = 'email',
+  name = "email",
   size = 50,
-  backgroundColor = '#000',
-  iconColor = '#fff',
+  backgroundColor = "#000",
+  iconColor = "#fff",
   style,
   onPress,
   activeOpacity,
@@ -20,8 +20,8 @@ export default function ButtonIcon({
           height: size,
           borderRadius: size / 2,
           backgroundColor,
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: "center",
+          alignItems: "center",
           margin: margin,
         },
         style,

@@ -165,6 +165,11 @@ function TripScreen({ navigation }) {
     navigation.goBack()
   }
 
+  const handleBackButton = () => {
+    console.log("go back")
+    navigation.goBack()
+  }
+
   return (
     <>
       <View style={styles.tripContainer}>
@@ -172,7 +177,7 @@ function TripScreen({ navigation }) {
           style={styles.back}
           name="chevron-left"
           size={35}
-          onPress={() => navigation.goBack("Map")}
+          onPress={() => handleBackButton()}
         />
         <View style={styles.mapContainer}>
           {displayTrip ? (
@@ -396,8 +401,9 @@ const styles = StyleSheet.create({
     // marginTop: 10,
     position: "absolute",
     right: 30,
-    bottom: 30,
+    bottom: 100,
     backgroundColor: colors.primary,
+    elevation: 10,
   },
   currentTrip: {
     paddingLeft: 20,

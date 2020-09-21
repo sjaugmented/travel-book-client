@@ -24,7 +24,7 @@ function TripList({ data, handlePress }) {
 }
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 15, marginTop: 10, height: 375 },
+  container: { marginBottom: 15, marginTop: 0, height: 375 },
 })
 
 export default TripList

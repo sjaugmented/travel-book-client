@@ -1,6 +1,7 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import PieChart from "react-native-chart-kit";
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import PieChart from 'react-native-chart-kit'
+import colors from '../config/colors'
 
 function ChartCard({ data }) {
   return (
@@ -11,15 +12,15 @@ function ChartCard({ data }) {
         height={}
         chartConfig={}
         accessor={}
-        backgroundColor={}
+        backgroundColor={colors.secondary}
         paddingLeft="15"
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {},
-});
+  container: { backgroundColor: colors.secondary },
+})
 
-export default ChartCard;
+export default ChartCard

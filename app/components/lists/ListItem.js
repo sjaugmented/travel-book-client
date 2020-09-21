@@ -7,22 +7,25 @@ import AppText from '../AppText'
 
 function ListItem({
   title,
-  id,
+  fontSize,
   onPress,
   subTitle,
-  navigation,
-  handlePress,
+  color,
+  marginBottom,
+  underlayColor,
   renderRightActions,
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight
         style={styles.touch}
-        underlayColor={colors.primary}
+        underlayColor={underlayColor}
         onPress={onPress}
       >
-        <View style={styles.container}>
-          <AppText style={styles.title}>{title}</AppText>
+        <View style={[styles.container, { marginBottom: marginBottom }]}>
+          <AppText fontSize={fontSize} style={[styles.title, { color: color }]}>
+            {title}
+          </AppText>
           <AppText style={styles.subTitle}>{subTitle}</AppText>
         </View>
       </TouchableHighlight>
@@ -40,6 +43,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignItems: 'center',
     padding: 15,
+    height: 50,
   },
   title: {
     fontWeight: '500',

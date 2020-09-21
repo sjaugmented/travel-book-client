@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useContext, useEffect } from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import MapScreen from "../screens/MapScreen";
-import TripScreen from "../screens/TripScreen";
+import MapScreen from '../screens/MapScreen'
+import TripScreen from '../screens/TripScreen'
+import MemoryScreen from '../screens/MemoryScreen'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 function AppNavigator() {
   return (
@@ -21,8 +22,9 @@ function AppNavigator() {
         }}
       />
       <Stack.Screen name="Trip" component={TripScreen} />
+      <Stack.Screen name="Memory" component={MemoryScreen} />
     </Stack.Navigator>
-  );
+  )
 }
 
-export default AppNavigator;
+export default AppNavigator

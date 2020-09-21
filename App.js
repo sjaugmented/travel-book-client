@@ -14,6 +14,7 @@ export default function App() {
     userId: '',
   })
   const [showTrip, setShowTrip] = useState('')
+  const [showMemory, setShowMemory] = useState('')
 
   const checkForUser = async () => {
     try {
@@ -58,8 +59,10 @@ export default function App() {
         >
           <TripShowContext.Provider
             value={{
-              showTrip: showTrip,
-              setShowTrip: setShowTrip,
+              showTrip,
+              setShowTrip,
+              showMemory,
+              setShowMemory,
             }}
           >
             {user.username ? <AppNavigator /> : <AuthNavigator />}

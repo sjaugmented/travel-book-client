@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react"
 import {
   StyleSheet,
   Text,
@@ -7,38 +7,38 @@ import {
   Image,
   Dimensions,
   FlatList,
-} from 'react-native'
-import NativeModal from 'react-native-modal'
-import AppText from '../components/AppText'
+} from "react-native"
+import NativeModal from "react-native-modal"
+import AppText from "../components/AppText"
 
-import TripContext from '../context/TripContext'
-import TripModel from '../api/trips'
-import AppHeader from '../components/AppHeader'
-import TripShowContext from '../context/TripShowContext'
-import colors from '../config/colors'
-import { PieChart as PieChart2 } from 'react-native-svg-charts'
+import TripContext from "../context/TripContext"
+import TripModel from "../api/trips"
+import AppHeader from "../components/AppHeader"
+import TripShowContext from "../context/TripShowContext"
+import colors from "../config/colors"
+import { PieChart as PieChart2 } from "react-native-svg-charts"
 import {
   LineChart,
   BarChart,
   PieChart,
   ProgressChart,
   ContributionGraph,
-} from 'react-native-chart-kit'
-import { ScrollView } from 'react-native-gesture-handler'
-import Swipeable from 'react-native-gesture-handler/Swipeable'
-import ListItemSeparator from '../components/lists/ListItemSeparator'
-import ListItem from '../components/lists/ListItem'
-import ListItemDeleteAction from '../components/lists/ListItemDeleteAction'
-import MemoryModel from '../api/memories'
-import AppButton from '../components/AppButton'
+} from "react-native-chart-kit"
+import { ScrollView } from "react-native-gesture-handler"
+import Swipeable from "react-native-gesture-handler/Swipeable"
+import ListItemSeparator from "../components/lists/ListItemSeparator"
+import ListItem from "../components/lists/ListItem"
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction"
+import MemoryModel from "../api/memories"
+import AppButton from "../components/AppButton"
 
-const { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get("window")
 
 function TripScreen({ navigation }) {
   const showTrip = useContext(TripShowContext)
-  const [displayTrip, setDisplay] = useState('')
+  const [displayTrip, setDisplay] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
-  const [memoryToDelete, setMemoryToDelete] = useState('')
+  const [memoryToDelete, setMemoryToDelete] = useState("")
 
   useEffect(() => {
     loadTrip()
@@ -77,30 +77,30 @@ function TripScreen({ navigation }) {
 
   const pieChart1 = [
     {
-      name: 'Eating',
+      name: "Eating",
       mileage: 10,
-      color: 'rgba(131, 167, 234, 1)',
+      color: "rgba(131, 167, 234, 1)",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Drinking',
+      name: "Drinking",
       mileage: 6,
-      color: '#F00',
+      color: "#F00",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Sight-Seeing',
+      name: "Sight-Seeing",
       mileage: 25,
-      color: 'purple',
+      color: "purple",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Sleeping',
+      name: "Sleeping",
       mileage: 30,
-      color: 'rgb(40, 167, 44)',
+      color: "rgb(40, 167, 44)",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
@@ -108,37 +108,37 @@ function TripScreen({ navigation }) {
 
   const pieChart2 = [
     {
-      name: 'Air',
+      name: "Air",
       mileage: 6500,
-      color: 'rgb(255, 255, 255)',
+      color: "rgb(255, 255, 255)",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Car',
+      name: "Car",
       mileage: 340,
-      color: '#F00',
+      color: "#F00",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Bus',
+      name: "Bus",
       mileage: 782,
-      color: 'orange',
+      color: "orange",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Boat',
+      name: "Boat",
       mileage: 0,
-      color: 'blue',
+      color: "blue",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
     {
-      name: 'Foot',
+      name: "Foot",
       mileage: 108,
-      color: 'rgb(0, 128, 0)',
+      color: "rgb(0, 128, 0)",
       legendFontColor: colors.light,
       legendFontSize: 15,
     },
@@ -147,9 +147,9 @@ function TripScreen({ navigation }) {
   const data3 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
 
   const randomColor = () =>
-    ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
+    ("#" + ((Math.random() * 0xffffff) << 0).toString(16) + "000000").slice(
       0,
-      7,
+      7
     )
 
   const overviewData = data3
@@ -158,27 +158,27 @@ function TripScreen({ navigation }) {
       value,
       svg: {
         fill: randomColor(),
-        onPress: () => console.log('press', index),
+        onPress: () => console.log("press", index),
       },
       key: `pie-${index}`,
     }))
 
   ////MEMORY STORAGE AND FUNCTION////
-  let memObj = [{ locationName: 'Loading...', _id: 1 }]
+  let memObj = [{ locationName: "Loading...", _id: 1 }]
 
   if (displayTrip) {
     memObj = displayTrip.memories
   }
 
   const setDeleteState = (memoryId) => {
-    console.log('storing ID...', memoryId)
+    console.log("storing ID...", memoryId)
     setModalVisible(true)
     setMemoryToDelete(memoryId)
     console.log(`stored ${memoryId} to state`)
   }
 
   const deleteMemory = async (memoryId) => {
-    console.log('deleteMemory with ID:', memoryId)
+    console.log("deleteMemory with ID:", memoryId)
     try {
       await MemoryModel.delete(memoryId)
       setModalVisible(false)
@@ -197,17 +197,17 @@ function TripScreen({ navigation }) {
     <>
       <View style={styles.container}>
         <Image
-          source={require('../assets/welcome_palms.jpg')}
+          source={require("../assets/welcome_palms.jpg")}
           style={styles.tripPic}
           resizeMode="center"
         />
         <ScrollView
           style={styles.trip}
           snapToInterval={height / 3}
-          snapToAlignment={'center'}
+          snapToAlignment={"center"}
         >
           <AppHeader style={styles.header}>
-            {displayTrip ? displayTrip.name : 'Loading...'}
+            {displayTrip ? displayTrip.name : "Loading..."}
           </AppHeader>
 
           <AppText>{displayTrip.year}</AppText>
@@ -222,7 +222,7 @@ function TripScreen({ navigation }) {
             horizontal={true}
             decelerationRate={0}
             snapToInterval={200}
-            snapToAlignment={'center'}
+            snapToAlignment={"center"}
             contentInset={{
               top: 0,
               left: 30,
@@ -234,12 +234,12 @@ function TripScreen({ navigation }) {
               <AppText>Here's another bullshit chart.</AppText>
               <PieChart
                 data={pieChart1}
-                width={Dimensions.get('screen').width}
+                width={Dimensions.get("screen").width}
                 height={220}
                 chartConfig={{
-                  backgroundColor: '#e26a00',
-                  backgroundGradientFrom: '#fb8c00',
-                  backgroundGradientTo: '#ffa726',
+                  backgroundColor: "#e26a00",
+                  backgroundGradientFrom: "#fb8c00",
+                  backgroundGradientTo: "#ffa726",
                   decimalPlaces: 2, // optional, defaults to 2dp
                   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                   style: {
@@ -260,12 +260,12 @@ function TripScreen({ navigation }) {
               <AppText>And one more. Also bullshit.</AppText>
               <PieChart
                 data={pieChart2}
-                width={Dimensions.get('screen').width}
+                width={Dimensions.get("screen").width}
                 height={220}
                 chartConfig={{
-                  backgroundColor: '#e26a00',
-                  backgroundGradientFrom: '#fb8c00',
-                  backgroundGradientTo: '#ffa726',
+                  backgroundColor: "#e26a00",
+                  backgroundGradientFrom: "#fb8c00",
+                  backgroundGradientTo: "#ffa726",
                   decimalPlaces: 2, // optional, defaults to 2dp
                   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                   style: {
@@ -285,7 +285,7 @@ function TripScreen({ navigation }) {
           </ScrollView>
 
           <View>
-            <AppText style={{ fontWeight: 'bold' }}>MEMORIES</AppText>
+            <AppText style={{ fontWeight: "bold" }}>MEMORIES</AppText>
             <View style={styles.memoryList}>
               <FlatList
                 data={memObj}
@@ -293,7 +293,7 @@ function TripScreen({ navigation }) {
                 renderItem={({ item }) => (
                   <ListItem
                     title={item.locationName}
-                    onPress={() => console.log('Memory selected', item)}
+                    onPress={() => console.log("Memory selected", item)}
                     renderRightActions={() => (
                       <ListItemDeleteAction
                         onPress={() => setDeleteState(item._id)}
@@ -311,7 +311,7 @@ function TripScreen({ navigation }) {
               <AppButton
                 title="Edit Trip"
                 color={colors.medium}
-                onPress={() => console.log('edit', displayTrip)}
+                onPress={() => console.log("edit", displayTrip)}
               />
             </View>
             <View>
@@ -366,18 +366,18 @@ const styles = StyleSheet.create({
   },
   window: {
     flex: 1,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
-  tripPic: { width: '100%', height: 200 },
+  tripPic: { width: "100%", height: 200 },
   trip: {
     flex: 1,
     padding: 10,
   },
   overview: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 20,
     padding: 5,
   },
@@ -388,9 +388,9 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 200,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // elevation: 3,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 3,
   },
   chartsContainer: {
     // marginTop: 50,
@@ -400,13 +400,13 @@ const styles = StyleSheet.create({
   charts: {
     // marginTop: 50,
     backgroundColor: colors.medium,
-    color: 'white',
+    color: "white",
     width: width - 80,
     margin: 10,
     height: 200,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   charts2: {
     // marginTop: 50,
@@ -416,8 +416,8 @@ const styles = StyleSheet.create({
     margin: 10,
     height: 200,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   memoryList: {
     flex: 1,
@@ -433,9 +433,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: 30,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   deleteText: {
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
   },
   modalButton: { margin: 10 },

@@ -13,7 +13,7 @@ function ListItem({
   handlePress,
 }) {
   return (
-    <TouchableHighlight underlayColor={colors.white} onPress={onPress}>
+    <TouchableHighlight underlayColor={colors.dark} onPress={onPress}>
       <View style={styles.container}>
         <AppText>{title}</AppText>
         <AppText>{subTitle}</AppText>

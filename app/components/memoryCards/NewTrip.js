@@ -36,7 +36,7 @@ function NewTrip({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <AppHeader style={styles.header}>Where ya going?</AppHeader>
+      <AppHeader style={styles.header}>Name Your Trip</AppHeader>
       <AppTextInput
         onChangeText={(text) => memoryContext.setTripName(text)}
         icon="airplane"

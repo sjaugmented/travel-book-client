@@ -29,7 +29,7 @@ import MapInput from '../components/MapInput'
 
 function MapScreen({ navigation }) {
   //useContext
-  const tripShowContext = useContext(TripShowContext)
+  // const { refreshMap } = useContext(TripShowContext)
   const { username, userId, logout } = useContext(UserContext)
   //Hide and show
   const [menuVisible, setMenuVisible] = useState(false)
@@ -162,15 +162,16 @@ function MapScreen({ navigation }) {
           }}
           showsUserLocation={true}
         >
-          {allMemories !== '' &&
-            allMemories.map((marker, index) => (
-              <Marker
-                pinColor="blue"
-                key={index}
-                title={marker.locationName}
-                coordinate={marker.location}
-              />
-            ))}
+          {allMemories
+            ? allMemories.map((marker, index) => (
+                <Marker
+                  pinColor="blue"
+                  key={index}
+                  title={marker.locationName}
+                  coordinate={marker.location}
+                />
+              ))
+            : console.log('none')}
         </MapView>
       )}
       {!tripActive ? (
@@ -204,14 +205,16 @@ function MapScreen({ navigation }) {
       />
       {/* MENU MODAL */}
       <NativeModal
-        visible={menuVisible}
+        isVisible={menuVisible}
         animationType="slide"
         transparent={true}
         onBackdropPress={() => setMenuVisible(false)}
-        // onSwipeComplete={() => setMenuVisible(false)}
-        // swipeDirection="down"
-        // backdropColor="clear"
-        // backdropOpacity={0}
+        onSwipeComplete={() => setMenuVisible(false)}
+        swipeThreshold={100}
+        swipeDirection="down"
+        backdropColor="clear"
+        backdropOpacity={0}
+        propagateSwipe={true}
         style={styles.menuModal}
         onModalHide={() => {
           getLocation()
@@ -220,7 +223,12 @@ function MapScreen({ navigation }) {
       >
         <View style={styles.menuView}>
           <TripContext.Provider
-            value={{ setPickedTrip: setPickedTrip, pickedTrip: pickedTrip }}
+            value={{
+              setPickedTrip: setPickedTrip,
+              tripName: tripName,
+              pickedTrip: pickedTrip,
+              refreshMap: refreshMap,
+            }}
           >
             <ActiveTripContext.Provider
               value={{
@@ -246,7 +254,9 @@ function MapScreen({ navigation }) {
         onBackdropPress={() => setModalVisible(false)}
         backdropColor="clear"
         backdropOpacity={0}
-        onModalHide={() => getLocation()}
+        onModalHide={() => {
+          getLocation(), refreshMap(100)
+        }}
         style={styles.memModal}
       >
         <View style={styles.memoryView}>

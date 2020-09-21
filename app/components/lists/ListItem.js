@@ -1,9 +1,9 @@
-import React from "react"
-import { render } from "react-dom"
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native"
-import Swipeable from "react-native-gesture-handler/Swipeable"
-import colors from "../../config/colors"
-import AppText from "../AppText"
+import React from 'react'
+import { render } from 'react-dom'
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import colors from '../../config/colors'
+import AppText from '../AppText'
 
 function ListItem({
   title,
@@ -16,7 +16,11 @@ function ListItem({
 }) {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight underlayColor={colors.white} onPress={onPress}>
+      <TouchableHighlight
+        style={styles.touch}
+        underlayColor={colors.primary}
+        onPress={onPress}
+      >
         <View style={styles.container}>
           <AppText style={styles.title}>{title}</AppText>
           <AppText style={styles.subTitle}>{subTitle}</AppText>
@@ -27,15 +31,18 @@ function ListItem({
 }
 
 const styles = StyleSheet.create({
+  touch: {
+    borderRadius: 50,
+  },
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 5,
-    alignItems: "center",
+    alignItems: 'center',
     padding: 15,
   },
   title: {
-    fontWeight: "500",
+    fontWeight: '500',
   },
   subTitle: {
     color: colors.medium,

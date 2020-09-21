@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
 import AppText from '../AppText'
 import ListItem from '../lists/ListItem'
 import ListItemSeparator from '../lists/ListItemSeparator'
+import colors from '../../config/colors'
 
 function TripList({ data, handlePress }) {
   return (
@@ -12,6 +13,9 @@ function TripList({ data, handlePress }) {
         keyExtractor={(trip) => trip.name.toString()}
         renderItem={({ item }) => (
           <ListItem
+            color={colors.dark}
+            fontSize={20}
+            underlayColor={colors.light}
             title={item.name}
             subTitle={item.year}
             onPress={() => handlePress(item.name)}

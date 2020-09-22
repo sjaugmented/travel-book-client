@@ -57,7 +57,7 @@ function PhotoSocial({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      <AppHeader style={styles.header}>Take A Pic!</AppHeader>
+      <AppHeader style={styles.header}>Add A Pic!</AppHeader>
       {memoryContext.checkInPhoto === '' ? (
         <View style={styles.empty}>
           <AppText>Image</AppText>

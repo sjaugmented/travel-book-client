@@ -48,6 +48,7 @@ function MapScreen({ navigation }) {
   const [checkInPhoto, setCheckInPhoto] = useState('')
   const [memoryLocation, setMemoryLocation] = useState('')
   const [prevLocation, setPrevLocation] = useState('')
+  const [choice, setChoice] = useState(true)
 
   //Hook for show trip window
   const [pickedTrip, setPickedTrip] = useState('')
@@ -132,7 +133,8 @@ function MapScreen({ navigation }) {
 
   const loadMemories = async () => {
     try {
-      const { memories } = await MemoryModel.all()
+      const { memories } = await MemoryModel.all(userId)
+      // console.log(memories)
       setAllMemories(memories)
     } catch (error) {
       console.log(error)
@@ -280,6 +282,8 @@ function MapScreen({ navigation }) {
                 setCheckInPhoto: setCheckInPhoto,
                 setTripName: setTripName,
                 setMemoryLocation: setMemoryLocation,
+                setChoice: setChoice,
+                choice: choice,
                 tripName: tripName,
                 checkInPhoto: checkInPhoto,
                 location: location,

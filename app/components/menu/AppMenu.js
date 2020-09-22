@@ -82,6 +82,9 @@ function AppMenu({ navigation }) {
           backgroundColor={colors.light}
           iconColor={colors.primary}
           style={{ marginBottom: 40 }}
+          onPress={() => {
+            navigation.navigate('Trophies'), setMenuVisible(false)
+          }}
         />
         {tripActive && (
           <>
@@ -102,17 +105,25 @@ function AppMenu({ navigation }) {
       <View style={styles.trophyContainer}>
         <AppText style={styles.text}>RECENT TROPHIES</AppText>
         <View style={styles.trophies}>
-          <ButtonIcon margin={5} size={30} iconColor="red" name="trophy" />
           <ButtonIcon
+            margin={5}
+            size={30}
+            backgroundColor="transparent"
+            iconColor="red"
+            name="trophy"
+          />
+          <ButtonIcon
+            backgroundColor="transparent"
             margin={5}
             size={30}
             iconColor="green"
             name="trophy-award"
           />
           <ButtonIcon
+            backgroundColor="transparent"
             margin={5}
             size={30}
-            iconColor="white"
+            iconColor="orange"
             name="trophy-variant"
           />
         </View>

@@ -64,10 +64,6 @@ function NameOfPlace({ navigation }) {
 
   return (
     <View style={styles.memoryView}>
-      {/* <AppButton
-        onPress={() => navigation.replace('TypeOfPlace')}
-        title="Go Back"
-      /> */}
       <AppHeader style={styles.header}>Choose Your Location</AppHeader>
       <FlatList
         style={styles.listContainer}
@@ -76,6 +72,9 @@ function NameOfPlace({ navigation }) {
         keyExtractor={(place) => place.place_id.toString()}
         renderItem={({ item }) => (
           <ListItem
+            fontSize={18}
+            color={colors.primary}
+            underlayColor={colors.background}
             title={item.name}
             onPress={() => handlePress(item.name, item.geometry)}
           />
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexWrap: 'wrap',
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   back: {
     position: 'absolute',

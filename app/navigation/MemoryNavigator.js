@@ -13,6 +13,7 @@ import SubmitMemory from '../components/memoryCards/SubmitMemory'
 import NewTrip from '../components/memoryCards/NewTrip'
 import Choice from '../components/memoryCards/Choice'
 import ActiveTripContext from '../context/activeTripContext'
+import MemoryContext from '../context/memoryContext'
 
 const Stack = createStackNavigator()
 const forFade = ({ current }) => ({
@@ -20,8 +21,9 @@ const forFade = ({ current }) => ({
     opacity: current.progress,
   },
 })
-function MemoryNavigator(props) {
+function MemoryNavigator() {
   const { tripActive } = useContext(ActiveTripContext)
+  const { choice, setChoice } = useContext(MemoryContext)
 
   return (
     <Stack.Navigator
@@ -39,7 +41,9 @@ function MemoryNavigator(props) {
           component={NewTrip}
         />
       )}
-      {/* {!tripActive && <Stack.Screen name="Choice" component={Choice} />} */}
+
+      {/* <Stack.Screen name="Choice" component={Choice} /> */}
+
       <Stack.Screen
         name="TypeOfPlace"
         options={{ cardStyleInterpolator: forFade }}

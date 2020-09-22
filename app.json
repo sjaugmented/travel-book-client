@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "travel-book-client",
-    "slug": "travel-book-client",
+    "name": "Travel Book",
+    "slug": "travel-book",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },

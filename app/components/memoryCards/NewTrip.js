@@ -27,7 +27,8 @@ function NewTrip({ navigation }) {
       }
       await TripModel.create(data)
       storeTripActive(true)
-      // navigation.navigate('Choice')
+
+      // setChoice(true)
       navigation.navigate('TypeOfPlace')
     } catch (error) {
       console.log(error)
@@ -40,9 +41,10 @@ function NewTrip({ navigation }) {
       <AppTextInput
         onChangeText={(text) => memoryContext.setTripName(text)}
         icon="airplane"
-        placeholder="Name your trip!"
+        placeholder="Type"
       />
       <ButtonIcon
+        style={{ marginTop: 10 }}
         name="forward"
         backgroundColor="green"
         size={60}
@@ -56,12 +58,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
-    // opacity: 0.7,
     alignItems: 'center',
-    // justifyContent: 'center',
     borderRadius: 50,
-    marginTop: 60,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 200,
   },
   header: {
     fontSize: 30,

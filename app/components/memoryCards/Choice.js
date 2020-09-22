@@ -9,14 +9,17 @@ import AppHeader from '../AppHeader'
 import AppButton from '../Button'
 
 function Choice({ navigation }) {
+  const { setChoice } = useContext(memoryContext)
   //set memoryContext object
   const memoryContext = useContext(MemoryContext)
   //Set typeofplace check-in and go to next modal
   const handlePress = (answer) => {
     if (answer === 'yes') {
+      setChoice(false)
       navigation.navigate('TypeOfPlace')
     } else {
       memoryContext.setModalVisible(false)
+      setChoice(false)
     }
   }
 

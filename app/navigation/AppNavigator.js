@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import MapScreen from '../screens/MapScreen'
 import TripScreen from '../screens/TripScreen'
 import MemoryScreen from '../screens/MemoryScreen'
+import TrophyScreen from '../screens/TrophyScreen'
 
 const Stack = createStackNavigator()
 
@@ -23,6 +24,7 @@ function AppNavigator() {
       />
       <Stack.Screen name="Trip" component={TripScreen} />
       <Stack.Screen name="Memory" component={MemoryScreen} />
+      <Stack.Screen name="Trophies" component={TrophyScreen} />
     </Stack.Navigator>
   )
 }

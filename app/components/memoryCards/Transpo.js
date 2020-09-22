@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native'
 import colors from '../../config/colors'
 import MemoryContext from '../../context/memoryContext'
 import AppHeader from '../AppHeader'
-import AppText from '../AppText'
 import ButtonIcon from '../ButtonIcon'
 
 function Transpo({ navigation }) {

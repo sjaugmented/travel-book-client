@@ -81,6 +81,7 @@ function MapScreen({ navigation }) {
       type: checkInType,
       transpo: checkInTranspo,
       photo: checkInPhoto,
+      user: userId,
     }
     setMemory(memoryData)
     if (!tripActive) storeTripActive(true)

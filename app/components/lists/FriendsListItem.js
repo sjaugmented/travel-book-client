@@ -3,6 +3,8 @@ import { StyleSheet, Image, View, TouchableHighlight } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import colors from '../../config/colors'
 import AppText from '../AppText'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import ButtonIcon from '../ButtonIcon'
 
 function FriendsListItem({
   name,
@@ -17,21 +19,35 @@ function FriendsListItem({
   renderRightActions,
 }) {
   return (
-    <Swipeable renderRightActions={renderRightActions}>
+    <Swipeable style={styles.swipe} renderRightActions={renderRightActions}>
       <TouchableHighlight
         style={styles.touch}
         underlayColor={underlayColor}
         onPress={onPress}
       >
-        <View style={[styles.container, { marginBottom: marginBottom }]}>
-          <Image
-            source={{ uri: avatar }}
-            style={{ width: 50, height: 50, borderRadius: 10 }}
-          />
-          <AppText fontSize={fontSize} style={[styles.title, { color: color }]}>
+        <View style={[styles.friendContainer, { marginBottom: marginBottom }]}>
+          {active ? (
+            <ButtonIcon
+              name="circle-small"
+              backgroundColor="green"
+              size={12}
+              style={styles.isActive}
+            />
+          ) : (
+            <ButtonIcon
+              name="circle-small"
+              backgroundColor="red"
+              size={12}
+              style={styles.isActive}
+            />
+          )}
+          <Image source={{ uri: avatar }} style={styles.avatar} />
+          <AppText
+            fontSize={fontSize}
+            style={[styles.username, { color: color }]}
+          >
             {name}
           </AppText>
-          <AppText style={styles.subTitle}>{active}</AppText>
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -41,20 +57,24 @@ function FriendsListItem({
 const styles = StyleSheet.create({
   touch: {
     borderRadius: 30,
+    marginVertical: 10,
   },
-  container: {
+  friendContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 5,
     alignItems: 'center',
-    padding: 15,
-    height: 50,
   },
-  title: {
+  isActive: {
+    marginRight: 8,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+  },
+  username: {
     fontWeight: '500',
-  },
-  subTitle: {
-    color: colors.medium,
+    fontSize: 20,
+    marginLeft: 10,
   },
 })
 

@@ -32,19 +32,16 @@ function WelcomeScreen({ navigation }) {
       })
 
       if (result.type === 'success') {
-        console.log(result)
         const foundUser = await UserModel.show(result.user.id)
         if (foundUser) {
           await AsyncStorage.setItem('username', foundUser.name)
           await AsyncStorage.setItem('userId', foundUser.googleId)
           setUser({ username: foundUser.name, userId: foundUser.googleId })
-          // navigation.navigate("Map")
         } else {
           const newUser = await UserModel.create(result.user)
           await AsyncStorage.setItem('username', newUser.name)
           await AsyncStorage.setItem('userId', newUser.googleId)
           setUser({ username: newUser.name, userId: newUser.googleId })
-          // navigation.navigate("Map")
         }
       } else {
         return { cancelled: true }

@@ -30,14 +30,16 @@ function FriendsListItem({
             <ButtonIcon
               name="circle-small"
               backgroundColor="green"
-              size={12}
+              iconColor="green"
+              size={10}
               style={styles.isActive}
             />
           ) : (
             <ButtonIcon
               name="circle-small"
               backgroundColor="red"
-              size={12}
+              iconColor="red"
+              size={10}
               style={styles.isActive}
             />
           )}

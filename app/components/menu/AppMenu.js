@@ -76,6 +76,9 @@ function AppMenu({ navigation }) {
           backgroundColor={colors.light}
           iconColor={colors.primary}
           style={{ marginBottom: 20 }}
+          onPress={() => {
+            navigation.navigate('Friends'), setMenuVisible(false)
+          }}
         />
         <ButtonIcon
           name="trophy-award"

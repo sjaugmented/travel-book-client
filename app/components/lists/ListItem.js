@@ -35,7 +35,7 @@ function ListItem({
 
 const styles = StyleSheet.create({
   touch: {
-    borderRadius: 50,
+    borderRadius: 30,
   },
   container: {
     flexDirection: 'row',
